@@ -35,7 +35,7 @@ pipeline {
 		stage("Создание БД") {
             steps {
                 script {
-                    def drop_db = "tests/scripts/drop_db.py"
+                    def drop_db = "scripts/drop_db.py"
                     def versionFile = "D:\\Vanessa-Automation\\version\\${params.product}.txt" // перенести в git
 				    timeout(time: 2, unit: 'MINUTES') {
                         retry(3) {
@@ -49,7 +49,7 @@ pipeline {
 								"""
                             } catch (e) {
                                 echo "drop_db упал, перезапуск агента 1С"
-                                bat 'python -X utf8 tests/scripts/AgentRestart.py'
+                                bat 'python -X utf8 scripts/AgentRestart.py'
                                 wait1C()
                                 throw e
                             }
