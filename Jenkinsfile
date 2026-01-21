@@ -203,3 +203,8 @@ pipeline {
         }
     }
 }
+
+
+def wait1C() {
+    bat 'python -X utf8 tests/tools/wait_1c_ready.py'
+}
