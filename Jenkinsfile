@@ -2,10 +2,7 @@ pipeline {
     agent {
         label "OneS"
     }
-	environment {
-        
-		
-    }
+
     stages {
 		 stage('Инициализация параметров') {
             steps {
