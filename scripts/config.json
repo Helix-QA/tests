@@ -1,0 +1,20 @@
+{
+	"base": {
+	  "logo": "${logo}",
+	  "project": "${JOB_NAME}",
+	  "environment": "",
+	  "comment": "${env.BUILD_USER}",
+	  "reportLink": "${allureReportUrl}",
+	  "language": "ru",
+	  "allureFolder": "allure-report",
+	  "enableChart": true,
+	  "enableSuitesPublishing": false,
+	  "customData": {}
+	},
+	"telegram": {
+	  "token": "7117726988:AAFJFXz3rF7XyNXK23vtcy6MQG1E9x3DmRc",
+	  "chat": "-1002565044673",
+	  "replyTo": "",
+	  "templatePath": "/templates/telegram.ftl"
+	}
+  }
