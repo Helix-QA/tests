@@ -198,7 +198,7 @@ if __name__ == "__main__":
 
     rac_force_drop(infobase)
 
-    delete_folder("tests/build/results")
+    delete_folder("build/results")
 
     drop_postgres(db)
     clean_1c_cache()

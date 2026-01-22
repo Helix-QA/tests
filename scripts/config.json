@@ -3,7 +3,6 @@
 	  "logo": "${logo}",
 	  "project": "${JOB_NAME}",
 	  "environment": "",
-	  "comment": "${env.BUILD_USER}",
 	  "reportLink": "${allureReportUrl}",
 	  "language": "ru",
 	  "allureFolder": "allure-report",
