@@ -241,7 +241,6 @@ pipeline {
 					def updatedConfigJson = configJson
 						.replace('"${allureReportUrl}"', "\"${allureReportUrl}\"")
 						.replace('"${JOB_NAME}"', "\"${env.JOB_NAME}\"")
-						.replace('"${env.BUILD_USER}"', "\"${env.BUILD_USER}\"")
 						.replace('"${logo}"', "\"${env.logo}\"")
 					writeFile(file: 'scripts/config.json', text: updatedConfigJson)
 					try {
