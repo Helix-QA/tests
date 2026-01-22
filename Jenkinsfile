@@ -60,9 +60,7 @@ pipeline {
 					echo "Создание базы данных"
 					bat """
 					chcp 65001
-					call vrunner create 
-
-						--db-server localhost ^
+					call vrunner create --db-server localhost ^
 						--name ${env.dbTests} ^
 						--dbms PostgreSQL ^
 						--db-admin postgres ^
@@ -81,7 +79,6 @@ pipeline {
 					bat """
 					chcp 65001
 					call vrunner restore ^
-
 						"D:/Vanessa-Automation/DT/${params.product}.dt" ^
 						--ibconnection /Slocalhost/${env.dbTests} ^
 						--uccode tester
@@ -90,7 +87,6 @@ pipeline {
 					bat """
 					chcp 65001
 					call vrunner updatedb ^
-
 						--ibconnection /Slocalhost/${env.dbTests} ^
 						--db-user Админ ^
 						--uccode tester
@@ -117,7 +113,6 @@ pipeline {
 					bat """
 					chcp 65001
 					call vrunner updatedb ^
-
 						--ibconnection /Slocalhost/${env.dbTests} ^
 						--db-user Админ ^
 						--uccode tester
