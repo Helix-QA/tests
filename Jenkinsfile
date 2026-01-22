@@ -197,8 +197,8 @@ pipeline {
 	post {
         always {
             script {
-                allure includeProperties: false, jdk: '', results: 	[[path: 'build/results']]
-                junit allowEmptyResults: true, 		  testresults:	[['build/out/jUnint/*.xml']]
+                allure(includeProperties: false,   results:  [[path: 'build/results']])
+                junit(allowEmptyResults: true, testResults: 'build/out/jUnInt/*.xml')
             }
         }
     }
