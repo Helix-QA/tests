@@ -8,6 +8,7 @@ pipeline {
             steps {
                 script {
 					currentBuild.displayName = "#${BUILD_NUMBER} – ${params.product} – ${params.VERSION_NEW} ${params.debug}"
+					updateConfigFile()
                     if (params.product == 'fitness') {
                         env.testPathPlaceholder = "\\features\\${params.product}${params.debug}"
                         env.repository = repositoryReleaseFitness
@@ -207,4 +208,13 @@ pipeline {
 
 def wait1C() {
     bat 'python -X utf8 tools/wait_1c_ready.py'
+}
+
+def updateConfigFile() {
+ 	def configJson = readFile(file: 'tests/tools/VAParams.json')
+ 	def escapedWorkspace = env.WORKSPACE.replace("\\", "\\\\").replace("\\", "\\\\")
+  	def updatedConfigJson = configJson.replaceAll(/\$\{product\}/, params.product)
+                              		.replaceAll(/\$\{workspace\}/, escapedWorkspace)
+                             		.replaceAll(/\$\{dbTests\}/, env.dbTests)
+	writeFile(file: 'tests/tools/VAParams.json', text: updatedConfigJson)
 }
