@@ -7,7 +7,7 @@ pipeline {
 		 stage('Инициализация параметров') {
             steps {
                 script {
-					currentBuild.displayName = "#${BUILD_NUMBER} – ${params.product} – ${params.VERSION_NEW} ${params.debug}"
+					currentBuild.displayName = "#${BUILD_NUMBER} | ${params.VERSION_NEW} | ${params.debug}"
 					updateConfigFile()
                     if (params.product == 'fitness') {
                         env.testPathPlaceholder = "\\features\\${params.product}${params.debug}"
@@ -197,9 +197,8 @@ pipeline {
 	post {
         always {
             script {
-                allure([
-                    includeProperties: false,
-                    results: [[path: 'tests/build/results']]])
+                allure includeProperties: false, jdk: '', results: 	[[path: 'tests/build/results']]
+                junit allowEmptyResults: true, 			  results: 	[['tests/build/out/jUnint/*.xml']]
             }
         }
     }
