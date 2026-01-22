@@ -9,7 +9,7 @@ pipeline {
                 script {
 					currentBuild.displayName = "#${BUILD_NUMBER} – ${params.product} – ${params.VERSION_NEW} ${params.debug}"
                     if (params.product == 'fitness') {
-                        env.testPathPlaceholder = "\\features\\${params.product}\\${params.debug}"
+                        env.testPathPlaceholder = "\\features\\${params.product}${params.debug}"
                         env.repository = repositoryReleaseFitness
                         env.extmess = "http://192.168.2.16/hran1c/repository.1ccr/fitness4_messenger_release"
                         env.extNameMess = "Мессенджер"
@@ -179,7 +179,7 @@ pipeline {
 							call vrunner vanessa ^
 								--path "${env.WORKSPACE}${env.testPathPlaceholder}" ^
 								--vanessasettings "tools/VAParams.json" ^
-
+								--workspace features ^
 								--pathvanessa ${env.pathvanessa} ^
 								--additional "/DisplayAllFunctions /L ru" ^
 								--ibconnection /Slocalhost/${env.dbTests} ^
