@@ -198,7 +198,7 @@ pipeline {
         always {
             script {
                 allure includeProperties: false, jdk: '', results: 	[[path: 'tests/build/results']]
-                junit allowEmptyResults: true, 		  testresults:	[['tests/build/out/jUnint/*.xml']]
+               // junit allowEmptyResults: true, 		  testresults:	[['tests/build/out/jUnint/*.xml']]
             }
         }
     }
