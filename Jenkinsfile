@@ -211,10 +211,10 @@ def wait1C() {
 }
 
 def updateConfigFile() {
- 	def configJson = readFile(file: 'tests/tools/VAParams.json')
+ 	def configJson = readFile(file: '\\tools\\VAParams.json')
  	def escapedWorkspace = env.WORKSPACE.replace("\\", "\\\\").replace("\\", "\\\\")
   	def updatedConfigJson = configJson.replaceAll(/\$\{product\}/, params.product)
                               		.replaceAll(/\$\{workspace\}/, escapedWorkspace)
                              		.replaceAll(/\$\{dbTests\}/, env.dbTests)
-	writeFile(file: 'tests/tools/VAParams.json', text: updatedConfigJson)
+	writeFile(file: '\\tools\\VAParams.json', text: updatedConfigJson)
 }
