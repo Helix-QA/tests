@@ -178,7 +178,7 @@ pipeline {
 							chcp 65001
 							call vrunner vanessa ^
 								--path "${env.WORKSPACE}${env.testPathPlaceholder}" ^
-								--vanessasettings "tools/VAParams.json" ^
+								--vanessasettings "./tools/VAParams.json" ^
 								--workspace features ^
 								--pathvanessa ${env.pathvanessa} ^
 								--additional "/DisplayAllFunctions /L ru" ^
