@@ -173,13 +173,12 @@ pipeline {
             steps {
                 script {
                         try {
-							
 							bat """
 							chcp 65001
 							call vrunner vanessa ^
 								--path "${env.WORKSPACE}${env.testPathPlaceholder}" ^
 								--vanessasettings "./tools/VAParams.json" ^
-								--workspace features ^
+								--workspace ./features ^
 								--pathvanessa ${env.pathvanessa} ^
 								--additional "/DisplayAllFunctions /L ru" ^
 								--ibconnection /Slocalhost/${env.dbTests} ^
