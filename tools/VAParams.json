@@ -104,7 +104,7 @@
 	"ДелатьОтчетВФорматеjUnit": true,
 	"СкриншотыjUnit": true,
 	"ОтчетJUnit": {
-		"КаталогВыгрузкиJUnit": "$workspaceRoot/build/out/jUnint",
+		"КаталогВыгрузкиJUnit": "build/out/jUnint",
 		"ЗаписыватьСценарииВJunitЧерезTestSuite": false
 	},
 	"ДелатьОтчетВФорматеCucumberJson": false,
