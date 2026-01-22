@@ -241,12 +241,12 @@ pipeline {
 					}
 					catch (Exception e) {
 						echo "Ошибка при отправке уведомления: ${e.message}. Продолжаем выполнение pipeline."
+					}
 				}
-            }
-        }
-    }
+			}
+		}
+	}
 }
-
 
 def wait1C() {
     bat 'python -X utf8 scripts/wait_1c_ready.py'
