@@ -75,6 +75,7 @@ pipeline {
 						--db-user Админ ^
 						--uccode tester
 					"""
+					wait1C()
                     echo "Загрузка .dt"
 					bat """
 					chcp 65001
@@ -163,6 +164,7 @@ pipeline {
 									--db-user Админ ^
 									--uccode tester
 								"""
+								wait1C()
 								echo "Выгружаем .dt"
 								bat """
 								chcp 65001
