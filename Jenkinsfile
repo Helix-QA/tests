@@ -155,12 +155,28 @@ pipeline {
 									--execute "C:\\Program Files\\OneScript\\lib\\vanessa-runner\\epf\\УбратьОкноПеремещенияИБ.epf" ^
 									--uccode tester
 								"""
+								echo "Отключение сессий"
+								bat """
+								chcp 65001
+								call vrunner session kill ^
+									--db ${env.dbTests} ^
+									--db-user Админ ^
+									--uccode tester
+								"""
 								echo "Выгружаем .dt"
 								bat """
 								chcp 65001
 								call vrunner dump ^
 									"D:\\Vanessa-Automation\\DT\\${params.product}.dt" ^
 									--ibconnection /Slocalhost/${env.dbTests} ^
+									--db-user Админ ^
+									--uccode tester
+								"""
+								echo "Разблокирование входа"
+								bat """
+								chcp 65001
+								call vrunner session unlock ^
+									--db ${env.dbTests} ^
 									--db-user Админ ^
 									--uccode tester
 								"""
