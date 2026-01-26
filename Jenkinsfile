@@ -261,7 +261,7 @@ pipeline {
 						.replace('"${allureReportUrl}"', "\"${allureReportUrl}\"")
 						.replace('"${JOB_NAME}"', "\"${env.JOB_NAME}\"")
 						.replace('"${token}"', "\"${env.botToken}\"")
-						.replace('"${chat}"', "\"${env.chatId}\"")
+						.replace('"${chat}"', "\"${env.testchatID}\"")
 						.replace('"${logo}"', "\"${env.logo}\"")
 					writeFile(file: 'scripts/config.json', text: updatedConfigJson)
 					try {
