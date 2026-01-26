@@ -53,7 +53,7 @@ stage('Smoke tests') {
         }
     }
 }
-
+}
 post {
     always {
         script {
