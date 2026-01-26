@@ -85,14 +85,6 @@ pipeline {
 						--uccode tester
 					"""
 					wait1C()
-					echo "Обновление конфигурации"
-					bat """
-					chcp 65001
-					call vrunner updatedb ^
-						--ibconnection /Slocalhost/${env.dbTests} ^
-						--db-user Админ ^
-						--uccode tester
-					"""
                     echo "Загрузка из хранилища"
 					bat """
 					chcp 65001
@@ -103,14 +95,6 @@ pipeline {
 						--db-user Админ ^
 						--uccode tester
 					"""
-					echo "Отключение сессий"
-					bat """
-					chcp 65001
-					call vrunner session kill ^
-						--db ${env.dbTests} ^
-						--db-user Админ ^
-						--uccode tester
-						"""
 					echo "Обновление конфигурации"
 					bat """
 					chcp 65001
