@@ -84,6 +84,7 @@ pipeline {
 						--ibconnection /Slocalhost/${env.dbTests} ^
 						--uccode tester
 					"""
+					wait1C()
 					echo "Обновление конфигурации"
 					bat """
 					chcp 65001
