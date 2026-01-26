@@ -4,7 +4,6 @@ pipeline {
   agent { label 'OneS' }
 
   stages {
-
     stage('Init') {
       steps {
         script {
@@ -27,33 +26,40 @@ pipeline {
     }
 
     stage('Prepare DB') {
-      steps {
-        database.prepare(
-          dbName     : env.dbTests,
-          repository : env.repository,
-          product    : params.product
-        )
-      }
+    steps {
+        script {
+            database.prepare(
+                dbName     : env.dbTests,
+                repository : env.repository,
+                product    : params.product
+            )
+        }
     }
+}
 
-    stage('Scenario tests') {
-      steps {
-        vanessa.runScenarios(env.testPathPlaceholder)
-      }
+stage('Scenario tests') {
+    steps {
+        script {
+            vanessa.runScenarios(env.testPathPlaceholder)
+        }
     }
+}
 
-    stage('Smoke tests') {
-      when { expression { !params.scenarios } }
-      steps {
-        vanessa.runSmoke()
-      }
+stage('Smoke tests') {
+    when { expression { !params.scenarios } }
+    steps {
+        script {
+            vanessa.runSmoke()
+        }
     }
-  }
+}
 
-  post {
+post {
     always {
-      reports.publish()
-      notifications.send()
+        script {
+            reports.publish()
+            notifications.send()
+        }
     }
-  }
+}
 }
