@@ -17,12 +17,11 @@ stages {
 		}	
 	}
 
-
 	stage('Prepare DB') {
-			steps {
-				prepareDatabase()
-			}
+		steps {
+			prepareDatabase()
 		}
+	}
 
 	stage('Scenario tests') {
 		steps {
@@ -32,11 +31,11 @@ stages {
 
 	stage('Smoke tests') {
 		when { expression { !params.scenarios } }
-			steps {
-				runSmoke()
-				}
-			}
+		steps {
+			runSmoke()
+		}
 	}
+}
 	post {
 		always {
 			publishReports()
@@ -88,4 +87,19 @@ def sendNotification() {
 
     bat '''java "-DconfigFile=scripts/config.json" -jar scripts/allure-notifications-4.8.0.jar'''
   }
+}
+
+def updateVAConfig() {
+  def configJson = readFile(file: 'scripts/VAParams.json')
+
+  def escapedWorkspace = env.WORKSPACE
+    .replace("\\", "\\\\")
+    .replace("\\", "\\\\")
+
+  def updated = configJson
+    .replaceAll(/\$\{product\}/, params.product)
+    .replaceAll(/\$\{workspace\}/, escapedWorkspace)
+    .replaceAll(/\$\{dbTests\}/, env.dbTests)
+
+  writeFile file: 'scripts/VAParams.json', text: updated
 }
