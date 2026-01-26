@@ -1,105 +1,59 @@
+@Library('helix-shared-lib') _
+
 pipeline {
-agent { label 'OneS' }
+  agent { label 'OneS' }
 
-stages {
-	stage('Init') {
-		steps {
-			script {
-				currentBuild.displayName = "#${BUILD_NUMBER} | ${params.VERSION_NEW}"
-				def products = load 'vars/products.groovy'
-				def cfg = products[params.product]
-				env.repository = cfg.repository
-				env.extmess = cfg.extmess
-				env.extName = cfg.extName
-				env.logo = cfg.logo
-				updateVAConfig()
-			}
-		}	
-	}
+  stages {
 
-	stage('Prepare DB') {
-		steps {
-			prepareDatabase()
-		}
-	}
+    stage('Init') {
+      steps {
+        script {
+          currentBuild.displayName = "#${BUILD_NUMBER} | ${params.VERSION_NEW}"
 
-	stage('Scenario tests') {
-		steps {
-			runVanessa(env.testPathPlaceholder)
-		}
-	}
+          def products = productsConfig()
+          def cfg = products[params.product]
 
-	stage('Smoke tests') {
-		when { expression { !params.scenarios } }
-		steps {
-			runSmoke()
-		}
-	}
-}
-	post {
-		always {
-			publishReports()
-			sendNotification()
-		}
-	}
-}
-def vrunner(String cmd) {
-	bat """
-	chcp 65001
-	call vrunner ${cmd} ^
-	--ibconnection /Slocalhost/${env.dbTests} ^
-	--db-user Админ ^
-	--uccode tester
-	"""
-}
+          env.repository = cfg.repository
+          env.extmess   = cfg.extmess
+          env.extName   = cfg.extName
+          env.logo      = cfg.logo
 
-def prepareDatabase() {
-	retry(3) {
-	bat 'python scripts/drop_db.py'
-	vrunner "create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL"
-	vrunner "restore D:/Vanessa-Automation/DT/${params.product}.dt"
-	vrunner "loadrepo --storage-name ${env.repository}"
-	vrunner "updatedb"
-	vrunner "session unlock --db ${env.dbTests}"
-	}
-}
-def runVanessa(path) {
-	vrunner "vanessa --path ${path} --vanessasettings scripts/VAParams.json"
-}
+          vanessa.updateConfig(
+            product : params.product,
+            dbTests : env.dbTests
+          )
+        }
+      }
+    }
 
-def publishReports() {
-  allure(includeProperties: false, results: [[path: 'build/results']])
-  junit(allowEmptyResults: true, testResults: 'build/out/jUnint/*.xml')
-}
+    stage('Prepare DB') {
+      steps {
+        database.prepare(
+          dbName     : env.dbTests,
+          repository : env.repository,
+          product    : params.product
+        )
+      }
+    }
 
-def sendNotification() {
-  if (currentBuild.currentResult in ['SUCCESS', 'UNSTABLE']) {
-    def allureUrl = "${env.JENKINS_URL}job/${env.JOB_NAME.replaceAll('/', '/job/')}/${env.BUILD_NUMBER}/allure"
+    stage('Scenario tests') {
+      steps {
+        vanessa.runScenarios(env.testPathPlaceholder)
+      }
+    }
 
-    def configJson = readFile('scripts/config.json')
-      .replace('"${allureReportUrl}"', "\"${allureUrl}\"")
-      .replace('"${JOB_NAME}"', "\"${env.JOB_NAME}\"")
-      .replace('"${token}"', "\"${env.botToken}\"")
-      .replace('"${chat}"', "\"${env.testchatID}\"")
-      .replace('"${logo}"', "\"${env.logo}\"")
-
-    writeFile file: 'scripts/config.json', text: configJson
-
-    bat '''java "-DconfigFile=scripts/config.json" -jar scripts/allure-notifications-4.8.0.jar'''
+    stage('Smoke tests') {
+      when { expression { !params.scenarios } }
+      steps {
+        vanessa.runSmoke()
+      }
+    }
   }
-}
 
-def updateVAConfig() {
-  def configJson = readFile(file: 'scripts/VAParams.json')
-
-  def escapedWorkspace = env.WORKSPACE
-    .replace("\\", "\\\\")
-    .replace("\\", "\\\\")
-
-  def updated = configJson
-    .replaceAll(/\$\{product\}/, params.product)
-    .replaceAll(/\$\{workspace\}/, escapedWorkspace)
-    .replaceAll(/\$\{dbTests\}/, env.dbTests)
-
-  writeFile file: 'scripts/VAParams.json', text: updated
+  post {
+    always {
+      reports.publish()
+      notifications.send()
+    }
+  }
 }
