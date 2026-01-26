@@ -84,6 +84,7 @@ pipeline {
 						--ibconnection /Slocalhost/${env.dbTests} ^
 						--uccode tester
 					"""
+					wait1C()
 					echo "Обновление конфигурации"
 					bat """
 					chcp 65001
@@ -259,7 +260,8 @@ pipeline {
 					def updatedConfigJson = configJson
 						.replace('"${allureReportUrl}"', "\"${allureReportUrl}\"")
 						.replace('"${JOB_NAME}"', "\"${env.JOB_NAME}\"")
-
+						.replace('"${token}"', "\"${env.botToken}\"")
+						.replace('"${chat}"', "\"${env.testchatID}\"")
 						.replace('"${logo}"', "\"${env.logo}\"")
 					writeFile(file: 'scripts/config.json', text: updatedConfigJson)
 					try {
