@@ -45,6 +45,10 @@ pipeline {
 								set PYTHONUTF8=1
 								cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
 								"""
+								echo "Проверка: инфобаза не должна быть зарегистрирована в RAC"
+								bat """
+								"C:\\Program Files\\1cv8\\8.5.1.1150\\bin\\rac.exe" infobase list localhost:1545 | findstr /I "${env.dbTests}" && exit /b 1 || exit /b 0
+								"""
 								echo "Создание базы данных"
 								bat """
 								chcp 65001
