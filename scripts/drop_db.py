@@ -3,18 +3,9 @@ import subprocess
 import sys
 import shutil
 import time
-import pythoncom
-import win32com.client
 from contextlib import suppress
 
-
 # ================== CONFIG ==================
-AGENT_ADDR = "localhost:1540"
-WP_HOST = "localhost"
-
-DB_USER_1C = "Админ"
-DB_PASS_1C = ""
-
 PG_HOST = "localhost"
 PG_PORT = "5432"
 PG_USER = "postgres"
@@ -25,91 +16,107 @@ RAC_CLUSTER_ADDR = "localhost:1545"
 
 PG_RETRIES = 6
 PG_WAIT_BETWEEN = 5
+ENCODING = "cp1251"  # Кодировка вывода rac.exe
 # ============================================
 
-
-# ---------- SERVICE UTILS ----------
-
-def run(cmd, ignore_errors=False):
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    if ignore_errors and result.stderr:
-        result.stderr = ""  # очищаем вывод ошибок
-    return result
-
-
+# ---------- RAC UTILS ----------
+def run_rac(cmd, ignore_errors=False):
+    """Запуск rac.exe с правильным декодированием cp1251"""
+    full_cmd = [RAC_PATH] + cmd + [RAC_CLUSTER_ADDR]
+    result = subprocess.run(full_cmd, capture_output=True)
+    
+    stdout = result.stdout.decode(ENCODING, errors="replace") if result.stdout else ""
+    stderr = result.stderr.decode(ENCODING, errors="replace") if result.stderr else ""
+    
+    if ignore_errors:
+        stderr = ""
+    
+    return type("Result", (), {
+        "returncode": result.returncode,
+        "stdout": stdout,
+        "stderr": stderr
+    })()
 
 # ---------- RAC FORCE CLEAN ----------
-
-def rac_force_drop(infobase_name: str):
+def rac_force_drop(infobase_name: str) -> bool:
     print("=== RAC CLEANUP ===")
     try:
-        cluster_uuid = None
-        result = run([RAC_PATH, "cluster", "list", RAC_CLUSTER_ADDR])
+        # 1. Получаем UUID кластера
+        result = run_rac(["cluster", "list"])
         if result.returncode != 0:
-            print("RAC: невозможно получить список кластеров:", result.stderr)
-            return
+            print("RAC: ошибка cluster list:", result.stderr or "нет вывода")
+            return False
 
+        cluster_uuid = None
         for line in result.stdout.splitlines():
-            if "cluster" in line.lower():
-                cluster_uuid = line.split(":")[1].strip()
+            if line.lower().startswith("cluster"):
+                cluster_uuid = line.split(":", 1)[1].strip()
                 break
 
         if not cluster_uuid:
             print("RAC: кластер не найден")
-            return
+            return False
 
-        print("Cluster UUID:", cluster_uuid)
+        print(f"RAC: кластер найден ({cluster_uuid})")
+
+        # 2. Получаем список инфобаз и ищем нужную по точному совпадению имени
+        result = run_rac(["infobase", "list", "--cluster", cluster_uuid])
+        if result.returncode != 0:
+            print("RAC: ошибка infobase list:", result.stderr or "нет вывода")
+            return False
 
         ib_uuid = None
-        result = run([RAC_PATH, "infobase", "list", "--cluster", cluster_uuid, RAC_CLUSTER_ADDR])
-        if result.returncode != 0:
-            print("RAC: невозможно получить список ИБ:", result.stderr)
-            return
+        current_ib_name = None
+        current_ib_uuid = None
 
         for line in result.stdout.splitlines():
-            if infobase_name.lower() in line.lower():
-                ib_uuid = line.split(":")[1].strip()
-                break
+            line = line.strip()
+            if line.lower().startswith("infobase"):
+                current_ib_uuid = line.split(":", 1)[1].strip()
+            elif line.lower().startswith("name"):
+                current_ib_name = line.split(":", 1)[1].strip()
+                if current_ib_name.lower() == infobase_name.lower():
+                    ib_uuid = current_ib_uuid
+                    break
 
         if not ib_uuid:
-            print("RAC: база не зарегистрирована")
-            return
+            print("RAC: инфобаза не найдена или уже удалена")
+            return True  # Уже чисто — считаем успехом
 
-        print("RAC: найдена IB", ib_uuid)
+        print(f"RAC: найдена инфобаза '{current_ib_name}' ({ib_uuid})")
 
+        # 3. Убиваем сессии
         print("RAC: убиваем сессии")
-        run([
-            RAC_PATH, "session", "terminate",
+        run_rac([
+            "session", "terminate",
             "--cluster", cluster_uuid,
-            RAC_CLUSTER_ADDR,
             "--infobase", ib_uuid,
             "--force"
         ], ignore_errors=True)
 
-        print("RAC: удаляем ИБ из кластера и базу данных")
-        run([
-            RAC_PATH, "infobase", "drop",
+        # 4. Удаляем инфобазу (с --drop-database)
+        print("RAC: удаляем инфобазу и базу данных")
+        result = run_rac([
+            "infobase", "drop",
             "--cluster", cluster_uuid,
-            RAC_CLUSTER_ADDR,
             "--infobase", ib_uuid,
-            "--drop-database"   # ← КЛЮЧЕВОЙ ПАРАМЕТР
-        ], ignore_errors=True)
+            "--drop-database"
+        ])
+        if result.returncode != 0:
+            print("RAC: ошибка при drop infobase:", result.stderr or "нет вывода")
+            return False
 
-        print("RAC cleanup завершён")
+        print("RAC cleanup завершён успешно")
+        return True
+
     except Exception as e:
-        print("RAC cleanup пропущен из-за ошибки:", e)
-
-
+        print("RAC cleanup ошибка:", str(e))
+        return False
 
 # ---------- CLEAN ----------
-
-def clean_gen_py():
-    shutil.rmtree(os.path.expanduser(r"~\AppData\Local\Temp\gen_py"), ignore_errors=True)
-
-
 def delete_folder(folder_path):
-    shutil.rmtree(folder_path, ignore_errors=True)
-
+    with suppress(Exception):
+        shutil.rmtree(folder_path)
 
 def clean_1c_cache():
     user = os.getenv("USERNAME")
@@ -126,81 +133,54 @@ def clean_1c_cache():
                 if item not in ("ExtCompT", "1cv8strt.pfl"):
                     delete_folder(os.path.join(path, item))
 
-
 # ---------- PostgreSQL ----------
-
 def terminate_pg_sessions(db_name):
     os.environ["PGPASSWORD"] = PG_PASS
-    run([
+    subprocess.run([
         "psql", "-h", PG_HOST, "-p", PG_PORT,
         "-U", PG_USER, "-d", "postgres",
         "-c",
         f"SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname='{db_name}' AND pid<>pg_backend_pid();"
-    ])
-
+    ], capture_output=True)
 
 def drop_postgres(db_name):
-    print("PostgreSQL drop:", db_name)
+    print("PostgreSQL drop (fallback):", db_name)
     os.environ["PGPASSWORD"] = PG_PASS
     for i in range(PG_RETRIES):
         terminate_pg_sessions(db_name)
-        result = run([
+        result = subprocess.run([
             "psql", "-h", PG_HOST, "-p", PG_PORT,
             "-U", PG_USER, "-d", "postgres",
             "-c", f'DROP DATABASE IF EXISTS "{db_name}";'
-        ])
+        ], capture_output=True, text=True)
         if result.returncode == 0:
-            print("PostgreSQL удалена")
+            print("PostgreSQL удалена (fallback)")
             return
         time.sleep(PG_WAIT_BETWEEN)
-    print(result.stderr)
+    print("PostgreSQL fallback не удался:", result.stderr)
     sys.exit(2)
 
-
-# ---------- 1C COM ----------
-
-def drop_1c_infobase(name):
-    com = agent = None
-    pythoncom.CoInitialize()
-    try:
-        clean_gen_py()
-        com = win32com.client.gencache.EnsureDispatch("V83.COMConnector")
-        agent = com.ConnectAgent(AGENT_ADDR)
-        cluster = agent.GetClusters()[0]
-        agent.Authenticate(cluster, "", "")
-
-        for wp_info in agent.GetWorkingProcesses(cluster):
-            wp = com.ConnectWorkingProcess(f"tcp://{WP_HOST}:{wp_info.MainPort}")
-            wp.AddAuthentication(DB_USER_1C, DB_PASS_1C)
-            for base in wp.GetInfoBases():
-                if base.Name.lower() == name.lower():
-                    print("COM: база найдена")
-                    with suppress(Exception):
-                        for c in wp.GetInfoBaseConnections(base):
-                            wp.TerminateConnection(c)
-                    with suppress(Exception):
-                        wp.DropInfoBase(base, 1)
-                    return True
-        return False
-    finally:
-        pythoncom.CoUninitialize()
-
-
 # ================= ENTRY =================
-
 if __name__ == "__main__":
     print("=== DROP DB START ===")
+
+    if len(sys.argv) < 2:
+        print("Ошибка: укажите имя инфобазы как аргумент")
+        sys.exit(1)
 
     infobase = sys.argv[1].strip()
     db = infobase.lower()
 
-    # Удаляем через RAC (с --drop-database)
-    rac_force_drop(infobase)
+    # Основной способ — через RAC (удаляет и регистрацию, и БД в PG)
+    success = rac_force_drop(infobase)
 
     delete_folder("build/results")
 
-    # Оставляем как fallback на случай, если --drop-database не сработал
-    drop_postgres(db)
+    # Fallback: если RAC не смог удалить БД — принудительно дропаем в PostgreSQL
+    if not success:
+        print("RAC не полностью справился — запускаем fallback PostgreSQL")
+        drop_postgres(db)
+
     clean_1c_cache()
 
     print("=== DONE ===")
