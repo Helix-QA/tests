@@ -20,9 +20,9 @@ ENCODING = "cp1251"  # Кодировка вывода rac.exe
 # ============================================
 
 # ---------- RAC UTILS ----------
-def run_rac(cmd, ignore_errors=False):
-    """Запуск rac.exe с правильным декодированием cp1251"""
-    full_cmd = [RAC_PATH] + cmd + [RAC_CLUSTER_ADDR]
+def run_rac(params, ignore_errors=False):
+    """Запуск rac.exe с правильным порядком параметров и декодированием cp1251"""
+    full_cmd = [RAC_PATH] + params + [RAC_CLUSTER_ADDR]
     result = subprocess.run(full_cmd, capture_output=True)
     
     stdout = result.stdout.decode(ENCODING, errors="replace") if result.stdout else ""
@@ -49,6 +49,7 @@ def rac_force_drop(infobase_name: str) -> bool:
 
         cluster_uuid = None
         for line in result.stdout.splitlines():
+            line = line.strip()
             if line.lower().startswith("cluster"):
                 cluster_uuid = line.split(":", 1)[1].strip()
                 break
@@ -59,15 +60,15 @@ def rac_force_drop(infobase_name: str) -> bool:
 
         print(f"RAC: кластер найден ({cluster_uuid})")
 
-        # 2. Получаем список инфобаз и ищем нужную по точному совпадению имени
-        result = run_rac(["infobase", "list", "--cluster", cluster_uuid])
+        # 2. Получаем список инфобаз (правильный порядок: --cluster перед list)
+        result = run_rac(["infobase", "--cluster", cluster_uuid, "list"])
         if result.returncode != 0:
             print("RAC: ошибка infobase list:", result.stderr or "нет вывода")
             return False
 
         ib_uuid = None
-        current_ib_name = None
         current_ib_uuid = None
+        current_ib_name = None
 
         for line in result.stdout.splitlines():
             line = line.strip()
@@ -81,26 +82,24 @@ def rac_force_drop(infobase_name: str) -> bool:
 
         if not ib_uuid:
             print("RAC: инфобаза не найдена или уже удалена")
-            return True  # Уже чисто — считаем успехом
+            return True  # Уже чисто
 
         print(f"RAC: найдена инфобаза '{current_ib_name}' ({ib_uuid})")
 
-        # 3. Убиваем сессии
+        # 3. Убиваем сессии (правильный порядок параметров)
         print("RAC: убиваем сессии")
         run_rac([
-            "session", "terminate",
-            "--cluster", cluster_uuid,
+            "session", "--cluster", cluster_uuid,
             "--infobase", ib_uuid,
-            "--force"
+            "terminate", "--force"
         ], ignore_errors=True)
 
-        # 4. Удаляем инфобазу (с --drop-database)
+        # 4. Удаляем инфобазу (правильный порядок: параметры перед drop)
         print("RAC: удаляем инфобазу и базу данных")
         result = run_rac([
-            "infobase", "drop",
-            "--cluster", cluster_uuid,
+            "infobase", "--cluster", cluster_uuid,
             "--infobase", ib_uuid,
-            "--drop-database"
+            "drop", "--drop-database"
         ])
         if result.returncode != 0:
             print("RAC: ошибка при drop infobase:", result.stderr or "нет вывода")
@@ -110,7 +109,7 @@ def rac_force_drop(infobase_name: str) -> bool:
         return True
 
     except Exception as e:
-        print("RAC cleanup ошибка:", str(e))
+        print("RAC cleanup исключение:", str(e))
         return False
 
 # ---------- CLEAN ----------
@@ -171,14 +170,14 @@ if __name__ == "__main__":
     infobase = sys.argv[1].strip()
     db = infobase.lower()
 
-    # Основной способ — через RAC (удаляет и регистрацию, и БД в PG)
+    # Основной способ — через RAC
     success = rac_force_drop(infobase)
 
     delete_folder("build/results")
 
-    # Fallback: если RAC не смог удалить БД — принудительно дропаем в PostgreSQL
+    # Fallback только если RAC полностью провалился
     if not success:
-        print("RAC не полностью справился — запускаем fallback PostgreSQL")
+        print("RAC не справился — запускаем fallback PostgreSQL")
         drop_postgres(db)
 
     clean_1c_cache()
