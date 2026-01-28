@@ -12,16 +12,15 @@ PG_USER = "postgres"
 PG_PASS = "postgres"
 
 RAC_PATH = r"C:\Program Files\1cv8\8.5.1.1150\bin\rac.exe"
-RAS_ADDR = "localhost:1545"  # Адрес RAS
+RAS_ADDR = "localhost:1545"
 
-PG_RAC_RETRIES = 6
+PG_RETRIES = 6
 PG_WAIT_BETWEEN = 5
-ENCODING = "cp1251"
+ENCODING = "chcp65001"
 # ============================================
 
 # ---------- RAC UTILS ----------
 def run_rac_global(cmd):
-    """Для глобальных команд (cluster list) — адрес в конце"""
     full_cmd = [RAC_PATH] + cmd + [RAS_ADDR]
     result = subprocess.run(full_cmd, capture_output=True)
     stdout = result.stdout.decode(ENCODING, errors="replace") if result.stdout else ""
@@ -29,11 +28,11 @@ def run_rac_global(cmd):
     return type("Result", (), {
         "returncode": result.returncode,
         "stdout": stdout,
-        "stderr": stderr
+        "stderr": stderr,
+        "raw_stdout": result.stdout  # для отладки, если нужно
     })()
 
 def run_rac_cluster(cmd, ignore_errors=False):
-    """Для команд под кластером — адрес в начале"""
     full_cmd = [RAC_PATH, RAS_ADDR] + cmd
     result = subprocess.run(full_cmd, capture_output=True)
     stdout = result.stdout.decode(ENCODING, errors="replace") if result.stdout else ""
@@ -46,51 +45,65 @@ def run_rac_cluster(cmd, ignore_errors=False):
         "stderr": stderr
     })()
 
+# ---------- ROBUST PARSING ----------
+def extract_value(lines, key):
+    """Извлекает значение после ключа (key : value) с учётом пробелов"""
+    key_lower = key.lower()
+    for line in lines:
+        line_lower = line.lower()
+        if key_lower in line_lower:
+            parts = line.split(":", 1)
+            if len(parts) > 1:
+                return parts[1].strip()
+    return None
+
 # ---------- RAC FORCE CLEAN ----------
 def rac_force_drop(infobase_name: str) -> bool:
     print("=== RAC CLEANUP ===")
     try:
-        # 1. Получаем UUID кластера (адрес в конце)
+        # 1. Получаем кластер
         result = run_rac_global(["cluster", "list"])
         if result.returncode != 0:
             print("RAC: ошибка cluster list:", result.stderr or "нет вывода")
             return False
 
-        cluster_uuid = None
-        for line in result.stdout.splitlines():
-            line = line.strip()
-            if line.lower().startswith("cluster"):
-                cluster_uuid = line.split(":", 1)[1].strip()
-                break
-
+        lines = [l.strip() for l in result.stdout.splitlines() if l.strip()]
+        cluster_uuid = extract_value(lines, "cluster")
         if not cluster_uuid:
-            print("RAC: кластер не найден")
+            print("RAC: кластер не найден в выводе")
+            print("Вывод cluster list:", result.stdout)
             return False
 
         print(f"RAC: кластер найден ({cluster_uuid})")
 
-        # 2. Получаем список инфобаз (адрес в начале)
+        # 2. Получаем список инфобаз
         result = run_rac_cluster(["infobase", "--cluster=" + cluster_uuid, "list"])
         if result.returncode != 0:
             print("RAC: ошибка infobase list:", result.stderr or "нет вывода")
+            print("Вывод:", result.stdout)
             return False
 
+        lines = result.stdout.splitlines()
         ib_uuid = None
         current_ib_uuid = None
         current_ib_name = None
 
-        for line in result.stdout.splitlines():
-            line = line.strip()
-            if line.lower().startswith("infobase"):
-                current_ib_uuid = line.split(":", 1)[1].strip()
-            elif line.lower().startswith("name"):
-                current_ib_name = line.split(":", 1)[1].strip()
-                if current_ib_name.lower() == infobase_name.lower():
+        for raw_line in lines:
+            line = raw_line.strip()
+            if not line:
+                continue
+            lower_line = line.lower()
+
+            if "infobase" in lower_line:
+                current_ib_uuid = extract_value([line], "infobase")
+            elif "name" in lower_line:
+                current_ib_name = extract_value([line], "name")
+                if current_ib_name and current_ib_name.lower() == infobase_name.lower() and current_ib_uuid:
                     ib_uuid = current_ib_uuid
                     break
 
         if not ib_uuid:
-            print("RAC: инфобаза не найдена или уже удалена — считаем успехом")
+            print("RAC: инфобаза не найдена или уже удалена — успех")
             return True
 
         print(f"RAC: найдена инфобаза '{current_ib_name}' ({ib_uuid})")
@@ -103,15 +116,15 @@ def rac_force_drop(infobase_name: str) -> bool:
             "terminate", "--force"
         ], ignore_errors=True)
 
-        # 4. Удаляем инфобазу и БД
-        print("RAC: удаляем регистрацию ИБ и базу данных")
+        # 4. Удаляем ИБ
+        print("RAC: удаляем регистрацию и БД")
         result = run_rac_cluster([
             "infobase", "--cluster=" + cluster_uuid,
             "--infobase=" + ib_uuid,
             "drop", "--drop-database"
         ])
         if result.returncode != 0:
-            print("RAC: ошибка при drop infobase:", result.stderr or "нет вывода")
+            print("RAC: ошибка drop:", result.stderr or "нет вывода")
             return False
 
         print("RAC cleanup завершён успешно")
@@ -119,6 +132,8 @@ def rac_force_drop(infobase_name: str) -> bool:
 
     except Exception as e:
         print("RAC cleanup исключение:", str(e))
+        import traceback
+        traceback.print_exc()
         return False
 
 # ---------- CLEAN ----------
@@ -154,7 +169,7 @@ def terminate_pg_sessions(db_name):
 def drop_postgres(db_name):
     print("PostgreSQL drop (fallback):", db_name)
     os.environ["PGPASSWORD"] = PG_PASS
-    for i in range(PG_RAC_RETRIES):
+    for i in range(PG_RETRIES):
         terminate_pg_sessions(db_name)
         result = subprocess.run([
             "psql", "-h", PG_HOST, "-p", PG_PORT,
@@ -184,7 +199,7 @@ if __name__ == "__main__":
     delete_folder("build/results")
 
     if not success:
-        print("RAC не полностью справился — fallback PostgreSQL")
+        print("RAC не справился полностью — fallback PostgreSQL")
         drop_postgres(db)
 
     clean_1c_cache()
