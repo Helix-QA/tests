@@ -20,7 +20,7 @@ PG_PORT = "5432"
 PG_USER = "postgres"
 PG_PASS = "postgres"
 
-RAC_PATH = r"C:\Program Files\1cv8\8.3.27.1688\bin\rac.exe"
+RAC_PATH = r"C:\Program Files\1cv8\8.3.5.1150\bin\rac.exe"
 RAC_CLUSTER_ADDR = "localhost:1545"
 
 PG_RETRIES = 6
@@ -196,7 +196,7 @@ if __name__ == "__main__":
     print("Ожидание...")
     time.sleep(5)
 
-    rac_force_drop(infobase)
+    # rac_force_drop(infobase)
 
     delete_folder("build/results")
 
