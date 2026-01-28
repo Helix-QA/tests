@@ -47,6 +47,16 @@ pipeline {
 								set PYTHONUTF8=1
 								cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
 								"""
+								echo "Создание базы данных"
+								bat """
+								chcp 65001
+								call vrunner create --db-server localhost ^
+									--name ${env.dbTests} ^
+									--dbms PostgreSQL ^
+									--db-admin postgres ^
+									--db-admin-pwd postgres ^
+									--uccode tester
+								"""
                             } catch (e) {
                                 echo "drop_db упал, перезапуск агента 1С"
                                 bat 'python -X utf8 scripts/AgentRestart.py'
@@ -57,16 +67,7 @@ pipeline {
                     }
 
                     wait1C()
-					echo "Создание базы данных"
-					bat """
-					chcp 65001
-					call vrunner create --db-server localhost ^
-						--name ${env.dbTests} ^
-						--dbms PostgreSQL ^
-						--db-admin postgres ^
-						--db-admin-pwd postgres ^
-						--uccode tester
-					"""
+					
                     echo "Отключение сессий"
 					bat """
 					chcp 65001
