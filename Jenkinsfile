@@ -35,39 +35,34 @@ pipeline {
                 script {
                     def drop_db = "scripts/drop_db.py"
                     def versionFile = "D:\\Vanessa-Automation\\version\\${params.product}.txt" // перенести в git
-				    timeout(time: 2, unit: 'MINUTES') {
-                        retry(3) {
-                            try {
-								echo "Удаление существующей базы"
-								bat """
-								chcp 65001
-								set PYTHONIOENCODING=utf-8
-								set PYTHONUTF8=1
-								cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
-								"""
-								echo "Проверка: инфобаза не должна быть зарегистрирована в RAC"
-								bat """
-								"C:\\Program Files\\1cv8\\8.5.1.1150\\bin\\rac.exe" infobase list localhost:1545 | findstr /I "${env.dbTests}" && exit /b 1 || exit /b 0
-								"""
-								echo "Создание базы данных"
-								bat """
-								chcp 65001
-								call vrunner create --db-server localhost ^
-									--name ${env.dbTests} ^
-									--dbms PostgreSQL ^
-									--db-admin postgres ^
-									--db-admin-pwd postgres ^
-									--uccode tester
-								"""
-                            } catch (e) {
-                                echo "drop_db упал, перезапуск агента 1С"
-                                bat 'python -X utf8 scripts/AgentRestart.py'
-                                wait1C()
-                                throw e
-                            }
-                        }
-                    }
+				retry(2) {
+					echo "drop_db упал, перезапуск агента 1С"
+					bat 'python -X utf8 scripts/AgentRestart.py'
+					wait1C()
+					
+					echo "Удаление существующей базы"
+					bat """
+					chcp 65001
+					set PYTHONIOENCODING=utf-8
+					set PYTHONUTF8=1
+					cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
+					"""
+					echo "Проверка: инфобаза не должна быть зарегистрирована в RAC"
+					bat """
+					"C:\\Program Files\\1cv8\\8.5.1.1150\\bin\\rac.exe" infobase list localhost:1545 ^ | findstr /R /C:"name *= *${env.dbTests}$" >nul && exit /b 1 || exit /b 0
 
+					"""
+				}
+					echo "Создание базы данных"
+					bat """
+					chcp 65001
+					call vrunner create --db-server localhost ^
+						--name ${env.dbTests} ^
+						--dbms PostgreSQL ^
+						--db-admin postgres ^
+						--db-admin-pwd postgres ^
+						--uccode tester
+					"""
                     wait1C()
 					
                     echo "Отключение сессий"
