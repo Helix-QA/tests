@@ -9,21 +9,21 @@ pipeline {
 					currentBuild.displayName = "#${BUILD_NUMBER} | ${params.VERSION_NEW} | ${params.debug}"
 					updateConfigFile()
                     if (params.product == 'fitness') {
-                        env.testPathPlaceholder = "\\features\\${params.product}\\${params.debug}"
+                        env.testPathPlaceholder = "\\features\\${params.product}${params.debug}"
                         env.repository = repositoryReleaseFitness
                         env.extmess = "http://192.168.2.16/hran1c/repository.1ccr/fitness4_messenger_release"
                         env.extNameMess = "Мессенджер"
                         env.logo = "doc/logo.png"
 
                     } else if (params.product == 'salon') {
-                        env.testPathPlaceholder = "\\features\\${params.product}\\${params.debug}"
+                        env.testPathPlaceholder = "\\features\\${params.product}${params.debug}"
                         env.repository = repositoryReleaseSalon
                         env.extmess = "http://192.168.2.16/hran1c/repository.1ccr/salon_messenger_release"
                         env.extNameMess = "Мессенджер_СалонКрасоты"
                         env.logo = "doc/logo1.png"
 
                     } else {
-                        env.testPathPlaceholder = "\\features\\${params.product}\\${params.debug}"
+                        env.testPathPlaceholder = "\\features\\${params.product}${params.debug}"
                         env.repository = repositoryReleaseStom
                         env.extmess = "http://192.168.2.16/hran1c/repository.1ccr/stomatology2_messenger_release"
                         env.extNameMess = "Мессенджер_Стоматология"
@@ -202,23 +202,17 @@ pipeline {
                 script {
                         try {
 							bat """
-chcp 65001
-
-set OPT_PATH=
-if not "${env.testPathPlaceholder}"=="" (
-  set OPT_PATH=--path "${env.WORKSPACE}${env.testPathPlaceholder}"
-)
-
-call vrunner vanessa %OPT_PATH% ^
-  --vanessasettings "${env.WORKSPACE}\\scripts\\VAParams.json" ^
-  --workspace "${env.WORKSPACE}" ^
-  --pathvanessa "${env.pathvanessa}" ^
-  --additional "/DisplayAllFunctions /L ru" ^
-  --ibconnection /Slocalhost/${env.dbTests} ^
-  --db-user Админ ^
-  --uccode tester
-"""
-
+							chcp 65001
+							call vrunner vanessa ^
+								--path "${env.WORKSPACE}${env.testPathPlaceholder}" ^
+								--vanessasettings "${env.WORKSPACE}\\scripts\\VAParams.json" ^
+								--workspace ${env.WORKSPACE} ^
+								--pathvanessa ${env.pathvanessa} ^
+								--additional "/DisplayAllFunctions /L ru" ^
+								--ibconnection /Slocalhost/${env.dbTests} ^
+								--db-user Админ ^
+								--uccode tester
+							"""
  						} catch (Exception Exc) {
 							echo "Error occurred: ${Exc.message}"
 							currentBuild.result = 'UNSTABLE'
