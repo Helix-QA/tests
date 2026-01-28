@@ -20,7 +20,7 @@ PG_PORT = "5432"
 PG_USER = "postgres"
 PG_PASS = "postgres"
 
-RAC_PATH = r"C:\Program Files\1cv8\8.3.27.1688\bin\rac.exe"
+RAC_PATH = r"C:\Program Files\1cv8\8.5.1.1150\bin\rac.exe"
 RAC_CLUSTER_ADDR = "localhost:1545"
 
 PG_RETRIES = 6
