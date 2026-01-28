@@ -61,7 +61,7 @@ def rac_force_drop(infobase_name: str):
         print("Cluster UUID:", cluster_uuid)
 
         ib_uuid = None
-        result = run([RAC_PATH, "infobase", "list", "--cluster", cluster_uuid])
+        result = run([RAC_PATH, "infobase", "list", "--cluster", cluster_uuid, RAC_CLUSTER_ADDR])
         if result.returncode != 0:
             print("RAC: невозможно получить список ИБ:", result.stderr)
             return
@@ -81,16 +81,19 @@ def rac_force_drop(infobase_name: str):
         run([
             RAC_PATH, "session", "terminate",
             "--cluster", cluster_uuid,
+            RAC_CLUSTER_ADDR,
             "--infobase", ib_uuid,
             "--force"
-        ])
+        ], ignore_errors=True)
 
-        print("RAC: удаляем IB из кластера")
+        print("RAC: удаляем ИБ из кластера и базу данных")
         run([
             RAC_PATH, "infobase", "drop",
             "--cluster", cluster_uuid,
-            "--infobase", ib_uuid
-        ])
+            RAC_CLUSTER_ADDR,
+            "--infobase", ib_uuid,
+            "--drop-database"   # ← КЛЮЧЕВОЙ ПАРАМЕТР
+        ], ignore_errors=True)
 
         print("RAC cleanup завершён")
     except Exception as e:
@@ -191,15 +194,12 @@ if __name__ == "__main__":
     infobase = sys.argv[1].strip()
     db = infobase.lower()
 
-    drop_1c_infobase(infobase)
-
-    print("Ожидание...")
-    time.sleep(5)
-
+    # Удаляем через RAC (с --drop-database)
     rac_force_drop(infobase)
 
     delete_folder("build/results")
 
+    # Оставляем как fallback на случай, если --drop-database не сработал
     drop_postgres(db)
     clean_1c_cache()
 
