@@ -9,12 +9,11 @@ pipeline {
 					currentBuild.displayName = "#${BUILD_NUMBER} | ${params.VERSION_NEW} | ${params.debug}"
 					updateConfigFile()
 					env.testPathPlaceholder = "\\features\\${params.product}${params.debug}"
-                    if (params.product == 'fitness') {       
+                    if (params.product == 'fitness') {
                         env.repository = repositoryReleaseFitness
                         env.extmess = "http://192.168.2.16/hran1c/repository.1ccr/fitness4_messenger_release"
                         env.extNameMess = "Мессенджер"
                         env.logo = "doc/logo.png"
-
                     } else if (params.product == 'salon') {
                         env.repository = repositoryReleaseSalon
                         env.extmess = "http://192.168.2.16/hran1c/repository.1ccr/salon_messenger_release"
@@ -22,6 +21,7 @@ pipeline {
                         env.logo = "doc/logo1.png"
 
                     } else {
+
                         env.repository = repositoryReleaseStom
                         env.extmess = "http://192.168.2.16/hran1c/repository.1ccr/stomatology2_messenger_release"
                         env.extNameMess = "Мессенджер_Стоматология"
@@ -33,91 +33,99 @@ pipeline {
 		stage("Создание БД") {
             steps {
                 script {
-					def drop_db = "scripts/drop_db.py"
-					def rac = '"C:\\Program Files\\1cv8\\8.5.1.1150\\bin\\rac.exe"'
-					def dbName = env.dbTests
+                    def drop_db = "scripts/drop_db.py"
+                    def versionFile = "D:\\Vanessa-Automation\\version\\${params.product}.txt" // перенести в git
+				    timeout(time: 2, unit: 'MINUTES') {
+                        retry(3) {
+                            try {
+								echo "Удаление существующей базы"
+								bat """
+								chcp 65001
+								set PYTHONIOENCODING=utf-8
+								set PYTHONUTF8=1
+								cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
+								"""
+                            } catch (e) {
+                                echo "drop_db упал, перезапуск агента 1С"
+                                bat 'python -X utf8 scripts/AgentRestart.py'
+                                wait1C()
+                                throw e
+                            }
+                        }
+                    }
 
-					timeout(time: 5, unit: 'MINUTES') {
-					retry(3) {
-						echo "🔄 Принудительный перезапуск агента 1С"
-						bat 'python -X utf8 scripts/AgentRestart.py'
-						wait1C()
+                    wait1C()
+					echo "Создание базы данных"
+					bat """
+					chcp 65001
+					call vrunner create --db-server localhost ^
+						--name ${env.dbTests} ^
+						--dbms PostgreSQL ^
+						--db-admin postgres ^
+						--db-admin-pwd postgres ^
+						--uccode tester
+					"""
+                    echo "Отключение сессий"
+					bat """
+					chcp 65001
+					call vrunner session kill ^
+						--db ${env.dbTests} ^
+						--db-user Админ ^
+						--uccode tester
+					"""
+					wait1C()
+                    echo "Загрузка .dt"
+					bat """
+					chcp 65001
+					call vrunner restore ^
+						"D:/Vanessa-Automation/DT/${params.product}.dt" ^
+						--ibconnection /Slocalhost/${env.dbTests} ^
+						--uccode tester
+					"""
+					wait1C()
+					echo "Обновление конфигурации"
+					bat """
+					chcp 65001
+					call vrunner updatedb ^
+						--ibconnection /Slocalhost/${env.dbTests} ^
+						--db-user Админ ^
+						--uccode tester
+					"""
+                    echo "Загрузка из хранилища"
+					bat """
+					chcp 65001
+					call vrunner loadrepo ^
+						--storage-name ${env.repository} ^
+						--storage-user ${env.VATest} ^
+						--ibconnection /Slocalhost/${env.dbTests} ^
+						--db-user Админ ^
+						--uccode tester
+					"""
+					echo "Отключение сессий"
+					bat """
+					chcp 65001
+					call vrunner session kill ^
+						--db ${env.dbTests} ^
+						--db-user Админ ^
+						--uccode tester
+						"""
+					echo "Обновление конфигурации"
+					bat """
+					chcp 65001
+					call vrunner updatedb ^
+						--ibconnection /Slocalhost/${env.dbTests} ^
+						--db-user Админ ^
+						--uccode tester
+					"""
+                    echo "Разблокирование входа"
+					bat """
+					chcp 65001
+					call vrunner session unlock ^
+						--db ${env.dbTests} ^
+						--db-user Админ ^
+						--uccode tester
+					"""
 
-						echo "🗑️ Удаление базы ${dbName}"
-						bat """
-						chcp 65001
-						set PYTHONIOENCODING=utf-8
-						set PYTHONUTF8=1
-						cmd /c python -X utf8 "${drop_db}" "${dbName}"
-						"""
-
-						echo "🔍 Проверка: база НЕ должна быть зарегистрирована в RAC"
-						bat """
-						${rac} infobase list localhost:1545 ^
-						| findstr /R /C:"name *= *${dbName}$" >nul && exit /b 1 || exit /b 0
-						"""
-					}
-
-						echo "🛑 Финальная проверка перед созданием"
-						bat """
-						${rac} infobase list localhost:1545 ^
-						| findstr /R /C:"name *= *${dbName}$" >nul && (
-							echo ❌ БАЗА ВСЁ ЕЩЁ В RAC. АВАРИЙНЫЙ СТОП.
-							exit /b 1
-						) || exit /b 0
-						"""
-
-						echo "✅ Создание новой базы ${dbName}"
-						bat """
-						chcp 65001
-						call vrunner create --db-server localhost ^
-							--name ${dbName} ^
-							--dbms PostgreSQL ^
-							--db-admin postgres ^
-							--db-admin-pwd postgres ^
-							--uccode tester
-						"""
-						wait1C()
-
-						echo "🔪 Отключение сессий"
-						bat """
-						chcp 65001
-						call vrunner session kill ^
-							--db ${dbName} ^
-							--db-user Админ ^
-							--uccode tester
-						"""
-						wait1C()
-
-						echo "📦 Загрузка .dt"
-						bat """
-						chcp 65001
-						call vrunner restore ^
-							"D:/Vanessa-Automation/DT/${params.product}.dt" ^
-							--ibconnection /Slocalhost/${dbName} ^
-							--uccode tester
-						"""
-						wait1C()
-
-						// ====== ОБНОВЛЕНИЕ КОНФИГУРАЦИИ ======
-						echo "🔄 Обновление конфигурации"
-						bat """
-						chcp 65001
-						call vrunner updatedb ^
-							--ibconnection /Slocalhost/${dbName} ^
-							--db-user Админ ^
-							--uccode tester
-						"""
-						wait1C()
-						echo "Разблокирование входа"
-						bat """
-						chcp 65001
-						call vrunner session unlock ^
-							--db ${env.dbTests} ^
-							--db-user Админ ^
-							--uccode tester
-						"""
-					}
                     echo "Проверка версии"
                     if (fileExists(versionFile)) {
                         env.version = readFile(versionFile).trim()
