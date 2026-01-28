@@ -202,17 +202,23 @@ pipeline {
                 script {
                         try {
 							bat """
-							chcp 65001
-							call vrunner vanessa ^
-								--path "${env.WORKSPACE}${env.testPathPlaceholder}" ^
-								--vanessasettings "${env.WORKSPACE}\\scripts\\VAParams.json" ^
-								--workspace ${env.WORKSPACE} ^
-								--pathvanessa ${env.pathvanessa} ^
-								--additional "/DisplayAllFunctions /L ru" ^
-								--ibconnection /Slocalhost/${env.dbTests} ^
-								--db-user Админ ^
-								--uccode tester
-							"""
+chcp 65001
+
+set OPT_PATH=
+if not "${env.testPathPlaceholder}"=="" (
+  set OPT_PATH=--path "${env.WORKSPACE}${env.testPathPlaceholder}"
+)
+
+call vrunner vanessa %OPT_PATH% ^
+  --vanessasettings "${env.WORKSPACE}\\scripts\\VAParams.json" ^
+  --workspace "${env.WORKSPACE}" ^
+  --pathvanessa "${env.pathvanessa}" ^
+  --additional "/DisplayAllFunctions /L ru" ^
+  --ibconnection /Slocalhost/${env.dbTests} ^
+  --db-user Админ ^
+  --uccode tester
+"""
+
  						} catch (Exception Exc) {
 							echo "Error occurred: ${Exc.message}"
 							currentBuild.result = 'UNSTABLE'
