@@ -62,152 +62,172 @@ pipeline {
 					// chcp 65001
 					// call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "8.5.1.1150" --rac "${env.rac}" --nocacheuse
 					// """
-			
 				}
-			} steps{
-                    bat """
-                    chcp 65001
-                    call vrunner session kill ^
-                        --db ${env.dbTests} ^
-                        --db-user Админ ^
-                        --uccode tester ^
-                        --v8version "8.5.1.1150" ^
-                        --nocacheuse
-                    """
-			} steps{
-                    bat """
-                    chcp 65001
-                    call vrunner restore ^
-                        "D:/Vanessa-Automation/DT/${params.product}.dt" ^
-                        --ibconnection /Slocalhost/${env.dbTests} ^
-                        --uccode tester ^
-                        --v8version "8.5.1.1150" ^
-                        --nocacheuse
-                    """
-			} steps{
-                    bat """
-                    chcp 65001
-                    call vrunner updatedb ^
-                        --ibconnection /Slocalhost/${env.dbTests} ^
-                        --db-user Админ ^
-                        --uccode tester ^
-                        --v8version "8.5.1.1150" ^
-                        --nocacheuse
-                    """
-			} steps{
-                    bat """
-                    chcp 65001
-                    call vrunner loadrepo ^
-                        --storage-name ${env.repository} ^
-                        --storage-user ${env.VATest} ^
-                        --ibconnection /Slocalhost/${env.dbTests} ^
-                        --db-user Админ ^
-                        --uccode tester ^
-                        --v8version "8.5.1.1150" ^
-                        --nocacheuse
-                    """
-			} steps{
-                    bat """
-                    chcp 65001
-                    call vrunner updatedb ^
-                        --ibconnection /Slocalhost/${env.dbTests} ^
-                        --db-user Админ ^
-                        --uccode tester ^
-                        --v8version "8.5.1.1150" ^
-                        --nocacheuse
-                    """
-			} steps{
-					bat """
-					chcp 65001
-					call vrunner session unlock ^
-						--db ${env.dbTests} ^
-						--db-user Админ ^
-						--uccode tester ^
-						--v8version "8.5.1.1150" ^
-						--nocacheuse
-					"""
-			} steps{
-                    echo 
-                    if (fileExists(versionFile)) {
-                        env.version = readFile(versionFile).trim()
-                    } else {
-                        env.version = "1.0.0"
-                    }
+			}
+		} 
+		stage("Отключение сессий"){
+			steps{
+				bat """
+				chcp 65001
+				call vrunner session kill ^
+					--db ${env.dbTests} ^
+					--db-user Админ ^
+					--uccode tester ^
+					--v8version "8.5.1.1150" ^
+					--nocacheuse
+				"""
+			}
+		} 
+		stage("Загрузка .dt"){
+			steps{
+				bat """
+				chcp 65001
+				call vrunner restore ^
+					"D:/Vanessa-Automation/DT/${params.product}.dt" ^
+					--ibconnection /Slocalhost/${env.dbTests} ^
+					--uccode tester ^
+					--v8version "8.5.1.1150" ^
+					--nocacheuse
+				"""
+			} 
+		}
+		stage("Обновление базы"){
+			steps{
+				bat """
+				chcp 65001
+				call vrunner updatedb ^
+					--ibconnection /Slocalhost/${env.dbTests} ^
+					--db-user Админ ^
+					--uccode tester ^
+					--v8version "8.5.1.1150" ^
+					--nocacheuse
+				"""
+			}
+		} 
+		stage("Загрзука данных с хранилища"){	
+			steps{
+				bat """
+				chcp 65001
+				call vrunner loadrepo ^
+					--storage-name ${env.repository} ^
+					--storage-user ${env.VATest} ^
+					--ibconnection /Slocalhost/${env.dbTests} ^
+					--db-user Админ ^
+					--uccode tester ^
+					--v8version "8.5.1.1150" ^
+					--nocacheuse
+				"""
+			}
+		}
+		stage("Обновление с хранилища"){ 
+			steps{
+				bat """
+				chcp 65001
+				call vrunner updatedb ^
+					--ibconnection /Slocalhost/${env.dbTests} ^
+					--db-user Админ ^
+					--uccode tester ^
+					--v8version "8.5.1.1150" ^
+					--nocacheuse
+				"""
+			} 
+		}
+		stage("Разрешение сеансов"){
+			steps{
+				bat """
+				chcp 65001
+				call vrunner session unlock ^
+					--db ${env.dbTests} ^
+					--db-user Админ ^
+					--uccode tester ^
+					--v8version "8.5.1.1150" ^
+					--nocacheuse
+				"""
+			}
+		} 
+		// stage("Обновление в режиме предприятия"){
+		// 	steps{
+		// 		echo 
+		// 		if (fileExists(versionFile)) {
+		// 			env.version = readFile(versionFile).trim()
+		// 		} else {
+		// 			env.version = "1.0.0"
+		// 		}
 
-                    if (params.VERSION_NEW > env.version) {
-                        retry(2) {
-                            try {
-                                echo "Обновление в режиме Предприятие"
-                                bat """
-                                chcp 65001
-                                call vrunner run ^
-                                    --command ЗавершитьРаботуСистемы; ^
-                                    --ibconnection /Slocalhost/${env.dbTests} ^
-                                    --db-user Админ ^
-                                    --execute "C:\\Program Files\\OneScript\\lib\\vanessa-runner\\epf\\ЗакрытьПредприятие.epf" ^
-                                    --uccode tester ^
-                                    --v8version "8.5.1.1150" ^
-                                    --nocacheuse
-                                """
+		// 		if (params.VERSION_NEW > env.version) {
+		// 			retry(2) {
+		// 				try {
+		// 					echo "Обновление в режиме Предприятие"
+		// 					bat """
+		// 					chcp 65001
+		// 					call vrunner run ^
+		// 						--command ЗавершитьРаботуСистемы; ^
+		// 						--ibconnection /Slocalhost/${env.dbTests} ^
+		// 						--db-user Админ ^
+		// 						--execute "C:\\Program Files\\OneScript\\lib\\vanessa-runner\\epf\\ЗакрытьПредприятие.epf" ^
+		// 						--uccode tester ^
+		// 						--v8version "8.5.1.1150" ^
+		// 						--nocacheuse
+		// 					"""
 
-                                echo "Убираем окно перемещения"
-                                bat """
-                                chcp 65001
-                                call vrunner run ^
-                                    --ibconnection /Slocalhost/${env.dbTests} ^
-                                    --db-user Админ ^
-                                    --execute "C:\\Program Files\\OneScript\\lib\\vanessa-runner\\epf\\УбратьОкноПеремещенияИБ.epf" ^
-                                    --uccode tester ^
-                                    --v8version "8.5.1.1150" ^
-                                    --nocacheuse
-                                """
+		// 					echo "Убираем окно перемещения"
+		// 					bat """
+		// 					chcp 65001
+		// 					call vrunner run ^
+		// 						--ibconnection /Slocalhost/${env.dbTests} ^
+		// 						--db-user Админ ^
+		// 						--execute "C:\\Program Files\\OneScript\\lib\\vanessa-runner\\epf\\УбратьОкноПеремещенияИБ.epf" ^
+		// 						--uccode tester ^
+		// 						--v8version "8.5.1.1150" ^
+		// 						--nocacheuse
+		// 					"""
 
-                                echo "Отключение сессий"
-                                bat """
-                                chcp 65001
-                                call vrunner session kill ^
-                                    --db ${env.dbTests} ^
-                                    --db-user Админ ^
-                                    --uccode tester ^
-                                    --v8version "8.5.1.1150" ^
-                                    --nocacheuse
-                                """
+		// 					echo "Отключение сессий"
+		// 					bat """
+		// 					chcp 65001
+		// 					call vrunner session kill ^
+		// 						--db ${env.dbTests} ^
+		// 						--db-user Админ ^
+		// 						--uccode tester ^
+		// 						--v8version "8.5.1.1150" ^
+		// 						--nocacheuse
+		// 					"""
 
-                                wait1C()
-                                echo "Выгружаем .dt"
-                                bat """
-                                chcp 65001
-                                call vrunner dump ^
-                                    "D:\\Vanessa-Automation\\DT\\${params.product}.dt" ^
-                                    --ibconnection /Slocalhost/${env.dbTests} ^
-                                    --db-user Админ ^
-                                    --uccode tester ^
-                                    --v8version "8.5.1.1150" ^
-                                    --nocacheuse
-                                """
+		// 					wait1C()
+		// 					echo "Выгружаем .dt"
+		// 					bat """
+		// 					chcp 65001
+		// 					call vrunner dump ^
+		// 						"D:\\Vanessa-Automation\\DT\\${params.product}.dt" ^
+		// 						--ibconnection /Slocalhost/${env.dbTests} ^
+		// 						--db-user Админ ^
+		// 						--uccode tester ^
+		// 						--v8version "8.5.1.1150" ^
+		// 						--nocacheuse
+		// 					"""
 
-                                echo "Разблокирование входа"
-                                bat """
-                                chcp 65001
-                                call vrunner session unlock ^
-                                    --db ${env.dbTests} ^
-                                    --db-user Админ ^
-                                    --uccode tester ^
-                                    --v8version "8.5.1.1150" ^
-                                    --nocacheuse
-                                """
+		// 					echo "Разблокирование входа"
+		// 					bat """
+		// 					chcp 65001
+		// 					call vrunner session unlock ^
+		// 						--db ${env.dbTests} ^
+		// 						--db-user Админ ^
+		// 						--uccode tester ^
+		// 						--v8version "8.5.1.1150" ^
+		// 						--nocacheuse
+		// 					"""
 
-                                writeFile file: versionFile, text: params.VERSION_NEW
-                            } catch (e) {
-                                echo "vanessa-runner временно не доступен, повтор через 30 сек"
-                                sleep 30
-                                wait1C()
-                                throw e
-                        	}
-						}
-                    }
-                }
-            }
+		// 					writeFile file: versionFile, text: params.VERSION_NEW
+		// 				} catch (e) {
+		// 					echo "vanessa-runner временно не доступен, повтор через 30 сек"
+		// 					sleep 30
+		// 					wait1C()
+		// 					throw e
+		// 				}
+		// 			}
+        //         }
+        //     }
+		// }
 		stage('Сценарное тестирование') {
             steps {
                 script {
