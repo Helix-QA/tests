@@ -36,61 +36,49 @@ pipeline {
                     def drop_db = "scripts/drop_db.py"
                     def versionFile = "D:\\Vanessa-Automation\\version\\${params.product}.txt"
 
-                    // timeout(time: 2, unit: 'MINUTES') {
-                    //     retry(3) {
-                    //         try {
-                    //             echo "Удаление существующей базы"
-                    //             bat """
-                    //             chcp 65001
-                    //             set PYTHONIOENCODING=utf-8
-                    //             set PYTHONUTF8=1
-                    //             cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
-                    //             """
-                    //         } catch (e) {
-                    //             echo "drop_db упал, перезапуск агента 1С"
-                    //             bat 'python -X utf8 scripts/AgentRestart.py'
-                    //             wait1C()
-                    //             throw e
-                    //         }
-                    //     }
-                    // }
+                    timeout(time: 2, unit: 'MINUTES') {
+                        retry(3) {
+                            try {
+                                echo "Удаление существующей базы"
+                                bat """
+                                chcp 65001
+                                set PYTHONIOENCODING=utf-8
+                                set PYTHONUTF8=1
+                                cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
+                                """
+								echo "Создание базы данных"
+								bat """
+								chcp 65001
+								call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "${env.VERSION_PLATFORM}" --rac "${env.rac}" --nocacheuse
+								"""
+								echo "Отключение сессий"
+								bat """
+								chcp 65001
+								call vrunner session kill ^
+									--db ${env.dbTests} ^
+									--db-user Админ ^
+									--uccode tester ^
+									--v8version "${env.VERSION_PLATFORM}" ^
+									--nocacheuse
+								"""
+                            } catch (e) {
+                                echo "drop_db упал, перезапуск агента 1С"
+                                bat 'python -X utf8 scripts/AgentRestart.py'
 
-                    wait1C()
+                                throw e
+                            }
+                        }
+                    }
 
-                    echo "Создание базы данных"
-                    bat """
-					chcp 65001
-					call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "8.5.1.1150" --rac "${env.rac}" --nocacheuse
-					"""
-				retry(3) {
-					echo "Отключение сессий"
-					def ret = bat(returnStatus: true, script: """
-						chcp 65001
-						call vrunner session kill ^
-							--db ${env.dbTests} ^
-							--db-user Админ ^
-							--uccode tester ^
-							--v8version "8.5.1.1150" ^
-							--nocacheuse
-					""")
-
-					if (ret != 0) {
-						echo "Ошибка выполнения команды vrunner, код возврата: ${ret}. Попытка будет повторена..."
-						error("Повтор команды")
-					} else {
-						echo "Команда выполнена успешно."
-					}
-				}
-
+                wait1C()
                     echo "Загрузка .dt"
                     bat """
                     chcp 65001
                     call vrunner restore ^
                         "D:/Vanessa-Automation/DT/${params.product}.dt" ^
                         --ibconnection /Slocalhost/${env.dbTests} ^
-						--db-user Админ ^
                         --uccode tester ^
-                        --v8version "8.5.1.1150" ^
+                        --v8version "${env.VERSION_PLATFORM}" ^
                         --nocacheuse
                     """
 
@@ -101,7 +89,7 @@ pipeline {
                         --ibconnection /Slocalhost/${env.dbTests} ^
                         --db-user Админ ^
                         --uccode tester ^
-                        --v8version "8.5.1.1150" ^
+                        --v8version "${env.VERSION_PLATFORM}" ^
                         --nocacheuse
                     """
 
@@ -114,7 +102,7 @@ pipeline {
                         --ibconnection /Slocalhost/${env.dbTests} ^
                         --db-user Админ ^
                         --uccode tester ^
-                        --v8version "8.5.1.1150" ^
+                        --v8version "${env.VERSION_PLATFORM}" ^
                         --nocacheuse
                     """
 
@@ -125,7 +113,7 @@ pipeline {
                         --ibconnection /Slocalhost/${env.dbTests} ^
                         --db-user Админ ^
                         --uccode tester ^
-                        --v8version "8.5.1.1150" ^
+                        --v8version "${env.VERSION_PLATFORM}" ^
                         --nocacheuse
                     """
 
@@ -136,7 +124,7 @@ pipeline {
                         --db ${env.dbTests} ^
                         --db-user Админ ^
                         --uccode tester ^
-                        --v8version "8.5.1.1150" ^
+                        --v8version "${env.VERSION_PLATFORM}" ^
                         --nocacheuse
                     """
 
@@ -157,9 +145,9 @@ pipeline {
                                     --command ЗавершитьРаботуСистемы; ^
                                     --ibconnection /Slocalhost/${env.dbTests} ^
                                     --db-user Админ ^
-                                    --execute "C:\\Program Files\\OneScript\\lib\\vanessa-runner\\epf\\ЗакрытьПредприятие.epf" ^
+                                    --execute "epf/ЗакрытьПредприятие.epf" ^
                                     --uccode tester ^
-                                    --v8version "8.5.1.1150" ^
+                                    --v8version "${env.VERSION_PLATFORM}" ^
                                     --nocacheuse
                                 """
 
@@ -169,9 +157,9 @@ pipeline {
                                 call vrunner run ^
                                     --ibconnection /Slocalhost/${env.dbTests} ^
                                     --db-user Админ ^
-                                    --execute "C:\\Program Files\\OneScript\\lib\\vanessa-runner\\epf\\УбратьОкноПеремещенияИБ.epf" ^
+                                    --execute "epf/УбратьОкноПеремещенияИБ.epf" ^
                                     --uccode tester ^
-                                    --v8version "8.5.1.1150" ^
+                                    --v8version "${env.VERSION_PLATFORM}" ^
                                     --nocacheuse
                                 """
 
@@ -182,7 +170,7 @@ pipeline {
                                     --db ${env.dbTests} ^
                                     --db-user Админ ^
                                     --uccode tester ^
-                                    --v8version "8.5.1.1150" ^
+                                    --v8version "${env.VERSION_PLATFORM}" ^
                                     --nocacheuse
                                 """
 
@@ -195,7 +183,7 @@ pipeline {
                                     --ibconnection /Slocalhost/${env.dbTests} ^
                                     --db-user Админ ^
                                     --uccode tester ^
-                                    --v8version "8.5.1.1150" ^
+                                    --v8version "${env.VERSION_PLATFORM}" ^
                                     --nocacheuse
                                 """
 
@@ -206,7 +194,7 @@ pipeline {
                                     --db ${env.dbTests} ^
                                     --db-user Админ ^
                                     --uccode tester ^
-                                    --v8version "8.5.1.1150" ^
+                                    --v8version "${env.VERSION_PLATFORM}" ^
                                     --nocacheuse
                                 """
 
@@ -237,7 +225,7 @@ pipeline {
                             --ibconnection /Slocalhost/${env.dbTests} ^
                             --db-user Админ ^
                             --uccode tester ^
-                            --v8version "8.5.1.1150" ^
+                            --v8version "${env.VERSION_PLATFORM}" ^
                             --nocacheuse
                         """
                     } catch (Exception Exc) {
