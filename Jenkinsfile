@@ -73,9 +73,6 @@ pipeline {
 						--db-admin-pwd postgres ^
 						--uccode tester ^
 						--v8version "8.5.1.1150" ^
-						--rac "C:\\Program Files\\1cv8\\8.5.1.1150\\bin\\rac.exe" ^
-						--rac-host localhost ^
-						--rac-port 1545 ^
 						--nocacheuse
 					"""
 
