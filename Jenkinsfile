@@ -56,6 +56,13 @@ pipeline {
                     }
 
                     wait1C()
+					bat """
+					whoami
+					echo PATH=%PATH%
+					"%RAC_PATH%" --version
+					"%RAC_PATH%" cluster list
+					"""
+
                     echo "Создание базы данных"
                     bat """
 					chcp 65001
