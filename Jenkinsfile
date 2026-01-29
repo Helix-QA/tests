@@ -30,7 +30,7 @@ pipeline {
                 }
             }
         }
-		  stage("Создание БД") {
+		stage("Создание БД") {
             steps {
                 script {
                     def drop_db = "scripts/drop_db.py"
@@ -62,8 +62,10 @@ pipeline {
 					// chcp 65001
 					// call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "8.5.1.1150" --rac "${env.rac}" --nocacheuse
 					// """
-
-                    echo "Отключение сессий"
+			
+				}
+			}
+			steps("Отключение сессий"){
                     bat """
                     chcp 65001
                     call vrunner session kill ^
@@ -73,9 +75,7 @@ pipeline {
                         --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
-
-                    wait1C()
-                    echo "Загрузка .dt"
+			} steps("Загрузка .dt"){
                     bat """
                     chcp 65001
                     call vrunner restore ^
@@ -85,9 +85,7 @@ pipeline {
                         --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
-
-                    wait1C()
-                    echo "Обновление конфигурации"
+			} steps("Обновление конфигурации"){
                     bat """
                     chcp 65001
                     call vrunner updatedb ^
@@ -97,8 +95,7 @@ pipeline {
                         --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
-
-                    echo "Загрузка из хранилища"
+			} steps("Загрузка из хранилища"){
                     bat """
                     chcp 65001
                     call vrunner loadrepo ^
@@ -110,19 +107,7 @@ pipeline {
                         --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
-
-                    echo "Отключение сессий"
-                    bat """
-                    chcp 65001
-                    call vrunner session kill ^
-                        --db ${env.dbTests} ^
-                        --db-user Админ ^
-                        --uccode tester ^
-                        --v8version "8.5.1.1150" ^
-                        --nocacheuse
-                    """
-
-                    echo "Обновление конфигурации"
+			} steps("Обновление конфигурации"){
                     bat """
                     chcp 65001
                     call vrunner updatedb ^
@@ -132,19 +117,18 @@ pipeline {
                         --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
-
-                    echo "Разблокирование входа"
-                    bat """
-                    chcp 65001
-                    call vrunner session unlock ^
-                        --db ${env.dbTests} ^
-                        --db-user Админ ^
-                        --uccode tester ^
-                        --v8version "8.5.1.1150" ^
-                        --nocacheuse
-                    """
-
-                    echo "Проверка версии"
+			} steps("Разблокирование входа"){
+					bat """
+					chcp 65001
+					call vrunner session unlock ^
+						--db ${env.dbTests} ^
+						--db-user Админ ^
+						--uccode tester ^
+						--v8version "8.5.1.1150" ^
+						--nocacheuse
+					"""
+			} steps("Проверка версии"){
+                    echo 
                     if (fileExists(versionFile)) {
                         env.version = readFile(versionFile).trim()
                     } else {
@@ -220,12 +204,11 @@ pipeline {
                                 sleep 30
                                 wait1C()
                                 throw e
-                            }
-                        }
+                        	}
+						}
                     }
                 }
             }
-        }
 		stage('Сценарное тестирование') {
             steps {
                 script {
