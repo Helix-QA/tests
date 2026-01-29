@@ -63,10 +63,20 @@ pipeline {
 					"%RAC_PATH%" cluster list
 					"""
 
-                    echo "Создание базы данных"
-                    bat """
+                   bat """
 					chcp 65001
-					call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "8.5.1.1150" --rac "C:\\Program Files\\1cv8\\8.5.1.1150\\bin\\rac.exe" --nocacheuse
+					call vrunner create ^
+						--db-server localhost ^
+						--name ${env.dbTests} ^
+						--dbms PostgreSQL ^
+						--db-admin postgres ^
+						--db-admin-pwd postgres ^
+						--uccode tester ^
+						--v8version "8.5.1.1150" ^
+						--rac "C:\\Program Files\\1cv8\\8.5.1.1150\\bin\\rac.exe" ^
+						--rac-host localhost ^
+						--rac-port 1545 ^
+						--nocacheuse
 					"""
 
                     echo "Отключение сессий"
