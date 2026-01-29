@@ -49,7 +49,7 @@ pipeline {
 								echo "Создание базы данных"
 								bat """
 								chcp 65001
-								call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "${env.VERSION_PLATFORM}" --rac "${env.rac}" --nocacheuse
+								call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "${env.VERSION_PLATFORM}" --rac "${env.rac}"  
 								"""
 								echo "Отключение сессий"
 								bat """
@@ -59,7 +59,7 @@ pipeline {
 									--db-user Админ ^
 									--uccode tester ^
 									--v8version "${env.VERSION_PLATFORM}" ^
-									--nocacheuse
+									 
 								"""
                             } catch (e) {
                                 echo "drop_db упал, перезапуск агента 1С"
@@ -77,7 +77,7 @@ pipeline {
                         --ibconnection /Slocalhost/${env.dbTests} ^
                         --uccode tester ^
                         --v8version "${env.VERSION_PLATFORM}" ^
-                        --nocacheuse
+                         
                     """
 
                     echo "Обновление конфигурации"
@@ -88,7 +88,7 @@ pipeline {
                         --db-user Админ ^
                         --uccode tester ^
                         --v8version "${env.VERSION_PLATFORM}" ^
-                        --nocacheuse
+                         
                     """
 
                     echo "Загрузка из хранилища"
@@ -101,7 +101,7 @@ pipeline {
                         --db-user Админ ^
                         --uccode tester ^
                         --v8version "${env.VERSION_PLATFORM}" ^
-                        --nocacheuse
+                         
                     """
 
                     echo "Обновление конфигурации"
@@ -112,7 +112,7 @@ pipeline {
                         --db-user Админ ^
                         --uccode tester ^
                         --v8version "${env.VERSION_PLATFORM}" ^
-                        --nocacheuse
+                         
                     """
 
                     echo "Разблокирование входа"
@@ -123,7 +123,7 @@ pipeline {
                         --db-user Админ ^
                         --uccode tester ^
                         --v8version "${env.VERSION_PLATFORM}" ^
-                        --nocacheuse
+                         
                     """
 
                     echo "Проверка версии"
@@ -146,7 +146,7 @@ pipeline {
                                     --execute "epf/ЗакрытьПредприятие.epf" ^
                                     --uccode tester ^
                                     --v8version "${env.VERSION_PLATFORM}" ^
-                                    --nocacheuse
+                                     
                                 """
 
                                 echo "Убираем окно перемещения"
@@ -158,7 +158,7 @@ pipeline {
                                     --execute "epf/УбратьОкноПеремещенияИБ.epf" ^
                                     --uccode tester ^
                                     --v8version "${env.VERSION_PLATFORM}" ^
-                                    --nocacheuse
+                                     
                                 """
 
                                 echo "Отключение сессий"
@@ -169,7 +169,7 @@ pipeline {
                                     --db-user Админ ^
                                     --uccode tester ^
                                     --v8version "${env.VERSION_PLATFORM}" ^
-                                    --nocacheuse
+                                     
                                 """
 
                                 wait1C()
@@ -182,7 +182,7 @@ pipeline {
                                     --db-user Админ ^
                                     --uccode tester ^
                                     --v8version "${env.VERSION_PLATFORM}" ^
-                                    --nocacheuse
+                                     
                                 """
 
                                 echo "Разблокирование входа"
@@ -193,7 +193,7 @@ pipeline {
                                     --db-user Админ ^
                                     --uccode tester ^
                                     --v8version "${env.VERSION_PLATFORM}" ^
-                                    --nocacheuse
+                                    
                                 """
 
                                 writeFile file: versionFile, text: params.VERSION_NEW
@@ -224,7 +224,6 @@ pipeline {
                             --db-user Админ ^
                             --uccode tester ^
                             --v8version "${env.VERSION_PLATFORM}" ^
-                            --nocacheuse
                         """
                     } catch (Exception Exc) {
                         echo "Error occurred: ${Exc.message}"
