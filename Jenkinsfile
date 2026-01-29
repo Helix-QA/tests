@@ -64,8 +64,7 @@ pipeline {
 					// """
 			
 				}
-			}
-			steps("Отключение сессий"){
+			} steps{
                     bat """
                     chcp 65001
                     call vrunner session kill ^
@@ -75,7 +74,7 @@ pipeline {
                         --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
-			} steps("Загрузка .dt"){
+			} steps{
                     bat """
                     chcp 65001
                     call vrunner restore ^
@@ -85,7 +84,7 @@ pipeline {
                         --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
-			} steps("Обновление конфигурации"){
+			} steps{
                     bat """
                     chcp 65001
                     call vrunner updatedb ^
@@ -95,7 +94,7 @@ pipeline {
                         --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
-			} steps("Загрузка из хранилища"){
+			} steps{
                     bat """
                     chcp 65001
                     call vrunner loadrepo ^
@@ -107,7 +106,7 @@ pipeline {
                         --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
-			} steps("Обновление конфигурации"){
+			} steps{
                     bat """
                     chcp 65001
                     call vrunner updatedb ^
@@ -117,7 +116,7 @@ pipeline {
                         --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
-			} steps("Разблокирование входа"){
+			} steps{
 					bat """
 					chcp 65001
 					call vrunner session unlock ^
@@ -127,7 +126,7 @@ pipeline {
 						--v8version "8.5.1.1150" ^
 						--nocacheuse
 					"""
-			} steps("Проверка версии"){
+			} steps{
                     echo 
                     if (fileExists(versionFile)) {
                         env.version = readFile(versionFile).trim()
