@@ -57,11 +57,11 @@ pipeline {
 
                     wait1C()
 
-                    // echo "Создание базы данных"
-                    // bat """
-					// chcp 65001
-					// call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "8.5.1.1150" --rac "${env.rac}" --nocacheuse
-					// """
+                    echo "Создание базы данных"
+                    bat """
+					chcp 65001
+					call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "8.5.1.1150" --rac "${env.rac}" --nocacheuse
+					"""
 				retry(3) {
 					echo "Отключение сессий"
 					def ret = bat(returnStatus: true, script: """
@@ -82,7 +82,6 @@ pipeline {
 					}
 				}
 
-                    wait1C()
                     echo "Загрузка .dt"
                     bat """
                     chcp 65001
@@ -95,7 +94,6 @@ pipeline {
                         --nocacheuse
                     """
 
-                    wait1C()
                     echo "Обновление конфигурации"
                     bat """
                     chcp 65001
