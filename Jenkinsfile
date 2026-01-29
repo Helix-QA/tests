@@ -66,7 +66,7 @@ pipeline {
                         --db-admin postgres ^
                         --db-admin-pwd postgres ^
                         --uccode tester ^
-                        --v8version "8.5.1" ^
+                        --v8version "8.5.1.1150" ^
 						--rac "C:\\Program Files\\1cv8\\8.5.1.1150\\bin\\rac.exe" ^
                         --nocacheuse
                     """
@@ -78,7 +78,7 @@ pipeline {
                         --db ${env.dbTests} ^
                         --db-user Админ ^
                         --uccode tester ^
-                        --v8version "8.5.1" ^
+                        --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
 
@@ -90,7 +90,7 @@ pipeline {
                         "D:/Vanessa-Automation/DT/${params.product}.dt" ^
                         --ibconnection /Slocalhost/${env.dbTests} ^
                         --uccode tester ^
-                        --v8version "8.5.1" ^
+                        --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
 
@@ -102,7 +102,7 @@ pipeline {
                         --ibconnection /Slocalhost/${env.dbTests} ^
                         --db-user Админ ^
                         --uccode tester ^
-                        --v8version "8.5.1" ^
+                        --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
 
@@ -115,7 +115,7 @@ pipeline {
                         --ibconnection /Slocalhost/${env.dbTests} ^
                         --db-user Админ ^
                         --uccode tester ^
-                        --v8version "8.5.1" ^
+                        --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
 
@@ -126,7 +126,7 @@ pipeline {
                         --db ${env.dbTests} ^
                         --db-user Админ ^
                         --uccode tester ^
-                        --v8version "8.5.1" ^
+                        --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
 
@@ -137,7 +137,7 @@ pipeline {
                         --ibconnection /Slocalhost/${env.dbTests} ^
                         --db-user Админ ^
                         --uccode tester ^
-                        --v8version "8.5.1" ^
+                        --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
 
@@ -148,7 +148,7 @@ pipeline {
                         --db ${env.dbTests} ^
                         --db-user Админ ^
                         --uccode tester ^
-                        --v8version "8.5.1" ^
+                        --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
 
@@ -171,7 +171,7 @@ pipeline {
                                     --db-user Админ ^
                                     --execute "C:\\Program Files\\OneScript\\lib\\vanessa-runner\\epf\\ЗакрытьПредприятие.epf" ^
                                     --uccode tester ^
-                                    --v8version "8.5.1" ^
+                                    --v8version "8.5.1.1150" ^
                                     --nocacheuse
                                 """
 
@@ -183,7 +183,7 @@ pipeline {
                                     --db-user Админ ^
                                     --execute "C:\\Program Files\\OneScript\\lib\\vanessa-runner\\epf\\УбратьОкноПеремещенияИБ.epf" ^
                                     --uccode tester ^
-                                    --v8version "8.5.1" ^
+                                    --v8version "8.5.1.1150" ^
                                     --nocacheuse
                                 """
 
@@ -194,7 +194,7 @@ pipeline {
                                     --db ${env.dbTests} ^
                                     --db-user Админ ^
                                     --uccode tester ^
-                                    --v8version "8.5.1" ^
+                                    --v8version "8.5.1.1150" ^
                                     --nocacheuse
                                 """
 
@@ -207,7 +207,7 @@ pipeline {
                                     --ibconnection /Slocalhost/${env.dbTests} ^
                                     --db-user Админ ^
                                     --uccode tester ^
-                                    --v8version "8.5.1" ^
+                                    --v8version "8.5.1.1150" ^
                                     --nocacheuse
                                 """
 
@@ -218,7 +218,7 @@ pipeline {
                                     --db ${env.dbTests} ^
                                     --db-user Админ ^
                                     --uccode tester ^
-                                    --v8version "8.5.1" ^
+                                    --v8version "8.5.1.1150" ^
                                     --nocacheuse
                                 """
 
@@ -249,7 +249,7 @@ pipeline {
                             --ibconnection /Slocalhost/${env.dbTests} ^
                             --db-user Админ ^
                             --uccode tester ^
-                            --v8version "8.5.1" ^
+                            --v8version "8.5.1.1150" ^
                             --nocacheuse
                         """
                     } catch (Exception Exc) {
