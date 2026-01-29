@@ -36,38 +36,32 @@ pipeline {
                     def drop_db = "scripts/drop_db.py"
                     def versionFile = "D:\\Vanessa-Automation\\version\\${params.product}.txt"
 
-                    timeout(time: 2, unit: 'MINUTES') {
-                        retry(3) {
-                            try {
-                                echo "Удаление существующей базы"
-                                bat """
-                                chcp 65001
-                                set PYTHONIOENCODING=utf-8
-                                set PYTHONUTF8=1
-                                cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
-                                """
-                            } catch (e) {
-                                echo "drop_db упал, перезапуск агента 1С"
-                                bat 'python -X utf8 scripts/AgentRestart.py'
-                                wait1C()
-                                throw e
-                            }
-                        }
-                    }
+                    // timeout(time: 2, unit: 'MINUTES') {
+                    //     retry(3) {
+                    //         try {
+                    //             echo "Удаление существующей базы"
+                    //             bat """
+                    //             chcp 65001
+                    //             set PYTHONIOENCODING=utf-8
+                    //             set PYTHONUTF8=1
+                    //             cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
+                    //             """
+                    //         } catch (e) {
+                    //             echo "drop_db упал, перезапуск агента 1С"
+                    //             bat 'python -X utf8 scripts/AgentRestart.py'
+                    //             wait1C()
+                    //             throw e
+                    //         }
+                    //     }
+                    // }
 
                     wait1C()
-					bat """
-					whoami
-					echo PATH=%PATH%
-					"%RAC_PATH%" --version
-					"%RAC_PATH%" cluster list
-					"""
 
-                    echo "Создание базы данных"
-                    bat """
-					chcp 65001
-					call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "8.5.1.1150" --rac "${env.rac}" --nocacheuse
-					"""
+                    // echo "Создание базы данных"
+                    // bat """
+					// chcp 65001
+					// call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "8.5.1.1150" --rac "${env.rac}" --nocacheuse
+					// """
 
                     echo "Отключение сессий"
                     bat """
