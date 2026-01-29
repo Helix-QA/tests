@@ -62,17 +62,25 @@ pipeline {
 					// chcp 65001
 					// call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "8.5.1.1150" --rac "${env.rac}" --nocacheuse
 					// """
+				retry(3) {
+					echo "Отключение сессий"
+					def ret = bat(returnStatus: true, script: """
+						chcp 65001
+						call vrunner session kill ^
+							--db ${env.dbTests} ^
+							--db-user Админ ^
+							--uccode tester ^
+							--v8version "8.5.1.1150" ^
+							--nocacheuse
+					""")
 
-                    echo "Отключение сессий"
-                    bat """
-                    chcp 65001
-                    call vrunner session kill ^
-                        --db ${env.dbTests} ^
-                        --db-user Админ ^
-                        --uccode tester ^
-                        --v8version "8.5.1.1150" ^
-                        --nocacheuse
-                    """
+					if (ret != 0) {
+						echo "Ошибка выполнения команды vrunner, код возврата: ${ret}. Попытка будет повторена..."
+						error("Повтор команды")
+					} else {
+						echo "Команда выполнена успешно."
+					}
+				}
 
                     wait1C()
                     echo "Загрузка .dt"
@@ -111,26 +119,6 @@ pipeline {
                         --v8version "8.5.1.1150" ^
                         --nocacheuse
                     """
-				retry(3) {
-					echo "Отключение сессий"
-					def ret = bat(returnStatus: true, script: """
-						chcp 65001
-						call vrunner session kill ^
-							--db ${env.dbTests} ^
-							--db-user Админ ^
-							--uccode tester ^
-							--v8version "8.5.1.1150" ^
-							--nocacheuse
-					""")
-
-					if (ret != 0) {
-						echo "Ошибка выполнения команды vrunner, код возврата: ${ret}. Попытка будет повторена..."
-						error("Повтор команды")
-					} else {
-						echo "Команда выполнена успешно."
-					}
-				}
-
 
                     echo "Обновление конфигурации"
                     bat """
