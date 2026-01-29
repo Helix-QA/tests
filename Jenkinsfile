@@ -87,6 +87,7 @@ pipeline {
 					call vrunner restore ^
 						"D:/Vanessa-Automation/DT/${params.product}.dt" ^
 						--ibconnection /Slocalhost/${env.dbTests} ^
+						-db-user Админ ^
 						--uccode tester ^
 						--v8version "8.5.1.1150" ^
 						--nocacheuse
