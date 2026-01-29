@@ -63,14 +63,12 @@ pipeline {
 								"""
                             } catch (e) {
                                 echo "drop_db упал, перезапуск агента 1С"
-                                bat 'python -X utf8 scripts/AgentRestart.py'
-
+                                bat 'python -X utf8 scripts/AgentRestart.py'	
+                				wait1C()
                                 throw e
                             }
                         }
                     }
-
-                wait1C()
                     echo "Загрузка .dt"
                     bat """
                     chcp 65001
