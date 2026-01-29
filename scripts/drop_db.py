@@ -161,7 +161,7 @@ def drop_1c_infobase(name):
     pythoncom.CoInitialize()
     try:
         clean_gen_py()
-        com = win32com.client.gencache.EnsureDispatch("V83.COMConnector")
+        com = win32com.client.gencache.EnsureDispatch("V85.COMConnector")
         agent = com.ConnectAgent(AGENT_ADDR)
         cluster = agent.GetClusters()[0]
         agent.Authenticate(cluster, "", "")
