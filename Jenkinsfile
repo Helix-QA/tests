@@ -9,12 +9,11 @@ pipeline {
 					currentBuild.displayName = "#${BUILD_NUMBER} | ${params.VERSION_NEW} | ${params.debug}"
 					updateConfigFile()
 					env.testPathPlaceholder = "\\features\\${params.product}${params.debug}"
-                    if (params.product == 'fitness') {       
+                    if (params.product == 'fitness') {
                         env.repository = repositoryReleaseFitness
                         env.extmess = "http://192.168.2.16/hran1c/repository.1ccr/fitness4_messenger_release"
                         env.extNameMess = "Мессенджер"
                         env.logo = "doc/logo.png"
-
                     } else if (params.product == 'salon') {
                         env.repository = repositoryReleaseSalon
                         env.extmess = "http://192.168.2.16/hran1c/repository.1ccr/salon_messenger_release"
@@ -22,6 +21,7 @@ pipeline {
                         env.logo = "doc/logo1.png"
 
                     } else {
+
                         env.repository = repositoryReleaseStom
                         env.extmess = "http://192.168.2.16/hran1c/repository.1ccr/stomatology2_messenger_release"
                         env.extNameMess = "Мессенджер_Стоматология"
@@ -30,102 +30,101 @@ pipeline {
                 }
             }
         }
-		stage("Создание БД") {
+		  stage("Создание БД") {
             steps {
                 script {
                     def drop_db = "scripts/drop_db.py"
-                    def versionFile = "D:\\Vanessa-Automation\\version\\${params.product}.txt" // перенести в git
-				    timeout(time: 2, unit: 'MINUTES') {
+                    def versionFile = "D:\\Vanessa-Automation\\version\\${params.product}.txt"
+
+                    timeout(time: 2, unit: 'MINUTES') {
                         retry(3) {
                             try {
-								echo "Удаление существующей базы"
-								bat """
-								chcp 65001
-								set PYTHONIOENCODING=utf-8
-								set PYTHONUTF8=1
-								cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
-								"""
+                                echo "Удаление существующей базы"
+                                bat """
+                                chcp 65001
+                                set PYTHONIOENCODING=utf-8
+                                set PYTHONUTF8=1
+                                cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
+                                """
 								echo "Создание базы данных"
 								bat """
 								chcp 65001
-								call vrunner create --db-server localhost ^
-									--name ${env.dbTests} ^
-									--dbms PostgreSQL ^
-									--db-admin postgres ^
-									--db-admin-pwd postgres ^
-									--uccode tester
+								call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "${env.VERSION_PLATFORM}" --rac "${env.rac}"  
+								"""
+								echo "Отключение сессий"
+								bat """
+								chcp 65001
+								call vrunner session kill ^
+									--db ${env.dbTests} ^
+									--db-user Админ ^
+									--uccode tester ^
+									--v8version "${env.VERSION_PLATFORM}" ^
+									 
 								"""
                             } catch (e) {
                                 echo "drop_db упал, перезапуск агента 1С"
-                                bat 'python -X utf8 scripts/AgentRestart.py'
-                                wait1C()
+                                bat 'python -X utf8 scripts/AgentRestart.py'	
+                				wait1C()
                                 throw e
                             }
                         }
                     }
-
-                    wait1C()
-					
-                    echo "Отключение сессий"
-					bat """
-					chcp 65001
-					call vrunner session kill ^
-						--db ${env.dbTests} ^
-						--db-user Админ ^
-						--uccode tester
-					"""
-					wait1C()
                     echo "Загрузка .dt"
-					bat """
-					chcp 65001
-					call vrunner restore ^
-						"D:/Vanessa-Automation/DT/${params.product}.dt" ^
-						--ibconnection /Slocalhost/${env.dbTests} ^
-						--uccode tester
-					"""
-					wait1C()
-					echo "Обновление конфигурации"
-					bat """
-					chcp 65001
-					call vrunner updatedb ^
-						--ibconnection /Slocalhost/${env.dbTests} ^
-						--db-user Админ ^
-						--uccode tester
-					"""
+                    bat """
+                    chcp 65001
+                    call vrunner restore ^
+                        "D:/Vanessa-Automation/DT/${params.product}.dt" ^
+                        --ibconnection /Slocalhost/${env.dbTests} ^
+                        --uccode tester ^
+                        --v8version "${env.VERSION_PLATFORM}" ^
+                         
+                    """
+
+                    echo "Обновление конфигурации"
+                    bat """
+                    chcp 65001
+                    call vrunner updatedb ^
+                        --ibconnection /Slocalhost/${env.dbTests} ^
+                        --db-user Админ ^
+                        --uccode tester ^
+                        --v8version "${env.VERSION_PLATFORM}" ^
+                         
+                    """
+
                     echo "Загрузка из хранилища"
-					bat """
-					chcp 65001
-					call vrunner loadrepo ^
-						--storage-name ${env.repository} ^
-						--storage-user ${env.VATest} ^
-						--ibconnection /Slocalhost/${env.dbTests} ^
-						--db-user Админ ^
-						--uccode tester
-					"""
-					echo "Отключение сессий"
-					bat """
-					chcp 65001
-					call vrunner session kill ^
-						--db ${env.dbTests} ^
-						--db-user Админ ^
-						--uccode tester
-						"""
-					echo "Обновление конфигурации"
-					bat """
-					chcp 65001
-					call vrunner updatedb ^
-						--ibconnection /Slocalhost/${env.dbTests} ^
-						--db-user Админ ^
-						--uccode tester
-					"""
+                    bat """
+                    chcp 65001
+                    call vrunner loadrepo ^
+                        --storage-name ${env.repository} ^
+                        --storage-user ${env.VATest} ^
+                        --ibconnection /Slocalhost/${env.dbTests} ^
+                        --db-user Админ ^
+                        --uccode tester ^
+                        --v8version "${env.VERSION_PLATFORM}" ^
+                         
+                    """
+
+                    echo "Обновление конфигурации"
+                    bat """
+                    chcp 65001
+                    call vrunner updatedb ^
+                        --ibconnection /Slocalhost/${env.dbTests} ^
+                        --db-user Админ ^
+                        --uccode tester ^
+                        --v8version "${env.VERSION_PLATFORM}" ^
+                         
+                    """
+
                     echo "Разблокирование входа"
-					bat """
-					chcp 65001
-					call vrunner session unlock ^
-						--db ${env.dbTests} ^
-						--db-user Админ ^
-						--uccode tester
-					"""
+                    bat """
+                    chcp 65001
+                    call vrunner session unlock ^
+                        --db ${env.dbTests} ^
+                        --db-user Админ ^
+                        --uccode tester ^
+                        --v8version "${env.VERSION_PLATFORM}" ^
+                         
+                    """
 
                     echo "Проверка версии"
                     if (fileExists(versionFile)) {
@@ -137,51 +136,65 @@ pipeline {
                     if (params.VERSION_NEW > env.version) {
                         retry(2) {
                             try {
-								echo "Обновление в режиме Предприятие"
-								bat """
-								chcp 65001
-								call vrunner run ^
-									--command ЗавершитьРаботуСистемы; ^
-									--ibconnection /Slocalhost/${env.dbTests} ^
-									--db-user Админ ^
-									--execute "C:\\Program Files\\OneScript\\lib\\vanessa-runner\\epf\\ЗакрытьПредприятие.epf" ^
-									--uccode tester
-								"""
-								echo "Убираем окно перемещения"
-								bat """
-								chcp 65001
-								call vrunner run ^
-									--ibconnection /Slocalhost/${env.dbTests} ^
-									--db-user Админ ^
-									--execute "C:\\Program Files\\OneScript\\lib\\vanessa-runner\\epf\\УбратьОкноПеремещенияИБ.epf" ^
-									--uccode tester
-								"""
-								echo "Отключение сессий"
-								bat """
-								chcp 65001
-								call vrunner session kill ^
-									--db ${env.dbTests} ^
-									--db-user Админ ^
-									--uccode tester
-								"""
-								wait1C()
-								echo "Выгружаем .dt"
-								bat """
-								chcp 65001
-								call vrunner dump ^
-									"D:\\Vanessa-Automation\\DT\\${params.product}.dt" ^
-									--ibconnection /Slocalhost/${env.dbTests} ^
-									--db-user Админ ^
-									--uccode tester
-								"""
-								echo "Разблокирование входа"
-								bat """
-								chcp 65001
-								call vrunner session unlock ^
-									--db ${env.dbTests} ^
-									--db-user Админ ^
-									--uccode tester
-								"""
+                                echo "Обновление в режиме Предприятие"
+                                bat """
+                                chcp 65001
+                                call vrunner run ^
+                                    --command ЗавершитьРаботуСистемы; ^
+                                    --ibconnection /Slocalhost/${env.dbTests} ^
+                                    --db-user Админ ^
+                                    --execute "epf/ЗакрытьПредприятие.epf" ^
+                                    --uccode tester ^
+                                    --v8version "${env.VERSION_PLATFORM}" ^
+                                     
+                                """
+
+                                echo "Убираем окно перемещения"
+                                bat """
+                                chcp 65001
+                                call vrunner run ^
+                                    --ibconnection /Slocalhost/${env.dbTests} ^
+                                    --db-user Админ ^
+                                    --execute "epf/УбратьОкноПеремещенияИБ.epf" ^
+                                    --uccode tester ^
+                                    --v8version "${env.VERSION_PLATFORM}" ^
+                                     
+                                """
+
+                                echo "Отключение сессий"
+                                bat """
+                                chcp 65001
+                                call vrunner session kill ^
+                                    --db ${env.dbTests} ^
+                                    --db-user Админ ^
+                                    --uccode tester ^
+                                    --v8version "${env.VERSION_PLATFORM}" ^
+                                     
+                                """
+
+                                wait1C()
+                                echo "Выгружаем .dt"
+                                bat """
+                                chcp 65001
+                                call vrunner dump ^
+                                    "D:\\Vanessa-Automation\\DT\\${params.product}.dt" ^
+                                    --ibconnection /Slocalhost/${env.dbTests} ^
+                                    --db-user Админ ^
+                                    --uccode tester ^
+                                    --v8version "${env.VERSION_PLATFORM}" ^
+                                     
+                                """
+
+                                echo "Разблокирование входа"
+                                bat """
+                                chcp 65001
+                                call vrunner session unlock ^
+                                    --db ${env.dbTests} ^
+                                    --db-user Админ ^
+                                    --uccode tester ^
+                                    --v8version "${env.VERSION_PLATFORM}" ^
+                                    
+                                """
 
                                 writeFile file: versionFile, text: params.VERSION_NEW
                             } catch (e) {
@@ -198,23 +211,24 @@ pipeline {
 		stage('Сценарное тестирование') {
             steps {
                 script {
-                        try {
-							bat """
-							chcp 65001
-							call vrunner vanessa ^
-								--path "${env.WORKSPACE}${env.testPathPlaceholder}" ^
-								--vanessasettings "${env.WORKSPACE}\\scripts\\VAParams.json" ^
-								--workspace ${env.WORKSPACE} ^
-								--pathvanessa ${env.pathvanessa} ^
-								--additional "/DisplayAllFunctions /L ru" ^
-								--ibconnection /Slocalhost/${env.dbTests} ^
-								--db-user Админ ^
-								--uccode tester
-							"""
- 						} catch (Exception Exc) {
-							echo "Error occurred: ${Exc.message}"
-							currentBuild.result = 'UNSTABLE'
-          				}
+                    try {
+                        bat """
+                        chcp 65001
+                        call vrunner vanessa ^
+                            --path "${env.WORKSPACE}${env.testPathPlaceholder}" ^
+                            --vanessasettings "${env.WORKSPACE}\\scripts\\VAParams.json" ^
+                            --workspace ${env.WORKSPACE} ^
+                            --pathvanessa ${env.pathvanessa} ^
+                            --additional "/DisplayAllFunctions /L ru" ^
+                            --ibconnection /Slocalhost/${env.dbTests} ^
+                            --db-user Админ ^
+                            --uccode tester ^
+                            --v8version "${env.VERSION_PLATFORM}" ^
+                        """
+                    } catch (Exception Exc) {
+                        echo "Error occurred: ${Exc.message}"
+                        currentBuild.result = 'UNSTABLE'
+                    }
                 }
             }
         }

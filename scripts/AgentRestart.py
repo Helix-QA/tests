@@ -17,8 +17,8 @@ def run_command(command):
         return 1
 
 def restart_1c_service():
-    """Перезапускает службу 1C:Enterprise 8.3 Server Agent (x86-64)."""
-    service_name = "1C:Enterprise 8.3 Server Agent (x86-64)"
+    """Перезапускает службу 1C:Enterprise 8.5 Server Agent (x86-64)."""
+    service_name = "1C:Enterprise 8.5 Server Agent (x86-64)"
     print(f"Остановка службы '{service_name}'...")
     stop_result = run_command(f'net stop "{service_name}"')
     
