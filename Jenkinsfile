@@ -46,7 +46,17 @@ pipeline {
                                 set PYTHONUTF8=1
                                 cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
                                 """
-								echo "Создание базы данных"
+								bat """
+                                chcp 65001
+                                call "${env.rac}" infobase list --cluster localhost:1545 > rac_list.txt
+                                findstr /i "${env.dbTests}" rac_list.txt && (
+                                    echo База ${env.dbTests} еще зарегистрирована в RAC
+                                    exit /b 1
+                                ) || (
+                                    echo База отсутствует в RAC
+                                )
+                                """
+                                                echo "Создание базы данных"
 								bat """
 								chcp 65001
 								call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "${env.VERSION_PLATFORM}" --rac "${env.rac}"  
