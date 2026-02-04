@@ -37,7 +37,7 @@ pipeline {
                     def versionFile = "D:\\Vanessa-Automation\\version\\${params.product}.txt"
 
                     timeout(time: 2, unit: 'MINUTES') {
-                        retry(3) {
+                        retry(6) {
                             try {
                                 echo "Удаление существующей базы"
                                 bat """
@@ -46,7 +46,22 @@ pipeline {
                                 set PYTHONUTF8=1
                                 cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
                                 """
-								echo "Создание базы данных"
+								bat """
+                                chcp 65001
+
+                                "${env.rac}" infobase list --cluster localhost:1545 > rac_list.txt
+
+                                findstr /i "avtotestqa" rac_list.txt >nul
+                                if %errorlevel%==0 (
+                                    echo База avtotestqa еще зарегистрирована в RAC
+                                    exit /b 1
+                                ) else (
+                                    echo База отсутствует в RAC
+                                    exit /b 0
+                                )
+                                """
+
+                                echo "Создание базы данных"
 								bat """
 								chcp 65001
 								call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "${env.VERSION_PLATFORM}" --rac "${env.rac}"  
