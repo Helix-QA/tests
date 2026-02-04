@@ -37,7 +37,7 @@ pipeline {
                     def versionFile = "D:\\Vanessa-Automation\\version\\${params.product}.txt"
 
                     timeout(time: 2, unit: 'MINUTES') {
-                        retry(3) {
+                        retry(6) {
                             try {
                                 echo "Удаление существующей базы"
                                 bat """
