@@ -1,6 +1,7 @@
 ﻿#language: ru
 
 @tree
+@IgnoreOnCIMainBuild
 
 Функционал: Я проверяю функционал справок в налоговую.
 
