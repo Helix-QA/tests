@@ -293,7 +293,7 @@ pipeline {
 						.replace('"${logo}"', "\"${env.logo}\"")
 					writeFile(file: 'scripts/config.json', text: updatedConfigJson)
 					try {
-						bat """java "-DconfigFile=scripts/config.json" "-Dhttp.connection.timeout=60000" "-Dhttp.socket.timeout=120000" -jar scripts/allure-notifications-4.8.0.jar"""
+						bat """java "-DconfigFile=scripts/config.json" "-Dhttp.connection.timeout=60000" "-Dhttp.socket.timeout=120000" -jar scripts/allure-notifications-4.11.0.jar"""
 					}
 					catch (Exception e) {
 						echo "Ошибка при отправке уведомления: ${e.message}. Продолжаем выполнение pipeline."
