@@ -1,6 +1,7 @@
 ﻿#language: ru
 
 @tree
+@IgnoreONCIMainBuild
 
 Функционал: Проверка нового статического QR-кода по Юкассе
 
