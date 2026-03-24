@@ -1,7 +1,6 @@
 ﻿#language: ru
 
 @tree
-@IgnoreOnCIMainBuild
 
 Функционал: Расписание занятия
 
