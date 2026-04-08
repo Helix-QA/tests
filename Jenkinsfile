@@ -291,6 +291,8 @@ pipeline {
 						.replace('"${token}"', "\"${env.botToken}\"")
 						.replace('"${chat}"', "\"${env.testchatID}\"")
 						.replace('"${logo}"', "\"${env.logo}\"")
+						.replace('"${proxyHost}"', "\"${env.proxyHost}\"")
+						.replace('"${proxyPort}"', "\"${env.proxyPort}\"")
 					writeFile(file: 'scripts/config.json', text: updatedConfigJson)
 					try {
 						bat """java "-DconfigFile=scripts/config.json" "-Dhttp.connection.timeout=60000" "-Dhttp.socket.timeout=120000" -jar scripts/allure-notifications-4.11.0.jar"""
