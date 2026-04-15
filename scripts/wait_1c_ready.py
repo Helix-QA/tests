@@ -3,7 +3,7 @@ import sys
 import time
 
 # ---------- CONFIG ----------
-RAC_PATH = r"C:\Program Files\1cv8\8.5.1.1150\bin\rac.exe"
+RAC_PATH = r"C:\Program Files\1cv8\8.5.1.1302\bin\rac.exe"
 RAC_ADDR = "localhost:1545"
 
 MAX_WAIT_SECONDS = 60    # Можно увеличить, если сервер стартует медленно
