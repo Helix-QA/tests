@@ -1,0 +1,1350 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<uilog xmlns:d1p1="http://v8.1c.ru/8.3/uilog">
+	<setFileDialogResult result="false"/>
+	<setFileDialogResult result="false"/>
+	<ClientApplicationWindow caption="Наименование1826401014 (Контрагент)">
+		<CommandInterface>
+			<CommandInterfaceGroup title="Панель навигации">
+				<CommandInterfaceButton title="Финансы">
+					<click/>
+				</CommandInterfaceButton>
+			</CommandInterfaceGroup>
+			<CommandInterfaceButton title="Основное">
+				<click/>
+			</CommandInterfaceButton>
+		</CommandInterface>
+		<close/>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow isMain="true">
+		<CommandInterface>
+			<CommandInterfaceGroup title="Панель разделов">
+				<CommandInterfaceButton title="Запасы">
+					<click/>
+				</CommandInterfaceButton>
+			</CommandInterfaceGroup>
+		</CommandInterface>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Контрагенты">
+		<Form title="Контрагенты">
+			<FormTable name="Список" title="Список">
+				<gotoNextRow/>
+			</FormTable>
+			<FormGroup name="КомманднаяПанель" title="Коммандная панель">
+				<FormGroup name="ГруппаСоздатьКонтагента" title="Группа создать">
+					<FormButton name="СоздатьКонтрагента" title="Создать">
+						<activate/>
+						<click/>
+					</FormButton>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Контрагент (создание)">
+		<Form title="Контрагент (создание)">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="СтандартныеРеквизиты" title="Стандартные реквизиты">
+					<FormGroup name="НаименованиеДата" title="Наименование, дата регистрации">
+						<FormGroup name="ГруппаНаименованиеИМетка" title="Группа наименование и метка">
+							<FormField name="Наименование" title="Наименование">
+								<inputText text="Наименование2754984779"/>
+							</FormField>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Контрагент (создание) *">
+		<Form title="Контрагент (создание) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаОМССНИЛС" title="Группа ОМССНИЛС">
+						<FormField name="РеестровыйНомерОМС" title="Реестровый номер ОМС">
+							<activate/>
+							<inputText text="START"/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup name="ГруппаРодительИЮрФизЛицо" title="Родитель и юр физ лицо">
+					<FormField name="ЮрФизЛицо" title="ЮрФизЛицо">
+						<activate/>
+						<selectOption presentation="ИП"/>
+						<selectOption presentation="Юридическое лицо"/>
+					</FormField>
+				</FormGroup>
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаВводаИНН" title="Группа ввода ИНН">
+						<FormField name="ИНН" title="ИНН">
+							<activate/>
+							<inputText text="9876543210"/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+			<gotoNextItem/>
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаВводаИНН" title="Группа ввода ИНН">
+						<FormButton name="ЗаполнитьРеквизитыПоДаннымЕГР" title="ЗаполнитьРеквизитыПоДаннымЕГР">
+							<activate/>
+						</FormButton>
+					</FormGroup>
+					<FormGroup name="ГруппаВводаКПП" title="Группа ввода КПП">
+						<FormField name="КПП" title="КПП">
+							<activate/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="1С:Предприятие">
+		<Form title="1С:Предприятие">
+			<FormGroup name="Content" title="Content">
+				<FormGroup name="BottomGroup" title="Bottom group">
+					<FormGroup name="Buttons" title="Buttons">
+						<FormButton name="Button0" title="Да">
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="1С:Предприятие">
+		<Form title="1С:Предприятие">
+			<FormGroup name="Content" title="Content">
+				<FormGroup name="BottomGroup" title="Bottom group">
+					<FormGroup name="Buttons" title="Buttons">
+						<FormButton name="Button0" title="Да">
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="1С:Предприятие">
+		<Form title="1С:Предприятие">
+			<FormGroup name="Content" title="Content">
+				<FormGroup name="BottomGroup" title="Bottom group">
+					<FormGroup name="Buttons" title="Buttons">
+						<FormButton name="Button0" title="OK">
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Контрагент (создание) *">
+		<Form title="Контрагент (создание) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаВводаКПП" title="Группа ввода КПП">
+						<FormField name="КПП" title="КПП">
+							<inputText text="770301001"/>
+						</FormField>
+					</FormGroup>
+					<FormGroup name="ГруппаВводаОКПО" title="Группа ввода ОКПО">
+						<FormField name="КодПоОКПО" title="ОКПО">
+							<activate/>
+							<inputText text="12345678"/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+					<FormGroup name="ГруппаКнопкаСохранить" title="Группа кнопка сохранить">
+						<FormButton name="ФормаКнопкаСохранитьИЗакрыть" title="Сохранить">
+							<activate/>
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow isMain="true">
+		<CommandInterface>
+			<CommandInterfaceGroup title="Панель разделов">
+				<CommandInterfaceButton title="Запасы">
+					<click/>
+				</CommandInterfaceButton>
+			</CommandInterfaceGroup>
+		</CommandInterface>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Контрагенты">
+		<Form title="Контрагенты">
+			<FormGroup name="КомманднаяПанель" title="Коммандная панель">
+				<FormItemAddition name="СтрокаПоиска" title="Строка поиска">
+					<activate/>
+					<inputText text="Наименование2754984779"/>
+				</FormItemAddition>
+			</FormGroup>
+			<FormTable name="Список" title="Список">
+				<gotoFirstRow/>
+				<selectAllRows/>
+				<gotoFirstRow/>
+				<choose/>
+			</FormTable>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Банковский счет (создание)">
+		<Form title="Банковский счет (создание)">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormField name="Владелец" title="Владелец счета">
+					<startChoosing/>
+				</FormField>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Выбор типа данных">
+		<Form title="Выбор типа данных">
+			<FormTable>
+				<gotoNextRow/>
+				<gotoNextRow/>
+				<gotoPreviousRow/>
+				<gotoPreviousRow/>
+				<choose/>
+			</FormTable>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Пациенты, контрагенты">
+		<Form title="Пациенты, контрагенты">
+			<FormGroup name="КомманднаяПанель" title="Коммандная панель">
+				<FormItemAddition name="СтрокаПоиска" title="Строка поиска">
+					<activate/>
+					<inputText text="Наименование2754984779"/>
+				</FormItemAddition>
+			</FormGroup>
+			<FormTable name="Список" title="Список">
+				<gotoFirstRow/>
+				<selectAllRows/>
+				<gotoFirstRow/>
+			</FormTable>
+			<FormGroup name="ГруппаДействий" title="Группа действий">
+				<FormGroup name="Выбрать" title="Выбрать">
+					<FormButton name="КнопкаВыбрать" title="Выбрать">
+						<activate/>
+						<click/>
+					</FormButton>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Банковский счет (создание) *">
+		<Form title="Банковский счет (создание) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаНомерВалюта" title="Номер,  валюта">
+					<FormField name="НомерСчета" title="Номер счета">
+						<activate/>
+						<inputText text="Наименование27549847"/>
+					</FormField>
+					<FormField name="Валюта" title="Валюта">
+						<activate/>
+						<inputText text="RUR"/>
+						<executeChoiceFromChoiceList presentation="RUR (643)"/>
+					</FormField>
+				</FormGroup>
+				<FormGroup name="ГруппаБанкВКоторомОткрытСчет" title="Банк, в котором открыт счет">
+					<FormGroup name="ГруппаБИККоррСчетБанка" title="БИК, корр. счет банка">
+						<FormField name="БИКБанка" title="БИК">
+							<activate/>
+							<startChoosing/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Банки">
+		<Form title="Банки">
+			<FormTable name="Список" title="Список">
+				<choose/>
+			</FormTable>
+			<FormGroup name="ГруппаДействий" title="Группа действий">
+				<FormGroup name="Выбрать" title="Выбрать">
+					<FormButton name="КнопкаВыбрать" title="Выбрать">
+						<activate/>
+						<click/>
+					</FormButton>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Банковский счет (создание) *">
+		<Form title="Банковский счет (создание) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаНаименованиеКод" title="Группа наименование код">
+					<FormField name="Наименование" title="Представление">
+						<activate/>
+						<inputText text="Наименование2754984779"/>
+					</FormField>
+				</FormGroup>
+				<FormGroup name="ГруппаКомманднаяПанель" title="Группа коммандная панель">
+					<FormGroup name="ГруппаКнопкаСохранить" title="Группа кнопка сохранить">
+						<FormButton name="ФормаКнопкаСохранитьИЗакрыть" title="Сохранить">
+							<activate/>
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент)">
+		<Form title="Наименование2754984779 (Контрагент)">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ЗначенияПоУмолчанию" title="Значения по умолчанию">
+						<FormField name="БанковскийСчетПоУмолчанию" title="Банковский счет">
+							<activate/>
+							<startChoosing/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Банковские счета">
+		<Form title="Банковские счета">
+			<FormGroup name="ГруппаДействий" title="Группа действий">
+				<FormGroup name="Выбрать" title="Выбрать">
+					<FormButton name="КнопкаВыбрать" title="Выбрать">
+						<activate/>
+						<click/>
+					</FormButton>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент) *">
+		<Form title="Наименование2754984779 (Контрагент) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаДоговорыКонтрагентов" title="Группа договоры контрагентов">
+						<FormGroup name="ГруппаДоговорыКонтрагентовСуществующие" title="Группа договоры контрагентов существующие">
+							<FormGroup name="ГруппаКоманднаяПанельДоговоры" title="Группа командная панель договоры">
+								<FormButton name="ДоговорыСоздать" title="Добавить">
+									<activate/>
+									<click/>
+								</FormButton>
+							</FormGroup>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Договор с поставщиком">
+		<Form title="Договор с поставщиком">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаШапка" title="Группа шапка">
+					<FormGroup name="ГруппаПраваяКолонка" title="ГруппаПраваяКолонка">
+						<FormGroup name="ГруппаДаты" title="Группа даты">
+							<FormField name="ДатаНачала" title="Срок действия с">
+								<activate/>
+								<inputText text="15.04.2026"/>
+							</FormField>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Договор с поставщиком *">
+		<Form title="Договор с поставщиком *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаШапка" title="Группа шапка">
+					<FormGroup name="ГруппаПраваяКолонка" title="ГруппаПраваяКолонка">
+						<FormGroup name="ГруппаДаты" title="Группа даты">
+							<FormField name="ДатаОкончания" title="по">
+								<activate/>
+								<inputText text="17.04.2026"/>
+							</FormField>
+						</FormGroup>
+						<FormField name="ВидЦен" title="Вид цен">
+							<activate/>
+							<executeChoiceFromChoiceList presentation="Розничная цена"/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup name="ГруппаКомманднаяПанель" title="Группа коммандная панель">
+					<FormGroup name="ГруппаКнопкаСохранить" title="Группа кнопка сохранить">
+						<FormButton name="ФормаКнопкаСохранитьИЗакрыть" title="Сохранить">
+							<activate/>
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент) *">
+		<Form title="Наименование2754984779 (Контрагент) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаДоговорыКонтрагентов" title="Группа договоры контрагентов">
+						<FormGroup name="ГруппаДоговорыКонтрагентовСуществующие" title="Группа договоры контрагентов существующие">
+							<FormGroup name="ГруппаКоманднаяПанельДоговоры" title="Группа командная панель договоры">
+								<FormButton name="ДоговорыСоздать" title="Добавить">
+									<click/>
+								</FormButton>
+							</FormGroup>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Договор с поставщиком">
+		<Form title="Договор с поставщиком">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаШапка" title="Группа шапка">
+					<FormGroup name="ГруппаПраваяКолонка" title="ГруппаПраваяКолонка">
+						<FormGroup name="ГруппаДаты" title="Группа даты">
+							<FormField name="ДатаНачала" title="Срок действия с">
+								<activate/>
+								<inputText text="11.04.2026"/>
+							</FormField>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Договор с поставщиком *">
+		<Form title="Договор с поставщиком *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаШапка" title="Группа шапка">
+					<FormGroup name="ГруппаПраваяКолонка" title="ГруппаПраваяКолонка">
+						<FormGroup name="ГруппаДаты" title="Группа даты">
+							<FormField name="ДатаОкончания" title="по">
+								<activate/>
+								<inputText text="13.04.2026"/>
+							</FormField>
+						</FormGroup>
+						<FormField name="ВидЦен" title="Вид цен">
+							<activate/>
+							<executeChoiceFromChoiceList presentation="Розничная цена"/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup name="ГруппаКомманднаяПанель" title="Группа коммандная панель">
+					<FormGroup name="ГруппаКнопкаСохранить" title="Группа кнопка сохранить">
+						<FormButton name="ФормаКнопкаСохранитьИЗакрыть" title="Сохранить">
+							<activate/>
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент) *">
+		<Form title="Наименование2754984779 (Контрагент) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаДоговорыКонтрагентов" title="Группа договоры контрагентов">
+						<FormGroup name="ГруппаДоговорыКонтрагентовСуществующие" title="Группа договоры контрагентов существующие">
+							<FormGroup name="ГруппаКоманднаяПанельДоговоры" title="Группа командная панель договоры">
+								<FormButton name="ДоговорыСоздать" title="Добавить">
+									<click/>
+								</FormButton>
+							</FormGroup>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Договор с поставщиком">
+		<Form title="Договор с поставщиком">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаШапка" title="Группа шапка">
+					<FormGroup name="ГруппаПраваяКолонка" title="ГруппаПраваяКолонка">
+						<FormGroup name="ГруппаДаты" title="Группа даты">
+							<FormField name="ДатаНачала" title="Срок действия с">
+								<activate/>
+								<inputText text="11.04.2026"/>
+							</FormField>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Договор с поставщиком *">
+		<Form title="Договор с поставщиком *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаШапка" title="Группа шапка">
+					<FormGroup name="ГруппаПраваяКолонка" title="ГруппаПраваяКолонка">
+						<FormGroup name="ГруппаДаты" title="Группа даты">
+							<FormField name="ДатаОкончания" title="по">
+								<activate/>
+								<inputText text="17.04.2026"/>
+							</FormField>
+						</FormGroup>
+						<FormField name="ВидЦен" title="Вид цен">
+							<activate/>
+							<executeChoiceFromChoiceList presentation="Розничная цена"/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup name="ГруппаКомманднаяПанель" title="Группа коммандная панель">
+					<FormGroup name="ГруппаКнопкаСохранить" title="Группа кнопка сохранить">
+						<FormButton name="ФормаКнопкаСохранитьИЗакрыть" title="Сохранить">
+							<activate/>
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент) *">
+		<Form title="Наименование2754984779 (Контрагент) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаКонтактнаяИнформацияСправочникКонтрагенты" title="Адреса, телефоны">
+						<FormGroup name="КомандыДобавленияКонтактнойИнформации" title="Команды добавления контактной информации">
+							<FormButton name="КнопкаДобавитьКонтактнуюИнформацию" title="+ Добавить контакт">
+								<activate/>
+								<click/>
+							</FormButton>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+			<executeChoiceFromMenu presentation="Телефон"/>
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаКонтактнаяИнформацияСправочникКонтрагенты" title="Адреса, телефоны">
+						<FormGroup name="КонтактнаяИнформация" title="Контактная информация">
+							<FormGroup name="КИ_0" title="Телефон">
+								<FormField name="ПредставлениеКИ_0" title="ПредставлениеКИ_0">
+									<startChoosing/>
+								</FormField>
+							</FormGroup>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Телефон">
+		<Form title="Телефон">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="СведенияОТелефоне" title="Сведения о телефоне">
+					<FormGroup name="ГруппаПоляТелефона" title="Телефона">
+						<FormField name="КодСтраны" title="Код страны">
+							<activate/>
+							<inputText text="+7"/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Телефон *">
+		<Form title="Телефон *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="СведенияОТелефоне" title="Сведения о телефоне">
+					<FormGroup name="ГруппаПоляТелефона" title="Телефона">
+						<FormField name="КодГорода" title="Код города">
+							<activate/>
+							<inputText text="987"/>
+							<closeDropList/>
+						</FormField>
+						<FormField name="НомерТелефона" title="Номер">
+							<activate/>
+							<inputText text="362 003"/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup name="ГруппаКомманднаяПанель" title="Группа коммандная панель">
+					<FormGroup name="ГруппаКнопкаСохранить" title="Группа кнопка сохранить">
+						<FormButton name="КомандаОК" title="Сохранить">
+							<activate/>
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент) *">
+		<Form title="Наименование2754984779 (Контрагент) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаКонтактнаяИнформацияСправочникКонтрагенты" title="Адреса, телефоны">
+						<FormGroup name="КонтактнаяИнформация" title="Контактная информация">
+							<FormGroup name="КИ_0" title="Телефон">
+								<FormField name="КомментарийКИ_0" title="КомментарийКИ_0">
+									<activate/>
+									<inputText text="Проверка"/>
+								</FormField>
+								<FormButton name="ПозвонитьПоIPТелефонии_0" title="ПозвонитьПоIPТелефонии_0">
+									<activate/>
+									<click/>
+								</FormButton>
+							</FormGroup>
+						</FormGroup>
+						<FormGroup name="КомандыДобавленияКонтактнойИнформации" title="Команды добавления контактной информации">
+							<FormButton name="КнопкаДобавитьКонтактнуюИнформацию" title="+ Добавить контакт">
+								<activate/>
+								<click/>
+							</FormButton>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+			<executeChoiceFromMenu presentation="Email"/>
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаКонтактнаяИнформацияСправочникКонтрагенты" title="Адреса, телефоны">
+						<FormGroup name="КонтактнаяИнформация" title="Контактная информация">
+							<FormGroup name="КИ_1" title="Email">
+								<FormField name="ПредставлениеКИ_1" title="ПредставлениеКИ_1">
+									<inputText text="1958777696@mail.ru"/>
+								</FormField>
+								<FormField name="КомментарийКИ_1" title="КомментарийКИ_1">
+									<activate/>
+									<inputText text="Проверка 2"/>
+								</FormField>
+							</FormGroup>
+						</FormGroup>
+						<FormGroup name="КомандыДобавленияКонтактнойИнформации" title="Команды добавления контактной информации">
+							<FormButton name="КнопкаДобавитьКонтактнуюИнформацию" title="+ Добавить контакт">
+								<activate/>
+								<click/>
+							</FormButton>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+			<executeChoiceFromMenu presentation="Юридический адрес"/>
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаКонтактнаяИнформацияСправочникКонтрагенты" title="Адреса, телефоны">
+						<FormGroup name="КонтактнаяИнформация" title="Контактная информация">
+							<FormGroup name="КИ_2" title="Юридический адрес">
+								<FormField name="ПредставлениеКИ_2" title="ПредставлениеКИ_2">
+									<startChoosing/>
+								</FormField>
+							</FormGroup>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Юридический адрес">
+		<Form title="Юридический адрес">
+			<FormGroup name="Выравнивание" title="Выравнивание">
+				<FormGroup name="ОсновныеСтраницы" title="Основные страницы">
+					<FormGroup name="СтраницаАдрес" title="Адрес">
+						<FormGroup name="ГруппаОсновныеПоляАдреса" title="Основные поля адреса">
+							<FormField name="НаселенныйПункт" title="Город, населенный пункт">
+								<inputText text="1"/>
+							</FormField>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Юридический адрес *">
+		<Form title="Юридический адрес *">
+			<FormGroup name="Выравнивание" title="Выравнивание">
+				<FormGroup name="ОсновныеСтраницы" title="Основные страницы">
+					<FormGroup name="СтраницаАдрес" title="Адрес">
+						<FormGroup name="ГруппаОсновныеПоляАдреса" title="Основные поля адреса">
+							<FormField name="Улица" title="Улица">
+								<activate/>
+								<inputText text="1"/>
+							</FormField>
+						</FormGroup>
+						<FormGroup name="ГруппаСтроенияИИнформация" title="Адрес">
+							<FormGroup name="ГруппаДомаСтроенияПомещения" title="Дома строения помещения">
+								<FormGroup name="ГруппаДом" title="Дом">
+									<FormField name="Дом" title="Дом">
+										<activate/>
+										<inputText text="1"/>
+									</FormField>
+								</FormGroup>
+								<FormGroup name="ГруппаСтроенияОсновная" title="Строения основная">
+									<FormField name="Строение" title="Строение">
+										<activate/>
+										<inputText text="1"/>
+									</FormField>
+								</FormGroup>
+								<FormGroup name="ГруппаПомещенияОсновная" title="Помещения основная">
+									<FormField name="Помещение" title="Помещение">
+										<activate/>
+										<inputText text="1"/>
+									</FormField>
+								</FormGroup>
+							</FormGroup>
+						</FormGroup>
+						<FormGroup name="ГруппаДополнительныеПоляАдреса" title="Дополнительные поля адреса">
+							<FormField name="Индекс" title="Индекс">
+								<activate/>
+								<inputText text="1"/>
+							</FormField>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup name="ПанельВнизу" title="Панель внизу">
+					<FormGroup name="ГруппаОКОтмена" title="Группа ОКОтмена">
+						<FormGroup name="ГруппаОК" title="Группа ОК">
+							<FormButton name="ФормаКомандаОК" title="     ОК      ">
+								<activate/>
+								<click/>
+							</FormButton>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент) *">
+		<Form title="Наименование2754984779 (Контрагент) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаКонтактнаяИнформацияСправочникКонтрагенты" title="Адреса, телефоны">
+						<FormGroup name="КомандыДобавленияКонтактнойИнформации" title="Команды добавления контактной информации">
+							<FormButton name="КнопкаДобавитьКонтактнуюИнформацию" title="+ Добавить контакт">
+								<activate/>
+								<click/>
+							</FormButton>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+			<executeChoiceFromMenu presentation="Фактический адрес"/>
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаКонтактнаяИнформацияСправочникКонтрагенты" title="Адреса, телефоны">
+						<FormGroup name="КонтактнаяИнформация" title="Контактная информация">
+							<FormGroup name="КИ_3" title="Фактический адрес">
+								<FormField name="ПредставлениеКИ_3" title="ПредставлениеКИ_3">
+									<startChoosing/>
+								</FormField>
+							</FormGroup>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Фактический адрес">
+		<Form title="Фактический адрес">
+			<FormGroup name="Выравнивание" title="Выравнивание">
+				<FormGroup name="ОсновныеСтраницы" title="Основные страницы">
+					<FormGroup name="СтраницаАдрес" title="Адрес">
+						<FormGroup name="ГруппаОсновныеПоляАдреса" title="Основные поля адреса">
+							<FormField name="НаселенныйПункт" title="Город, населенный пункт">
+								<inputText text="2"/>
+							</FormField>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Фактический адрес *">
+		<Form title="Фактический адрес *">
+			<FormGroup name="Выравнивание" title="Выравнивание">
+				<FormGroup name="ОсновныеСтраницы" title="Основные страницы">
+					<FormGroup name="СтраницаАдрес" title="Адрес">
+						<FormGroup name="ГруппаОсновныеПоляАдреса" title="Основные поля адреса">
+							<FormField name="Улица" title="Улица">
+								<activate/>
+								<inputText text="2"/>
+							</FormField>
+						</FormGroup>
+						<FormGroup name="ГруппаСтроенияИИнформация" title="Адрес">
+							<FormGroup name="ГруппаДомаСтроенияПомещения" title="Дома строения помещения">
+								<FormGroup name="ГруппаДом" title="Дом">
+									<FormField name="Дом" title="Дом">
+										<activate/>
+										<inputText text="2"/>
+									</FormField>
+								</FormGroup>
+								<FormGroup name="ГруппаСтроенияОсновная" title="Строения основная">
+									<FormField name="Строение" title="Строение">
+										<activate/>
+										<inputText text="2"/>
+									</FormField>
+								</FormGroup>
+								<FormGroup name="ГруппаПомещенияОсновная" title="Помещения основная">
+									<FormField name="Помещение" title="Помещение">
+										<activate/>
+										<inputText text="2"/>
+									</FormField>
+								</FormGroup>
+							</FormGroup>
+						</FormGroup>
+						<FormGroup name="ГруппаДополнительныеПоляАдреса" title="Дополнительные поля адреса">
+							<FormField name="Индекс" title="Индекс">
+								<activate/>
+								<inputText text="2"/>
+							</FormField>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup name="ПанельВнизу" title="Панель внизу">
+					<FormGroup name="ГруппаОКОтмена" title="Группа ОКОтмена">
+						<FormGroup name="ГруппаОК" title="Группа ОК">
+							<FormButton name="ФормаКомандаОК" title="     ОК      ">
+								<activate/>
+								<click/>
+							</FormButton>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент) *">
+		<Form title="Наименование2754984779 (Контрагент) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаКонтактнаяИнформацияСправочникКонтрагенты" title="Адреса, телефоны">
+						<FormGroup name="КомандыДобавленияКонтактнойИнформации" title="Команды добавления контактной информации">
+							<FormButton name="КнопкаДобавитьКонтактнуюИнформацию" title="+ Добавить контакт">
+								<activate/>
+								<click/>
+							</FormButton>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+			<executeChoiceFromMenu presentation="Почтовый адрес"/>
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаКонтактнаяИнформацияСправочникКонтрагенты" title="Адреса, телефоны">
+						<FormGroup name="КонтактнаяИнформация" title="Контактная информация">
+							<FormGroup name="КИ_4" title="Почтовый адрес">
+								<FormField name="ПредставлениеКИ_4" title="ПредставлениеКИ_4">
+									<startChoosing/>
+								</FormField>
+							</FormGroup>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Почтовый адрес">
+		<Form title="Почтовый адрес">
+			<FormGroup name="Выравнивание" title="Выравнивание">
+				<FormGroup name="ОсновныеСтраницы" title="Основные страницы">
+					<FormGroup name="СтраницаАдрес" title="Адрес">
+						<FormGroup name="ГруппаОсновныеПоляАдреса" title="Основные поля адреса">
+							<FormField name="НаселенныйПункт" title="Город, населенный пункт">
+								<inputText text="3"/>
+							</FormField>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Почтовый адрес *">
+		<Form title="Почтовый адрес *">
+			<FormGroup name="Выравнивание" title="Выравнивание">
+				<FormGroup name="ОсновныеСтраницы" title="Основные страницы">
+					<FormGroup name="СтраницаАдрес" title="Адрес">
+						<FormGroup name="ГруппаОсновныеПоляАдреса" title="Основные поля адреса">
+							<FormField name="Улица" title="Улица">
+								<activate/>
+								<inputText text="3"/>
+							</FormField>
+						</FormGroup>
+						<FormGroup name="ГруппаСтроенияИИнформация" title="Адрес">
+							<FormGroup name="ГруппаДомаСтроенияПомещения" title="Дома строения помещения">
+								<FormGroup name="ГруппаДом" title="Дом">
+									<FormField name="Дом" title="Дом">
+										<activate/>
+										<inputText text="3"/>
+									</FormField>
+								</FormGroup>
+								<FormGroup name="ГруппаСтроенияОсновная" title="Строения основная">
+									<FormField name="Строение" title="Строение">
+										<activate/>
+										<inputText text="3"/>
+									</FormField>
+								</FormGroup>
+								<FormGroup name="ГруппаПомещенияОсновная" title="Помещения основная">
+									<FormField name="Помещение" title="Помещение">
+										<activate/>
+										<inputText text="3"/>
+									</FormField>
+								</FormGroup>
+							</FormGroup>
+						</FormGroup>
+						<FormGroup name="ГруппаДополнительныеПоляАдреса" title="Дополнительные поля адреса">
+							<FormField name="Индекс" title="Индекс">
+								<activate/>
+								<inputText text="3"/>
+							</FormField>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup name="ПанельВнизу" title="Панель внизу">
+					<FormGroup name="ГруппаОКОтмена" title="Группа ОКОтмена">
+						<FormGroup name="ГруппаОК" title="Группа ОК">
+							<FormButton name="ФормаКомандаОК" title="     ОК      ">
+								<activate/>
+								<click/>
+							</FormButton>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент) *">
+		<Form title="Наименование2754984779 (Контрагент) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаКонтактнаяИнформацияСправочникКонтрагенты" title="Адреса, телефоны">
+						<FormGroup name="КомандыДобавленияКонтактнойИнформации" title="Команды добавления контактной информации">
+							<FormButton name="КнопкаДобавитьКонтактнуюИнформацию" title="+ Добавить контакт">
+								<activate/>
+								<click/>
+							</FormButton>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+			<executeChoiceFromMenu presentation="Факс"/>
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаКонтактнаяИнформацияСправочникКонтрагенты" title="Адреса, телефоны">
+						<FormGroup name="КонтактнаяИнформация" title="Контактная информация">
+							<FormGroup name="КИ_5" title="Факс">
+								<FormField name="ПредставлениеКИ_5" title="ПредставлениеКИ_5">
+									<startChoosing/>
+								</FormField>
+							</FormGroup>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Факс">
+		<Form title="Факс">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="СведенияОТелефоне" title="Сведения о телефоне">
+					<FormGroup name="ГруппаПоляТелефона" title="Телефона">
+						<FormField name="КодСтраны" title="Код страны">
+							<activate/>
+							<inputText text="+7"/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Факс *">
+		<Form title="Факс *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="СведенияОТелефоне" title="Сведения о телефоне">
+					<FormGroup name="ГруппаПоляТелефона" title="Телефона">
+						<FormField name="КодГорода" title="Код города">
+							<activate/>
+							<inputText text="987"/>
+							<executeChoiceFromChoiceList presentation="987"/>
+						</FormField>
+						<FormField name="НомерТелефона" title="Номер">
+							<activate/>
+							<inputText text="154 946"/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup name="ГруппаКомманднаяПанель" title="Группа коммандная панель">
+					<FormGroup name="ГруппаКнопкаСохранить" title="Группа кнопка сохранить">
+						<FormButton name="КомандаОК" title="Сохранить">
+							<activate/>
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент) *">
+		<Form title="Наименование2754984779 (Контрагент) *">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаКонтактнаяИнформацияСправочникКонтрагенты" title="Адреса, телефоны">
+						<FormGroup name="КонтактнаяИнформация" title="Контактная информация">
+							<FormGroup name="КИ_5" title="Факс">
+								<FormField name="КомментарийКИ_5" title="КомментарийКИ_5">
+									<activate/>
+									<inputText text="Проверка 3"/>
+								</FormField>
+							</FormGroup>
+						</FormGroup>
+					</FormGroup>
+					<FormGroup name="ГруппаДополнительнаяИнформация" title="Дополнительная информация">
+						<FormField name="Комментарий" title="Комментарий">
+							<activate/>
+							<inputText text="Проверка комментария"/>
+						</FormField>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+					<FormGroup name="ГруппаКнопкаСохранить" title="Группа кнопка сохранить">
+						<FormButton name="ФормаКнопкаСохранитьИЗакрыть" title="Сохранить">
+							<activate/>
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Контрагенты">
+		<close/>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow isMain="true">
+		<CommandInterface>
+			<CommandInterfaceGroup title="Панель разделов">
+				<CommandInterfaceButton title="Запасы">
+					<click/>
+				</CommandInterfaceButton>
+			</CommandInterfaceGroup>
+		</CommandInterface>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Контрагенты">
+		<Form title="Контрагенты">
+			<FormGroup name="КомманднаяПанель" title="Коммандная панель">
+				<FormItemAddition name="СтрокаПоиска" title="Строка поиска">
+					<activate/>
+					<inputText text="Наименование2754984779"/>
+				</FormItemAddition>
+			</FormGroup>
+			<FormTable name="Список" title="Список">
+				<gotoFirstRow/>
+				<selectAllRows/>
+				<gotoFirstRow/>
+				<choose/>
+			</FormTable>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент)">
+		<CommandInterface>
+			<CommandInterfaceButton title="Основное">
+				<click/>
+			</CommandInterfaceButton>
+		</CommandInterface>
+		<Form title="Наименование2754984779 (Контрагент)">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаДополнительно" title="Дополнительно">
+					<FormGroup name="ГруппаДоговорыКонтрагентов" title="Группа договоры контрагентов">
+						<FormGroup name="ГруппаДоговорыКонтрагентовСуществующие" title="Группа договоры контрагентов существующие">
+							<FormGroup name="ГруппаКоманднаяПанельДоговоры" title="Группа командная панель договоры">
+								<FormGroup name="ГруппаПоложениеФильтров" title="Группа положение фильтров">
+									<FormGroup name="ГруппаДоговорыДействующие" title="Группа договоры действующие">
+										<FormButton name="ДоговорыДействующие" title="Действующие (1)">
+											<activate/>
+											<click/>
+										</FormButton>
+									</FormGroup>
+								</FormGroup>
+							</FormGroup>
+							<FormTable name="Договоры" title="Договоры">
+								<gotoFirstRow/>
+								<selectAllRows/>
+								<gotoFirstRow/>
+							</FormTable>
+							<FormGroup name="ГруппаКоманднаяПанельДоговоры" title="Группа командная панель договоры">
+								<FormGroup name="ГруппаПоложениеФильтров" title="Группа положение фильтров">
+									<FormGroup name="ГруппаДоговорыАрхив" title="Группа договоры архив">
+										<FormButton name="ДоговорыАрхив" title="Архив (2)">
+											<activate/>
+											<click/>
+										</FormButton>
+									</FormGroup>
+								</FormGroup>
+							</FormGroup>
+							<FormTable name="Договоры" title="Договоры">
+								<gotoFirstRow/>
+								<selectAllRows/>
+							</FormTable>
+						</FormGroup>
+					</FormGroup>
+				</FormGroup>
+				<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+					<FormGroup name="ГруппаКнопкаСохранить" title="Группа кнопка сохранить">
+						<FormButton name="ФормаКнопкаСохранитьИЗакрыть" title="Сохранить">
+							<activate/>
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Контрагенты">
+		<close/>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент)">
+		<CommandInterface>
+			<CommandInterfaceGroup title="Панель навигации">
+				<CommandInterfaceButton title="Банковские счета">
+					<click/>
+				</CommandInterfaceButton>
+			</CommandInterfaceGroup>
+		</CommandInterface>
+		<Form title="Банковские счета">
+			<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+				<FormGroup name="ГруппаСоздать" title="Группа создать">
+					<FormButton name="Создать" title="Создать">
+						<activate/>
+						<click/>
+					</FormButton>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Банковский счет (создание)">
+		<close/>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент)">
+		<Form title="Банковские счета">
+			<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+				<FormButton name="Скопировать" title="Скопировать">
+					<activate/>
+					<click/>
+				</FormButton>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Банковский счет (создание)">
+		<close/>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент)">
+		<Form title="Банковские счета">
+			<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+				<FormButton name="Редактировать" title="Редактировать">
+					<activate/>
+					<click/>
+				</FormButton>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Банковский счет)">
+		<close/>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент)">
+		<Form title="Банковские счета">
+			<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+				<FormButton name="Удалить" title="Удалить">
+					<activate/>
+					<click/>
+				</FormButton>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="1С:Предприятие">
+		<Form title="1С:Предприятие">
+			<FormGroup name="Content" title="Content">
+				<FormGroup name="BottomGroup" title="Bottom group">
+					<FormGroup name="Buttons" title="Buttons">
+						<FormButton name="Button1" title="Нет">
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент)">
+		<Form title="Банковские счета">
+			<FormTable name="Список" title="Список">
+				<gotoFirstRow/>
+				<selectAllRows/>
+				<gotoFirstRow/>
+			</FormTable>
+		</Form>
+		<CommandInterface>
+			<CommandInterfaceGroup title="Панель навигации">
+				<CommandInterfaceButton title="Диалоги">
+					<click/>
+				</CommandInterfaceButton>
+			</CommandInterfaceGroup>
+		</CommandInterface>
+		<Form title="Диалоги">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаЛеваяКолонка" title="Группа левая колонка">
+					<FormTable name="СписокДиалогов" title="СписокДиалогов">
+						<gotoFirstRow/>
+					</FormTable>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+		<CommandInterface>
+			<CommandInterfaceGroup title="Панель навигации">
+				<CommandInterfaceButton title="История">
+					<click/>
+				</CommandInterfaceButton>
+				<CommandInterfaceButton title="Источники">
+					<click/>
+				</CommandInterfaceButton>
+			</CommandInterfaceGroup>
+		</CommandInterface>
+		<Form title="Данные сквозной аналитики">
+			<FormTable name="Список" title="Список">
+				<gotoFirstRow/>
+			</FormTable>
+		</Form>
+		<CommandInterface>
+			<CommandInterfaceGroup title="Панель навигации">
+				<CommandInterfaceButton title="Наряд заказы">
+					<click/>
+				</CommandInterfaceButton>
+				<CommandInterfaceButton title="Программы страхования">
+					<click/>
+				</CommandInterfaceButton>
+			</CommandInterfaceGroup>
+		</CommandInterface>
+		<Form title="Программы страхования">
+			<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+				<FormGroup name="ГруппаСоздать" title="Группа создать">
+					<FormButton name="Создать" title="Создать">
+						<activate/>
+						<click/>
+					</FormButton>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Программа страхования (создание)">
+		<Form title="Программа страхования (создание)">
+			<FormGroup name="Выравнивание" title="Выравнивание">
+				<FormField name="Наименование" title="Наименование">
+					<inputText text="Проверка"/>
+				</FormField>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Программа страхования (создание) *">
+		<Form title="Программа страхования (создание) *">
+			<FormGroup name="Выравнивание" title="Выравнивание">
+				<FormField name="ВидДоговора" title="Вид договора">
+					<activate/>
+					<executeChoiceFromChoiceList presentation="Предоплата"/>
+				</FormField>
+				<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+					<FormGroup name="ГруппаКнопкаСохранить" title="Группа кнопка сохранить">
+						<FormButton name="ФормаКнопкаСохранитьИЗакрыть" title="Сохранить">
+							<activate/>
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент)">
+		<Form title="Программы страхования">
+			<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+				<FormButton name="Скопировать" title="Скопировать">
+					<activate/>
+					<click/>
+				</FormButton>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Программа страхования (создание)">
+		<close/>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент)">
+		<Form title="Программы страхования">
+			<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+				<FormButton name="Редактировать" title="Редактировать">
+					<activate/>
+					<click/>
+				</FormButton>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Проверка (Программа страхования)">
+		<close/>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент)">
+		<Form title="Программы страхования">
+			<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+				<FormButton name="Удалить" title="Удалить">
+					<activate/>
+					<click/>
+				</FormButton>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="1С:Предприятие">
+		<Form title="1С:Предприятие">
+			<FormGroup name="Content" title="Content">
+				<FormGroup name="BottomGroup" title="Bottom group">
+					<FormGroup name="Buttons" title="Buttons">
+						<FormButton name="Button1" title="Нет">
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow caption="Наименование2754984779 (Контрагент)">
+		<CommandInterface>
+			<CommandInterfaceGroup title="Панель навигации">
+				<CommandInterfaceButton title="Субъекты обращения МДЛП">
+					<click/>
+				</CommandInterfaceButton>
+			</CommandInterfaceGroup>
+		</CommandInterface>
+		<Form title="Субъекты обращения МДЛП">
+			<gotoNextItem/>
+			<gotoNextItem/>
+			<gotoNextItem/>
+			<gotoNextItem/>
+		</Form>
+		<CommandInterface>
+			<CommandInterfaceGroup title="Панель навигации">
+				<CommandInterfaceButton title="Файлы">
+					<click/>
+				</CommandInterfaceButton>
+				<CommandInterfaceButton title="Финансы">
+					<click/>
+				</CommandInterfaceButton>
+			</CommandInterfaceGroup>
+			<CommandInterfaceButton title="Основное">
+				<click/>
+			</CommandInterfaceButton>
+		</CommandInterface>
+		<Form title="Наименование2754984779 (Контрагент)">
+			<FormGroup name="ГруппаВыравнивание" title="Группа выравнивание">
+				<FormGroup name="ГруппаКоманднаяПанель" title="Группа командная панель">
+					<FormGroup name="ГруппаКнопкаСохранить" title="Группа кнопка сохранить">
+						<FormButton name="ФормаКнопкаСохранитьИЗакрыть" title="Сохранить">
+							<activate/>
+							<click/>
+						</FormButton>
+					</FormGroup>
+				</FormGroup>
+			</FormGroup>
+		</Form>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow startPage="true">
+		<close/>
+	</ClientApplicationWindow>
+	<ClientApplicationWindow isMain="true">
+		<close/>
+	</ClientApplicationWindow>
+</uilog>
