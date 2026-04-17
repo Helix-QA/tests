@@ -7,7 +7,7 @@ import pythoncom
 import win32com.client
 from contextlib import suppress
 
-
+PLATFORM_VERSION = sys.argv[1]
 # ================== CONFIG ==================
 AGENT_ADDR = "localhost:1540"
 WP_HOST = "localhost"
@@ -20,7 +20,7 @@ PG_PORT = "5432"
 PG_USER = "postgres"
 PG_PASS = "postgres"
 
-RAC_PATH = r"C:\Program Files\1cv8\8.5.1.1302\bin\rac.exe"
+RAC_PATH = rf"C:\Program Files\1cv8\{PLATFORM_VERSION}\bin\rac.exe"
 RAC_CLUSTER_ADDR = "localhost:1545"
 
 PG_RETRIES = 6
