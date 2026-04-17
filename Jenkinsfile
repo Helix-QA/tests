@@ -44,12 +44,12 @@ pipeline {
                                 chcp 65001
                                 set PYTHONIOENCODING=utf-8
                                 set PYTHONUTF8=1
-                                cmd /c python -X utf8 "${drop_db}" "${env.dbTests}"
+                                cmd /c python -X utf8 "${drop_db}" "${env.dbTests}" "${VERSION_PLATFORM}"
                                 """
-								bat """
+                                bat """
                                 chcp 65001
 
-                                "${env.rac}" infobase list --cluster localhost:1545 > rac_list.txt
+                                "C:\\Program Files\\1cv8\\${VERSION_PLATFORM}\\bin\\rac.exe" infobase list --cluster localhost:1545 > rac_list.txt
 
                                 findstr /i "avtotestqa" rac_list.txt >nul
                                 if %errorlevel%==0 (
@@ -64,7 +64,7 @@ pipeline {
                                 echo "Создание базы данных"
 								bat """
 								chcp 65001
-								call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "${env.VERSION_PLATFORM}" --rac "${env.rac}"  
+								call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "${env.VERSION_PLATFORM}" --rac "C:\\Program Files\\1cv8\\${VERSION_PLATFORM}\\bin\\rac.exe"  
 								"""
 								echo "Отключение сессий"
 								bat """
@@ -307,7 +307,8 @@ pipeline {
 }
 
 def wait1C() {
-    bat 'python -X utf8 scripts/wait_1c_ready.py'
+    def wait_1c_ready = "scripts/wait_1c_ready.py"
+    sh "python -X utf8 ${wait_1c_ready} \"${env.VERSION_PLATFORM}\""
 }
 
 def updateConfigFile() {
