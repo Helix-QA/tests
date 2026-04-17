@@ -40,7 +40,7 @@ pipeline {
                         retry(6) {
                             try {
                                 echo "Удаление существующей базы"
-                                sh "python -X utf8 ${drop_db} \"${env.VERSION_PLATFORM}\""
+                                sh "python -X utf8 ${drop_db}\"${env.dbTests}\" \"${env.VERSION_PLATFORM}\""
 								
                                 bat """
                                 chcp 65001
