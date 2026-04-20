@@ -2,8 +2,9 @@ import subprocess
 import sys
 import time
 
+PLATFORM_VERSION = sys.argv[1]
 # ---------- CONFIG ----------
-RAC_PATH = r"C:\Program Files\1cv8\8.5.1.1302\bin\rac.exe"
+RAC_PATH = rf"C:\Program Files\1cv8\{PLATFORM_VERSION}\bin\rac.exe"
 RAC_ADDR = "localhost:1545"
 
 MAX_WAIT_SECONDS = 60    # Можно увеличить, если сервер стартует медленно
