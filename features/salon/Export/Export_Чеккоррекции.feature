@@ -258,4 +258,39 @@
 		| 'Постоплата (кредит)' | '50,00' |
 		| 'Предоплата'          | '200,00'  |
 
-	
+Сценарий: Я проверяю чек коррекции Неприменённый ККТ
+	Тогда элемент формы с именем 'XML' стал равен 
+		|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
+		|'<CheckPackage>'|
+		|'	<Parameters CashierName=\" Админ \" OperationType=\"3\" TaxationSystem=\"0\" SaleLocation=\"SPA-Салон &quot;Меланж&quot;  \" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" OperationOnline=\"false\">'|
+		|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\"/>'|
+		|'		<AgentData/>'|
+		|'		<VendorData/>'|
+		|'		<CustomerDetail/>'|
+		|'		<OperationalAttribute/>'|
+		|'		<IndustryAttribute/>'|
+		|'	</Parameters>'|
+		|'	<Positions>'|
+		|'		<FiscalString Name=\"$$Услуга$$\" Quantity=\"1\" PriceWithDiscount=\"250\" AmountWithDiscount=\"250\" DiscountAmount=\"0\" Department=\"0\" VATRate=\"none\" PaymentMethod=\"1\" CalculationSubject=\"4\" MeasureOfQuantity=\"0\">'|
+		|'			<IndustryAttribute/>'|
+		|'			<AgentData/>'|
+		|'			<VendorData/>'|
+		|'		</FiscalString>'|
+		|'	</Positions>'|
+		|'	<Payments Cash=\"250\" ElectronicPayment=\"0\" PrePayment=\"0\" PostPayment=\"0\" Barter=\"0\"/>'|
+		|'</CheckPackage>'|
+	И таблица 'ПозицииЧека' стала равной:
+		| 'Наименование' | 'Количество' | 'Цена со скидками' | 'Сумма'  | 'Признак предмета расчета' | 'Признак способа расчета' |
+		| '$$Услуга$$'   | '1,00'       | '250,00'           | '250,00' | 'Услуга'                   | 'Предоплата полная'       |
+	И таблица 'ТаблицаОплат' стала равной:
+		| 'Тип оплаты'      | 'Сумма'  |
+		| 'Наличная оплата' | '250,00' |
+	И Я закрываю окно "Исходные данные чека"
+
+Сценарий:	я пополненил лицевого счёт клиента
+	И я перехожу по навигационной ссылке "$$СсылкаКлиента$$"
+	И я нажимаю на кнопку с именем 'КнопкаДобавитьЛицевыеСчета'
+	И я нажимаю на кнопку с именем 'КнопкаВидыОплатаНаименованиеСтрока_0'
+	И в поле с именем 'ПолеВидыОплатВводСуммыСтрока_0' я ввожу текст "250,00"
+	И Я нажимаю на кнопку оплаты 'КнопкаВидыОплатПрименитьеСуммуСтрока_0'				
+	И я нажимаю на кнопку с именем 'Оплатить'				
