@@ -33,7 +33,6 @@ pipeline {
 		  stage("Создание БД") {
             steps {
                 script {
-                    def drop_db = "scripts/УдалениеБазы.os"
                     def versionFile = "D:\\Vanessa-Automation\\version\\${params.product}.txt"
 
                     timeout(time: 2, unit: 'MINUTES') {
@@ -42,7 +41,7 @@ pipeline {
                                 echo "Удаление существующей базы"
                                 bat """
                                 chcp 65001
-                                oscript "${drop_db}" "${VERSION_PLATFORM} "${env.dbTests}"
+                                oscript scripts/УдалениеБазы.os ${VERSION_PLATFORM} ${env.dbTests}
                                 """
                                 // bat """
                                 // chcp 65001
