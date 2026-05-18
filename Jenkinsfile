@@ -42,7 +42,7 @@ pipeline {
                                 echo "Удаление существующей базы"
                                 bat """
                                 chcp 65001
-                                oscript "${drop_db}" "${VERSION_PLATFORM} "${env.dbTests}""
+                                oscript "${drop_db}" "${VERSION_PLATFORM} "${env.dbTests}"
                                 """
                                 // bat """
                                 // chcp 65001
