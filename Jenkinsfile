@@ -33,7 +33,7 @@ pipeline {
 		  stage("Создание БД") {
             steps {
                 script {
-                    def drop_db = "scripts/drop_db.py"
+                    def drop_db = "scripts/УдалениеБазы.os"
                     def versionFile = "D:\\Vanessa-Automation\\version\\${params.product}.txt"
 
                     timeout(time: 2, unit: 'MINUTES') {
@@ -42,24 +42,22 @@ pipeline {
                                 echo "Удаление существующей базы"
                                 bat """
                                 chcp 65001
-                                set PYTHONIOENCODING=utf-8
-                                set PYTHONUTF8=1
-                                cmd /c python -X utf8 "${drop_db}" "${env.dbTests}" "${VERSION_PLATFORM}"
+                                oscript УдалениеБазы.os "${drop_db}" "${VERSION_PLATFORM} "${env.dbTests}""
                                 """
-                                bat """
-                                chcp 65001
+                                // bat """
+                                // chcp 65001
 
-                                "C:\\Program Files\\1cv8\\${VERSION_PLATFORM}\\bin\\rac.exe" infobase list --cluster localhost:1545 > rac_list.txt
+                                // "C:\\Program Files\\1cv8\\${VERSION_PLATFORM}\\bin\\rac.exe" infobase list --cluster localhost:1545 > rac_list.txt
 
-                                findstr /i "avtotestqa" rac_list.txt >nul
-                                if %errorlevel%==0 (
-                                    echo База avtotestqa еще зарегистрирована в RAC
-                                    exit /b 1
-                                ) else (
-                                    echo База отсутствует в RAC
-                                    exit /b 0
-                                )
-                                """
+                                // findstr /i "avtotestqa" rac_list.txt >nul
+                                // if %errorlevel%==0 (
+                                //     echo База avtotestqa еще зарегистрирована в RAC
+                                //     exit /b 1
+                                // ) else (
+                                //     echo База отсутствует в RAC
+                                //     exit /b 0
+                                // )
+                                // """
 
                                 echo "Создание базы данных"
 								bat """
