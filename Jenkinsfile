@@ -34,53 +34,49 @@ pipeline {
             steps {
                 script {
                     def versionFile = "D:\\Vanessa-Automation\\version\\${params.product}.txt"
+                        echo "Удаление существующей базы"
+                        bat """
+                        chcp 65001
+                        oscript scripts/УдалениеБазы.os ${VERSION_PLATFORM} ${env.dbTests}
+                        """
+                        // bat """
+                        // chcp 65001
 
-                    timeout(time: 2, unit: 'MINUTES') {
-                        retry(6) {
-                            try {
-                                echo "Удаление существующей базы"
-                                bat """
-                                chcp 65001
-                                oscript scripts/УдалениеБазы.os ${VERSION_PLATFORM} ${env.dbTests}
-                                """
-                                // bat """
-                                // chcp 65001
+                        // "C:\\Program Files\\1cv8\\${VERSION_PLATFORM}\\bin\\rac.exe" infobase list --cluster localhost:1545 > rac_list.txt
 
-                                // "C:\\Program Files\\1cv8\\${VERSION_PLATFORM}\\bin\\rac.exe" infobase list --cluster localhost:1545 > rac_list.txt
+                        // findstr /i "avtotestqa" rac_list.txt >nul
+                        // if %errorlevel%==0 (
+                        //     echo База avtotestqa еще зарегистрирована в RAC
+                        //     exit /b 1
+                        // ) else (
+                        //     echo База отсутствует в RAC
+                        //     exit /b 0
+                        // )
+                        // """
 
-                                // findstr /i "avtotestqa" rac_list.txt >nul
-                                // if %errorlevel%==0 (
-                                //     echo База avtotestqa еще зарегистрирована в RAC
-                                //     exit /b 1
-                                // ) else (
-                                //     echo База отсутствует в RAC
-                                //     exit /b 0
-                                // )
-                                // """
+                        echo "Создание базы данных"
+                        bat """
+                        chcp 65001
+                        call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "${env.VERSION_PLATFORM}" --rac "C:\\Program Files\\1cv8\\${VERSION_PLATFORM}\\bin\\rac.exe"  
+                        """
+                        echo "Отключение сессий"
+                        bat """
+                        chcp 65001
+                        call vrunner session kill ^
+                            --db ${env.dbTests} ^
+                            --db-user Админ ^
+                            --uccode tester ^
+                            --v8version "${env.VERSION_PLATFORM}" ^
+                                
+                        """
+                }
+                        //  catch (e) {
+                        //     echo "Перезапуск агента 1С"
+                        //     bat 'oscript scripts/РестартАгентаСревера.os'	
+                        //     wait1C()
+                        //     throw e
+                        // }
 
-                                echo "Создание базы данных"
-								bat """
-								chcp 65001
-								call vrunner create --db-server localhost --name ${env.dbTests} --dbms PostgreSQL --db-admin postgres --db-admin-pwd postgres --uccode tester --v8version "${env.VERSION_PLATFORM}" --rac "C:\\Program Files\\1cv8\\${VERSION_PLATFORM}\\bin\\rac.exe"  
-								"""
-								echo "Отключение сессий"
-								bat """
-								chcp 65001
-								call vrunner session kill ^
-									--db ${env.dbTests} ^
-									--db-user Админ ^
-									--uccode tester ^
-									--v8version "${env.VERSION_PLATFORM}" ^
-									 
-								"""
-                            } catch (e) {
-                                echo "Перезапуск агента 1С"
-                                bat 'oscript scripts/РестартАгентаСревера.os'	
-                				wait1C()
-                                throw e
-                            }
-                        }
-                    }
                     echo "Загрузка .dt"
                     bat """
                     chcp 65001
