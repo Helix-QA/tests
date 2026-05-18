@@ -77,8 +77,8 @@ pipeline {
 									 
 								"""
                             } catch (e) {
-                                echo "drop_db упал, перезапуск агента 1С"
-                                bat 'python -X utf8 scripts/AgentRestart.py'	
+                                echo "Перезапуск агента 1С"
+                                bat 'oscript РестартАгентаСревера.os'	
                 				wait1C()
                                 throw e
                             }
