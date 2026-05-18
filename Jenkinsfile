@@ -75,7 +75,7 @@ pipeline {
 								"""
                             } catch (e) {
                                 echo "Перезапуск агента 1С"
-                                bat 'oscript РестартАгентаСревера.os'	
+                                bat 'oscript scripts/РестартАгентаСревера.os'	
                 				wait1C()
                                 throw e
                             }
