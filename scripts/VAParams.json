@@ -167,7 +167,7 @@
 	"СобиратьДанныеОСетевыхСоединениях": false,
 	"СобиратьДанныеОПроцессахОС": false,
 	"СобиратьДанныеОЗначенияхПеременных": false,
-	"КомандаЗапускаБраузера": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --remote-debugging-port=9222",
+	"КомандаЗапускаБраузера": "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --remote-debugging-port=9222 --user-data-dir=C:\\temp\\chrome_debug_profile --incognito",
 	"ИспользоватьБраузерПлюсWebSocket": false,
 	"ЭмулироватьДвиженияМышкиVanessaExt": false,
 	"ЭмулироватьВводКлавиатурыVanessaExt": false,
