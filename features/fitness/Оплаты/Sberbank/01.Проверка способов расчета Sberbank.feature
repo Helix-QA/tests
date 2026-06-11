@@ -1,6 +1,7 @@
 ﻿#language: ru
 
 @tree
+@IgnoreOnCIMainBuild
 
 Функционал: <описание фичи>
 Ссылка на документацию Sberbank v2: https://ecomtest.sberbank.ru/doc#tag/basicServices
