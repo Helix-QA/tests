@@ -166,6 +166,8 @@
 		И в поле с именем 'ВзаимодействиеЗадачаТекст' я ввожу текст "Проверка"
 		И из выпадающего списка с именем 'ВзаимодействиеЗадачаВремя' я выбираю точное значение "05:00"
 		И я нажимаю на кнопку с именем 'ВзаимодействиеЗадачаСоздать'				
+		Тогда элемент формы с именем 'ИсторияВзаимодействия' стал равен по шаблону
+			|'    	    		<div class=\"text-message\"><input style=\"margin:0 2px 0 0; width:12px; height:12px;\" title=\"Отметить как выполнено\" type=\"checkbox\" class=\"executetask\" name=\"Взаимодействие\" id=\"*"><span class=\"interaction\" style=\"color: #000\"><img src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCiAgIDxwYXRoIGZpbGw9IiMwMDcwZDIiIGQ9Ik02LjYyLDEwLjc5QzguMDYsMTMuNjIgMTAuMzgsMTUuOTQgMTMuMjEsMTcuMzhMMTUuNDEsMTUuMThDMTUuNjksMTQuOSAxNi4wOCwxNC44MiAxNi40MywxNC45M0MxNy41NSwxNS4zIDE4Ljc1LDE1LjUgMjAsMTUuNUExLDEgMCAwLDEgMjEsMTYuNVYyMEExLDEgMCAwLDEgMjAsMjFBMTcsMTcgMCAwLDEgMyw0QTEsMSAwIDAsMSA0LDNINy41QTEsMSAwIDAsMSA4LjUsNEM4LjUsNS4yNSA4LjcsNi40NSA5LjA3LDcuNTdDOS4xOCw3LjkyIDkuMSw4LjMxIDguODIsOC41OUw2LjYyLDEwLjc5WiIgLz4NCjwvc3ZnPg==\" width=\"12\" height=\"12\"> Звонок входящий - Проверка</span></div>'|
 
 	*Задача - Звонок исходящий (кнопка)
 		И я нажимаю на кнопку с именем 'ДобавитьЗадачу'
@@ -173,6 +175,8 @@
 		И в поле с именем 'ВзаимодействиеЗадачаТекст' я ввожу текст "Проверка"
 		И из выпадающего списка с именем 'ВзаимодействиеЗадачаВремя' я выбираю точное значение "05:00"
 		И я нажимаю на кнопку с именем 'ВзаимодействиеЗадачаСоздать'				
+		Тогда элемент формы с именем 'ИсторияВзаимодействия' стал равен по шаблону
+			|'    	    		<div class=\"text-message\"><input style=\"margin:0 2px 0 0; width:12px; height:12px;\" title=\"Отметить как выполнено\" type=\"checkbox\" class=\"executetask\" name=\"Взаимодействие\" id=\"*"><span class=\"interaction\" style=\"color: #000\"><img src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCiAgIDxwYXRoIGZpbGw9IiMwMDcwZDIiIGQ9Ik0xMiw4SDRBMiwyIDAgMCwwIDIsMTBWMTRBMiwyIDAgMCwwIDQsMTZINVYyMEExLDEgMCAwLDAgNiwyMUg4QTEsMSAwIDAsMCA5LDIwVjE2SDEyTDE3LDIwVjRMMTIsOE0xNSwxNS42TDEzLDE0SDRWMTBIMTNMMTUsOC40VjE1LjZNMjEuNSwxMkMyMS41LDEzLjcxIDIwLjU0LDE1LjI2IDE5LDE2VjhDMjAuNTMsOC43NSAyMS41LDEwLjMgMjEuNSwxMloiIC8+DQo8L3N2Zz4=\" width=\"12\" height=\"12\"> Звонок исходящий - Проверка</span></div>'|
 
 	*Задача - Онлайн-заявка (кнопка)
 		И я нажимаю на кнопку с именем 'ДобавитьЗадачу'
@@ -180,6 +184,8 @@
 		И в поле с именем 'ВзаимодействиеЗадачаТекст' я ввожу текст "Проверка"
 		И из выпадающего списка с именем 'ВзаимодействиеЗадачаВремя' я выбираю точное значение "05:00"
 		И я нажимаю на кнопку с именем 'ВзаимодействиеЗадачаСоздать'				
+		Тогда элемент формы с именем 'ИсторияВзаимодействия' стал равен по шаблону
+			|'    	    		<div class=\"text-message\"><input style=\"margin:0 2px 0 0; width:12px; height:12px;\" title=\"Отметить как выполнено\" type=\"checkbox\" class=\"executetask\" name=\"Взаимодействие\" id=\"*"><span class=\"interaction\" style=\"color: #000\"><img src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCiAgIDxwYXRoIGZpbGw9IiMwMDcwZDIiIGQ9Ik0xMi4wNCAyQzYuNTggMiAyLjEzIDYuNDUgMi4xMyAxMS45MUMyLjEzIDEzLjY2IDIuNTkgMTUuMzYgMy40NSAxNi44NkwyLjA1IDIyTDcuMyAyMC42MkM4Ljc1IDIxLjQxIDEwLjM4IDIxLjgzIDEyLjA0IDIxLjgzQzE3LjUgMjEuODMgMjEuOTUgMTcuMzggMjEuOTUgMTEuOTJDMjEuOTUgOS4yNyAyMC45MiA2Ljc4IDE5LjA1IDQuOTFDMTcuMTggMy4wMyAxNC42OSAyIDEyLjA0IDJNMTIuMDUgMy42N0MxNC4yNSAzLjY3IDE2LjMxIDQuNTMgMTcuODcgNi4wOUMxOS40MiA3LjY1IDIwLjI4IDkuNzIgMjAuMjggMTEuOTJDMjAuMjggMTYuNDYgMTYuNTggMjAuMTUgMTIuMDQgMjAuMTVDMTAuNTYgMjAuMTUgOS4xMSAxOS43NiA3Ljg1IDE5TDcuNTUgMTguODNMNC40MyAxOS42NUw1LjI2IDE2LjYxTDUuMDYgMTYuMjlDNC4yNCAxNSAzLjggMTMuNDcgMy44IDExLjkxQzMuODEgNy4zNyA3LjUgMy42NyAxMi4wNSAzLjY3TTguNTMgNy4zM0M4LjM3IDcuMzMgOC4xIDcuMzkgNy44NyA3LjY0QzcuNjUgNy44OSA3IDguNSA3IDkuNzFDNyAxMC45MyA3Ljg5IDEyLjEgOCAxMi4yN0M4LjE0IDEyLjQ0IDkuNzYgMTQuOTQgMTIuMjUgMTZDMTIuODQgMTYuMjcgMTMuMyAxNi40MiAxMy42NiAxNi41M0MxNC4yNSAxNi43MiAxNC43OSAxNi42OSAxNS4yMiAxNi42M0MxNS43IDE2LjU2IDE2LjY4IDE2LjAzIDE2Ljg5IDE1LjQ1QzE3LjEgMTQuODcgMTcuMSAxNC4zOCAxNy4wNCAxNC4yN0MxNi45NyAxNC4xNyAxNi44MSAxNC4xMSAxNi41NiAxNEMxNi4zMSAxMy44NiAxNS4wOSAxMy4yNiAxNC44NyAxMy4xOEMxNC42NCAxMy4xIDE0LjUgMTMuMDYgMTQuMzEgMTMuM0MxNC4xNSAxMy41NSAxMy42NyAxNC4xMSAxMy41MyAxNC4yN0MxMy4zOCAxNC40NCAxMy4yNCAxNC40NiAxMyAxNC4zNEMxMi43NCAxNC4yMSAxMS45NCAxMy45NSAxMSAxMy4xMUMxMC4yNiAxMi40NSA5Ljc3IDExLjY0IDkuNjIgMTEuMzlDOS41IDExLjE1IDkuNjEgMTEgOS43MyAxMC44OUM5Ljg0IDEwLjc4IDEwIDEwLjYgMTAuMSAxMC40NUMxMC4yMyAxMC4zMSAxMC4yNyAxMC4yIDEwLjM1IDEwLjA0QzEwLjQzIDkuODcgMTAuMzkgOS43MyAxMC4zMyA5LjYxQzEwLjI3IDkuNSA5Ljc3IDguMjYgOS41NiA3Ljc3QzkuMzYgNy4yOSA5LjE2IDcuMzUgOSA3LjM0QzguODYgNy4zNCA4LjcgNy4zMyA4LjUzIDcuMzNaIiAvPg0KPC9zdmc+\" width=\"12\" height=\"12\"> Онлайн-заявка - Проверка</span></div>'|
 
 	*Задача - Прочее (кнопка)
 		И я нажимаю на кнопку с именем 'ДобавитьЗадачу'
@@ -187,66 +193,18 @@
 		И в поле с именем 'ВзаимодействиеЗадачаТекст' я ввожу текст "Проверка"
 		И из выпадающего списка с именем 'ВзаимодействиеЗадачаВремя' я выбираю точное значение "05:00"
 		И я нажимаю на кнопку с именем 'ВзаимодействиеЗадачаСоздать'				
-		
-	*Проверка создания задач
 		Тогда элемент формы с именем 'ИсторияВзаимодействия' стал равен по шаблону
-			|'<div class=\"date-chat\" style=\"--color:#ff9b00;\"><span style=\"border-color:#ff9b00;\">Запланировано</span></div>'|
-			|'<div class=\"wr-message\">'|
-			|' 	<div class=\"message \" style=\"border-color:#ff9b00;\"> '|
-			|'       <div class=\"mainlink\">'|
-			|'			<a href=\"e1cib/data/Задача.Взаимодействие?ref=b7f28a880b80b86811f160c111a6ee47\" title=\"Открыть задачу\" name=\"task\">'|
-			|'    			<div class=\"inner-message plan\">	'|
-			|'    	    		<div class=\"info-message\">$$ЦифроваяДатаНаДень$$ 05:00 Админ</div>'|
-			|'    	    		<div class=\"text-message\"><input style=\"margin:0 2px 0 0; width:12px; height:12px;\" title=\"Отметить как выполнено\" type=\"checkbox\" class=\"executetask\" name=\"Взаимодействие\" id=\"11a6ee47-60c1-11f1-b7f2-8a880b80b868\"><span class=\"interaction\" style=\"color: #000\"><img src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCiAgIDxwYXRoIGZpbGw9IiMwMDcwZDIiIGQ9Ik02LjYyLDEwLjc5QzguMDYsMTMuNjIgMTAuMzgsMTUuOTQgMTMuMjEsMTcuMzhMMTUuNDEsMTUuMThDMTUuNjksMTQuOSAxNi4wOCwxNC44MiAxNi40MywxNC45M0MxNy41NSwxNS4zIDE4Ljc1LDE1LjUgMjAsMTUuNUExLDEgMCAwLDEgMjEsMTYuNVYyMEExLDEgMCAwLDEgMjAsMjFBMTcsMTcgMCAwLDEgMyw0QTEsMSAwIDAsMSA0LDNINy41QTEsMSAwIDAsMSA4LjUsNEM4LjUsNS4yNSA4LjcsNi40NSA5LjA3LDcuNTdDOS4xOCw3LjkyIDkuMSw4LjMxIDguODIsOC41OUw2LjYyLDEwLjc5WiIgLz4NCjwvc3ZnPg==\" width=\"12\" height=\"12\"> Звонок входящий - Проверка</span></div>'|
-			|'     			</div> '|
-			|'			</a>'|
-			|'  		</div>'|
-			|'		'|
-			|'	</div>	'|
-			|' </div>'|
-			|'<div class=\"wr-message\">'|
-			|' 	<div class=\"message \" style=\"border-color:#ff9b00;\"> '|
-			|'       <div class=\"mainlink\">'|
-			|'			<a href=\"e1cib/data/Задача.Взаимодействие?ref=b7f28a880b80b86811f160c111a6ee48\" title=\"Открыть задачу\" name=\"task\">'|
-			|'    			<div class=\"inner-message plan\">	'|
-			|'    	    		<div class=\"info-message\">$$ЦифроваяДатаНаДень$$ 05:00 Админ</div>'|
-			|'    	    		<div class=\"text-message\"><input style=\"margin:0 2px 0 0; width:12px; height:12px;\" title=\"Отметить как выполнено\" type=\"checkbox\" class=\"executetask\" name=\"Взаимодействие\" id=\"11a6ee48-60c1-11f1-b7f2-8a880b80b868\"><span class=\"interaction\" style=\"color: #000\"><img src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCiAgIDxwYXRoIGZpbGw9IiMwMDcwZDIiIGQ9Ik0xMiw4SDRBMiwyIDAgMCwwIDIsMTBWMTRBMiwyIDAgMCwwIDQsMTZINVYyMEExLDEgMCAwLDAgNiwyMUg4QTEsMSAwIDAsMCA5LDIwVjE2SDEyTDE3LDIwVjRMMTIsOE0xNSwxNS42TDEzLDE0SDRWMTBIMTNMMTUsOC40VjE1LjZNMjEuNSwxMkMyMS41LDEzLjcxIDIwLjU0LDE1LjI2IDE5LDE2VjhDMjAuNTMsOC43NSAyMS41LDEwLjMgMjEuNSwxMloiIC8+DQo8L3N2Zz4=\" width=\"12\" height=\"12\"> Звонок исходящий - Проверка</span></div>'|
-			|'     			</div> '|
-			|'			</a>'|
-			|'  		</div>'|
-			|'		'|
-			|'	</div>	'|
-			|' </div>'|
-			|'<div class=\"wr-message\">'|
-			|' 	<div class=\"message \" style=\"border-color:#ff9b00;\"> '|
-			|'       <div class=\"mainlink\">'|
-			|'			<a href=\"e1cib/data/Задача.Взаимодействие?ref=b7f28a880b80b86811f160c111a6ee49\" title=\"Открыть задачу\" name=\"task\">'|
-			|'    			<div class=\"inner-message plan\">	'|
-			|'    	    		<div class=\"info-message\">$$ЦифроваяДатаНаДень$$ 05:00 Админ</div>'|
-			|'    	    		<div class=\"text-message\"><input style=\"margin:0 2px 0 0; width:12px; height:12px;\" title=\"Отметить как выполнено\" type=\"checkbox\" class=\"executetask\" name=\"Взаимодействие\" id=\"11a6ee49-60c1-11f1-b7f2-8a880b80b868\"><span class=\"interaction\" style=\"color: #000\"><img src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCiAgIDxwYXRoIGZpbGw9IiMwMDcwZDIiIGQ9Ik0xMi4wNCAyQzYuNTggMiAyLjEzIDYuNDUgMi4xMyAxMS45MUMyLjEzIDEzLjY2IDIuNTkgMTUuMzYgMy40NSAxNi44NkwyLjA1IDIyTDcuMyAyMC42MkM4Ljc1IDIxLjQxIDEwLjM4IDIxLjgzIDEyLjA0IDIxLjgzQzE3LjUgMjEuODMgMjEuOTUgMTcuMzggMjEuOTUgMTEuOTJDMjEuOTUgOS4yNyAyMC45MiA2Ljc4IDE5LjA1IDQuOTFDMTcuMTggMy4wMyAxNC42OSAyIDEyLjA0IDJNMTIuMDUgMy42N0MxNC4yNSAzLjY3IDE2LjMxIDQuNTMgMTcuODcgNi4wOUMxOS40MiA3LjY1IDIwLjI4IDkuNzIgMjAuMjggMTEuOTJDMjAuMjggMTYuNDYgMTYuNTggMjAuMTUgMTIuMDQgMjAuMTVDMTAuNTYgMjAuMTUgOS4xMSAxOS43NiA3Ljg1IDE5TDcuNTUgMTguODNMNC40MyAxOS42NUw1LjI2IDE2LjYxTDUuMDYgMTYuMjlDNC4yNCAxNSAzLjggMTMuNDcgMy44IDExLjkxQzMuODEgNy4zNyA3LjUgMy42NyAxMi4wNSAzLjY3TTguNTMgNy4zM0M4LjM3IDcuMzMgOC4xIDcuMzkgNy44NyA3LjY0QzcuNjUgNy44OSA3IDguNSA3IDkuNzFDNyAxMC45MyA3Ljg5IDEyLjEgOCAxMi4yN0M4LjE0IDEyLjQ0IDkuNzYgMTQuOTQgMTIuMjUgMTZDMTIuODQgMTYuMjcgMTMuMyAxNi40MiAxMy42NiAxNi41M0MxNC4yNSAxNi43MiAxNC43OSAxNi42OSAxNS4yMiAxNi42M0MxNS43IDE2LjU2IDE2LjY4IDE2LjAzIDE2Ljg5IDE1LjQ1QzE3LjEgMTQuODcgMTcuMSAxNC4zOCAxNy4wNCAxNC4yN0MxNi45NyAxNC4xNyAxNi44MSAxNC4xMSAxNi41NiAxNEMxNi4zMSAxMy44NiAxNS4wOSAxMy4yNiAxNC44NyAxMy4xOEMxNC42NCAxMy4xIDE0LjUgMTMuMDYgMTQuMzEgMTMuM0MxNC4xNSAxMy41NSAxMy42NyAxNC4xMSAxMy41MyAxNC4yN0MxMy4zOCAxNC40NCAxMy4yNCAxNC40NiAxMyAxNC4zNEMxMi43NCAxNC4yMSAxMS45NCAxMy45NSAxMSAxMy4xMUMxMC4yNiAxMi40NSA5Ljc3IDExLjY0IDkuNjIgMTEuMzlDOS41IDExLjE1IDkuNjEgMTEgOS43MyAxMC44OUM5Ljg0IDEwLjc4IDEwIDEwLjYgMTAuMSAxMC40NUMxMC4yMyAxMC4zMSAxMC4yNyAxMC4yIDEwLjM1IDEwLjA0QzEwLjQzIDkuODcgMTAuMzkgOS43MyAxMC4zMyA5LjYxQzEwLjI3IDkuNSA5Ljc3IDguMjYgOS41NiA3Ljc3QzkuMzYgNy4yOSA5LjE2IDcuMzUgOSA3LjM0QzguODYgNy4zNCA4LjcgNy4zMyA4LjUzIDcuMzNaIiAvPg0KPC9zdmc+\" width=\"12\" height=\"12\"> Онлайн-заявка - Проверка</span></div>'|
-			|'     			</div> '|
-			|'			</a>'|
-			|'  		</div>'|
-			|'		'|
-			|'	</div>	'|
-			|' </div>'|
-			|'<div class=\"wr-message\">'|
-			|' 	<div class=\"message \" style=\"border-color:#ff9b00;\"> '|
-			|'       <div class=\"mainlink\">'|
-			|'			<a href=\"e1cib/data/Задача.Взаимодействие?ref=b7f28a880b80b86811f160c111a6ee4a\" title=\"Открыть задачу\" name=\"task\">'|
-			|'    			<div class=\"inner-message plan\">	'|
-			|'    	    		<div class=\"info-message\">$$ЦифроваяДатаНаДень$$ 05:00 Админ</div>'|
-			|'    	    		<div class=\"text-message\"><input style=\"margin:0 2px 0 0; width:12px; height:12px;\" title=\"Отметить как выполнено\" type=\"checkbox\" class=\"executetask\" name=\"Взаимодействие\" id=\"11a6ee4a-60c1-11f1-b7f2-8a880b80b868\"><span class=\"interaction\" style=\"color: #000\"><img src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCiAgIDxwYXRoIGZpbGw9IiMwMDcwZDIiIGQ9Ik03LDJDNCwyIDIsNSAyLDhDMiwxMC4xMSAzLDEzIDQsMTRDNSwxNSA2LDIyIDgsMjJDMTIuNTQsMjIgMTAsMTUgMTIsMTVDMTQsMTUgMTEuNDYsMjIgMTYsMjJDMTgsMjIgMTksMTUgMjAsMTRDMjEsMTMgMjIsMTAuMTEgMjIsOEMyMiw1IDIwLDIgMTcsMkMxNCwyIDE0LDMgMTIsM0MxMCwzIDEwLDIgNywyWiIgLz4NCjwvc3ZnPg==\" width=\"12\" height=\"12\"> Прочее - Проверка</span></div>'|
-			|'     			</div> '|
-			|'			</a>'|
-			|'  		</div>'|
-			|'		'|
-			|'	</div>	'|
-			|' </div>'|
+			|'    	    		<div class=\"text-message\"><input style=\"margin:0 2px 0 0; width:12px; height:12px;\" title=\"Отметить как выполнено\" type=\"checkbox\" class=\"executetask\" name=\"Взаимодействие\" id=\"*"><span class=\"interaction\" style=\"color: #000\"><img src=\"data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij4NCiAgIDxwYXRoIGZpbGw9IiMwMDcwZDIiIGQ9Ik02LjYyLDEwLjc5QzguMDYsMTMuNjIgMTAuMzgsMTUuOTQgMTMuMjEsMTcuMzhMMTUuNDEsMTUuMThDMTUuNjksMTQuOSAxNi4wOCwxNC44MiAxNi40MywxNC45M0MxNy41NSwxNS4zIDE4Ljc1LDE1LjUgMjAsMTUuNUExLDEgMCAwLDEgMjEsMTYuNVYyMEExLDEgMCAwLDEgMjAsMjFBMTcsMTcgMCAwLDEgMyw0QTEsMSAwIDAsMSA0LDNINy41QTEsMSAwIDAsMSA4LjUsNEM4LjUsNS4yNSA4LjcsNi40NSA5LjA3LDcuNTdDOS4xOCw3LjkyIDkuMSw4LjMxIDguODIsOC41OUw2LjYyLDEwLjc5WiIgLz4NCjwvc3ZnPg==\" width=\"12\" height=\"12\"> Звонок входящий - Проверка</span></div>'|
+
+	*Заметки
 		И я нажимаю на кнопку с именем 'ДобавитьЗаметку'
 		И Я закрываю окно ""
+
+	*SMS
 		И я нажимаю на кнопку с именем 'СоздатьSMSPush'
-		И Я закрываю окно "Отправка сообщения"			
+		И Я закрываю окно "Отправка сообщения"		
+
+	*Создание сделки	
 		И я нажимаю на кнопку с именем 'КнопкаСоздатьСделку'
 		И в меню формы я выбираю 'Новый пациент'
 		И я нажимаю на кнопку с именем 'КнопкаСоздатьСделку'
@@ -270,30 +228,54 @@
 		И я нажимаю на кнопку с именем 'ДопСведения'
 		И Я закрываю окно "Дополнительные сведения: $Фамилия$ $Имя$ $Отчество$: Редактирование значений свойств"
 	
-	*Вкладки в карточке
+	*Вкладки в карточке Взаиморасчеты
 		И В текущем окне я нажимаю кнопку командного интерфейса "Взаиморасчеты"
 		И в табличном документе 'ТабличныйДокумент' я перехожу к ячейке "R1C1"
 		И я нажимаю на кнопку с именем 'Сформировать'
+
+	*Вкладки в карточке Лицевой счет
 		И В текущем окне я нажимаю кнопку командного интерфейса "Лицевой счет"
 		И я нажимаю на кнопку с именем 'Сформировать'	
+
+	*Вкладки в карточке Приемы
 		И В текущем окне я нажимаю кнопку командного интерфейса "Приемы"
 		И я нажимаю кнопку выбора у поля с именем 'ОтборНаГлавнойЗуб'
 		И я нажимаю кнопку выбора у поля с именем 'ОтборНаГлавнойСтрЕдиница'
 		И Я закрываю окно "Выбор клиники"
+	
+	*Вкладки в карточке Зубная формула
 		И В текущем окне я нажимаю кнопку командного интерфейса "Зубная формула"
+		
+	*Вкладки в карточке Планы лечения
 		И В текущем окне я нажимаю кнопку командного интерфейса "Планы лечения"
+	
+	*Вкладки в карточке Планируемые оплаты
 		И В текущем окне я нажимаю кнопку командного интерфейса "Планируемые оплаты"
 		И я нажимаю на кнопку с именем 'Сформировать'
+
+	*Вкладки в карточке Оценки и отзывы
 		И В текущем окне я нажимаю кнопку командного интерфейса "Оценки и отзывы"
+
+	*Вкладки в карточке Сегменты
 		И В текущем окне я нажимаю кнопку командного интерфейса "Сегменты"
 		И я нажимаю на кнопку с именем 'ДобавитьВСегмент'
 		И Я закрываю окно "Сегменты пациентов"
+
+	*Вкладки в карточке Гарантии
 		И В текущем окне я нажимаю кнопку командного интерфейса "Гарантии"
-		И В текущем окне я нажимаю кнопку командного интерфейса "Диалоги"		
+
+	*Вкладки в карточке Диалоги
+		И В текущем окне я нажимаю кнопку командного интерфейса "Диалоги"	
+		
+	*Вкладки в карточке 	Договоры
 		И В текущем окне я нажимаю кнопку командного интерфейса "Договоры"
 		И я нажимаю на кнопку с именем 'ФормаКомандаСоздать'
 		И Я закрываю окно "Документ с пациентом (создание)"
+
+	*Вкладки в карточке Источники
 		И В текущем окне я нажимаю кнопку командного интерфейса "Источники"
+
+	*Вкладки в карточке Наряд заказы
 		И В текущем окне я нажимаю кнопку командного интерфейса "Наряд заказы"
 		И я нажимаю на кнопку с именем 'ФормаКомандаСоздать'
 		И я закрываю текущее окно
