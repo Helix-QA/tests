@@ -190,6 +190,22 @@
 		И я нажимаю на гиперссылку с именем 'ZОтчет_0'
 		И я нажимаю на кнопку с именем 'ПодтвердитьЗакрытиеСмены'
 
+Сценарий: Я Оплитил документ ЧекКоррекции Зачисление сдачи
+	И я нажимаю на кнопку с именем 'Кнопка_Оплаты_Визита'
+	И я нажимаю на кнопку с именем 'КнопкаВидыОплатаНаименованиеСтрока_0'
+	И в поле с именем 'ПолеВидыОплатВводСуммыСтрока_0' я ввожу текст "500,00"		
+	И Я нажимаю на кнопку оплаты 'КнопкаВидыОплатаНаименованиеСтрока_0'		
+	И я нажимаю на кнопку с именем 'Оплатить'
+	Если открылось окно "Вопрос" тогда
+		И я нажимаю на кнопку с именем 'КомандаДа'	
+	Если открылось окно "1С:Предприятие" тогда
+		И я нажимаю на кнопку с именем 'Button0'		
+	Если открылось окно "Внимание" Тогда
+		И я нажимаю на кнопку с именем 'Button0'
+		И я нажимаю на гиперссылку с именем 'ZОтчет_0'
+		И я нажимаю на кнопку с именем 'ПодтвердитьЗакрытиеСмены'
+
+
 Сценарий: Я проверяю страницу Постоплата(кредит)
 	И элемент формы с именем 'АдресСайта' стал равен по шаблону "$$ТекущаяСЕ1$$  "
 	И элемент формы с именем 'Дата' стал равен по шаблону "$$ЦифроваяДата$$ *"
@@ -303,3 +319,59 @@
 	И я устанавливаю флаг с именем 'Расчетная'
 	И я нажимаю на кнопку с именем 'ФормаКнопкаСохранитьИЗакрыть'
 		
+Сценарий: Я проверяю чек коррекции Зачисление сдачи один
+	Тогда элемент формы с именем 'XML' стал равен 
+		|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
+		|'<CheckPackage>'|
+		|'	<Parameters CashierName=\" Админ \" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"SPA-Салон &quot;Меланж&quot;  \" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+		|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\"/>'|
+		|'		<AgentData/>'|
+		|'		<VendorData/>'|
+		|'		<CustomerDetail/>'|
+		|'		<OperationalAttribute/>'|
+		|'		<IndustryAttribute/>'|
+		|'	</Parameters>'|
+		|'	<Positions>'|
+		|'		<FiscalString Name=\"Взнос на лицевой счет\" Quantity=\"1\" PriceWithDiscount=\"250\" AmountWithDiscount=\"250\" DiscountAmount=\"0\" Department=\"1\" VATRate=\"none\" PaymentMethod=\"3\" CalculationSubject=\"10\" MeasureOfQuantity=\"255\">'|
+		|'			<IndustryAttribute/>'|
+		|'			<AgentData/>'|
+		|'			<VendorData/>'|
+		|'		</FiscalString>'|
+		|'	</Positions>'|
+		|'	<Payments Cash=\"250\" ElectronicPayment=\"0\" PrePayment=\"0\" PostPayment=\"0\" Barter=\"0\"/>'|
+		|'</CheckPackage>'|
+	И таблица 'ПозицииЧека' стала равной:
+		| 'Наименование'          | 'Количество' | 'Сумма скидок' | 'Цена' | 'Цена со скидками' | 'Сумма'  | 'Номер секции' | 'Признак предмета расчета' | 'Ставка НДС' | 'Сумма НДС' | 'Штрихкод' | 'Признак способа расчета' |
+		| 'Взнос на лицевой счет' | '1,00'       | ''             | ''     | '250,00'           | '250,00' | '1'            | 'Платеж'                   | ''           | ''          | ''         | 'Аванс'                   |
+	И таблица 'ТаблицаОплат' стала равной:
+		| 'Тип оплаты'      | 'Сумма'  |
+		| 'Наличная оплата' | '250,00' |
+
+Сценарий: Я проверяю чек коррекции Зачисление сдачи два
+	Тогда элемент формы с именем 'XML' стал равен 
+		|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
+		|'<CheckPackage>'|
+		|'	<Parameters CashierName=\" Админ \" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"SPA-Салон &quot;Меланж&quot;  \" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+		|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\"/>'|
+		|'		<AgentData/>'|
+		|'		<VendorData/>'|
+		|'		<CustomerDetail/>'|
+		|'		<OperationalAttribute/>'|
+		|'		<IndustryAttribute/>'|
+		|'	</Parameters>'|
+		|'	<Positions>'|
+		|'		<FiscalString Name=\"Взнос на лицевой счет\" Quantity=\"1\" PriceWithDiscount=\"250\" AmountWithDiscount=\"250\" DiscountAmount=\"0\" Department=\"1\" VATRate=\"none\" PaymentMethod=\"3\" CalculationSubject=\"10\" MeasureOfQuantity=\"255\">'|
+		|'			<IndustryAttribute/>'|
+		|'			<AgentData/>'|
+		|'			<VendorData/>'|
+		|'		</FiscalString>'|
+		|'	</Positions>'|
+		|'	<Payments Cash=\"250\" ElectronicPayment=\"0\" PrePayment=\"0\" PostPayment=\"0\" Barter=\"0\"/>'|
+		|'</CheckPackage>'|
+	И таблица 'ПозицииЧека' стала равной:
+		| 'Наименование'          | 'Количество' | 'Сумма скидок' | 'Цена' | 'Цена со скидками' | 'Сумма'  | 'Номер секции' | 'Признак предмета расчета' | 'Ставка НДС' | 'Сумма НДС' | 'Штрихкод' | 'Признак способа расчета' |
+		| 'Взнос на лицевой счет' | '1,00'       | ''             | ''     | '250,00'           | '250,00' | '1'            | 'Платеж'                   | ''           | ''          | ''         | 'Аванс'                   |
+	И таблица 'ТаблицаОплат' стала равной:
+		| 'Тип оплаты'      | 'Сумма'  |
+		| 'Наличная оплата' | '250,00' |
+
