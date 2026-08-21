@@ -70,10 +70,12 @@
 		| '\"supplier_name\": \"*\",*'                         |
 		| '\"supplier_inn\": \"*\",*'                          |
 		| '\"tax_system\": \"osn\",*'                          |
-		| '\"target_serial\": \"00106701076650\",*'            |
-		| '\"ref_uuid\": \"*\"*'                               |
+		| '\"payment_place\": \"Фитнес плюс\",*'               |
+		| '\"internet_payment\": false,*'                      |
+		| '\"timezone\": null,*'                               |
+		| '\"target_serial\": \"00106701076650\"*'             |
 		| '}'                                                  |
-
+		
 Сценарий: Частичный возврат номенклатуры
 *Продажа
 	Дано Я открываю основную форму документа "Реализация"
@@ -127,8 +129,10 @@
 		| '\"supplier_name\": \"О*\",*'                        |
 		| '\"supplier_inn\": \"*\",*'                          |
 		| '\"tax_system\": \"osn\",*'                          |
-		| '\"target_serial\": \"00106701076650\",*'            |
-		| '\"ref_uuid\": \"*\"*'                               |
+		| '\"payment_place\": \"Фитнес плюс\",*'               |
+		| '\"internet_payment\": false,*'                      |
+		| '\"timezone\": null,*'                               |
+		| '\"target_serial\": \"00106701076650\"*'             |
 		| '}'                                                  |
 
 Сценарий: Дальнейший возврат номенклатуры
@@ -176,9 +180,12 @@
 		| '\"supplier_name\": \"*\",*'                         |
 		| '\"supplier_inn\": \"*\",*'                          |
 		| '\"tax_system\": \"osn\",*'                          |
-		| '\"target_serial\": \"00106701076650\",*'            |
-		| '\"ref_uuid\": \"*\"*'                               |
+		| '\"payment_place\": \"Фитнес плюс\",*'               |
+		| '\"internet_payment\": false,*'                      |
+		| '\"timezone\": null,*'                               |
+		| '\"target_serial\": \"00106701076650\"*'             |
 		| '}'                                                  |
+
 СсылкаКлиентаLifePay
 Сценарий: Частичный возврат средств
 *Продажа
@@ -232,8 +239,10 @@
 		| '\"supplier_name\": \"*\",*'                         |
 		| '\"supplier_inn\": \"*\",*'                          |
 		| '\"tax_system\": \"osn\",*'                          |
-		| '\"target_serial\": \"00106701076650\",*'            |
-		| '\"ref_uuid\": \"*\"*'                               |
+		| '\"payment_place\": \"Фитнес плюс\",*'               |
+		| '\"internet_payment\": false,*'                      |
+		| '\"timezone\": null,*'                               |
+		| '\"target_serial\": \"00106701076650\"*'             |
 		| '}'                                                  |
 
 Сценарий: Отмена ошибочной оплаты
@@ -281,8 +290,10 @@
 		| '\"supplier_name\": \"*\",*'                         |
 		| '\"supplier_inn\": \"*\",*'                          |
 		| '\"tax_system\": \"osn\",*'                          |
-		| '\"target_serial\": \"00106701076650\",*'            |
-		| '\"ref_uuid\": \"*\"*'                               |
+		| '\"payment_place\": \"Фитнес плюс\",*'               |
+		| '\"internet_payment\": false,*'                      |
+		| '\"timezone\": null,*'                               |
+		| '\"target_serial\": \"00106701076650\"*'             |
 		| '}'                                                  |
 
 Сценарий: OperationType-2 (Отмена ошибочной оплаты, частичная оплата)
@@ -312,27 +323,29 @@
 		| '\"products\": [*'                                   |
 		| '{*'                                                 |
 		| '\"name\": \" $$УслугаПерсональная$$\",*'            |
-		| '\"price\": 250,*'                                   |
+		| '\"price\": 200,*'                                   |
 		| '\"quantity\": 1,*'                                  |
 		| '\"tax\": \"none\",*'                                |
-		| '\"type\": \"5\",*'                                  |
-		| '\"item_type\": \"4\",*'                             |
+		| '\"type\": \"7\",*'                                  |
+		| '\"item_type\": \"10\",*'                            |
 		| '\"measurement_unit\": 0*'                           |
 		| '}*'                                                 |
 		| ']*'                                                 |
 		| '},*'                                                |
-		| '\"mode\": \"print_email\",*'                        |
-		| '\"type\": \"payment\",*'                            |
+		| '\"mode\": \"print\",*'                              |
+		| '\"type\": \"refund\",*'                             |
 		| '\"source\": \"1С_cloud\",*'                         |
-		| '\"customer_phone\": \"+*\",*'                       |
 		| '\"cash_amount\": 200,*'                             |
 		| '\"card_amount\": 0,*'                               |
 		| '\"prepayment_amount\": 0,*'                         |
-		| '\"credit_amount\": 50,*'                            |
+		| '\"credit_amount\": 0,*'                             |
 		| '\"other_amount\": 0,*'                              |
 		| '\"cashier_name\": \"*\",*'                          |
 		| '\"supplier_name\": \"*\",*'                         |
 		| '\"supplier_inn\": \"*\",*'                          |
 		| '\"tax_system\": \"osn\",*'                          |
+		| '\"payment_place\": \"Фитнес плюс\",*'               |
+		| '\"internet_payment\": false,*'                      |
+		| '\"timezone\": null,*'                               |
 		| '\"target_serial\": \"00106701076650\"*'             |
 		| '}'                                                  |
