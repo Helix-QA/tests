@@ -52,7 +52,7 @@ def check_1c_services():
     """Простая диагностика — запущен ли сервер 1С"""
     print("=== Проверка сервисов 1С ===")
     try:
-        result = run(["sc", "query", "1C:Enterprise*Server*Agent"], ignore_errors=True)
+        result = run(["sc", "query", "1C:Enterprise 8.5 Server Agent (x86-64)"], ignore_errors=True)
         if result.returncode == 0 and "RUNNING" in result.stdout:
             print("✅ 1C Server Agent запущен")
         else:
