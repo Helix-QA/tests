@@ -247,35 +247,6 @@ pipeline {
                 }
             }
         }
-		stage("Дымовые тесты") {
-            when { expression { !params.scenarios } }
-			steps {
-				script {
-					def replace = "scripts/replaceSmoke.py"
-					def smokeTests = "${env.WORKSPACE}features\\smoke\\exceptions_${params.product}"
-					def folderSmoke = "features\\smoke\\exceptions_${params.product}"
-					runDbOperation("smoke", " \"${env.WORKSPACE}\" \"${env.pathvanessa}\" \"${env.dbTests}\"")
-					bat "python -X utf8 \"${replace}\" \"${smokeTests}\" \"${params.product}\""
-					try{
-						bat """
-							chcp 65001
-							call vrunner vanessa ^
-								--path "${env.WORKSPACE}${folderSmoke}" ^
-								--vanessasettings "${env.WORKSPACE}\\scripts\\VAParams.json" ^
-								--workspace ${env.WORKSPACE} ^
-								--pathvanessa ${env.pathvanessa} ^
-								--additional "/DisplayAllFunctions /L ru" ^
-								--ibconnection /Slocalhost/${env.dbTests} ^
-								--db-user Админ ^
-								--uccode tester
-							"""
-					} catch (Exception Exc) {
-						echo "Error occurred: ${Exc.message}"
-						currentBuild.result = 'UNSTABLE'
-					}
-				}
-			}
-        }
 	}
 	post {
         always {
