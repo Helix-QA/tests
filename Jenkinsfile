@@ -8,7 +8,7 @@ pipeline {
                 script {
 					currentBuild.displayName = "#${BUILD_NUMBER} | ${params.VERSION_NEW} | ${params.debug}"
 					updateConfigFile()
-					env.testPathPlaceholder = "\\features\\${params.product}${params.debug}"
+					env.testPathPlaceholder = "\\features\\${params.product}\\${params.debug}"
                     if (params.product == 'fitness') {
                         env.repository = repositoryReleaseFitness
                         env.extmess = "http://192.168.2.16/hran1c/repository.1ccr/fitness4_messenger_release"
