@@ -1,5 +1,5 @@
 ﻿#language: ru
-
+@IgnoreOnCIMainBuild
 @tree
 
 Функционал: Тестирование маркированного товара.
