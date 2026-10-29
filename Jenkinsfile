@@ -252,7 +252,7 @@ pipeline {
         always {
             script {
                 allure(includeProperties: false,   results:  [[path: 'build/results']])
-                junit(allowEmptyResults: true, testResults: 'build/out/jUnint/*.xml')
+                junit(allowEmptyResults: true, testResults: 'build/out/jUnit/*.xml')
 				if (currentBuild.currentResult == "SUCCESS" || currentBuild.currentResult == "UNSTABLE") {
 					def allureReportUrl = "${env.JENKINS_URL}job/${env.JOB_NAME.replaceAll('/', '/job/')}/${env.BUILD_NUMBER}/allure"
 					def configJson = readFile(file: 'scripts/config.json')
