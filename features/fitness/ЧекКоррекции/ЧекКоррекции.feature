@@ -58,25 +58,25 @@
 
 	*Проверка "Исходные данные чека"								
 		Тогда элемент формы с именем 'XML' стал равен по шаблону 
-			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
-			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" OperationOnline=\"false\">'|
-			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Неприменение ККТ\"/>'|
-			|'		<AgentData/>'|
-			|'		<VendorData/>'|
-			|'		<CustomerDetail/>'|
-			|'		<OperationalAttribute/>'|
-			|'		<IndustryAttribute/>'|
-			|'	</Parameters>'|
-			|'	<Positions>'|
-			|'		<FiscalString Name=\"$$УслугаГрупповая$$\" Quantity=\"1\" PriceWithDiscount=\"250\" AmountWithDiscount=\"250\" DiscountAmount=\"0\" Department=\"1\" VATRate=\"none\" PaymentMethod=\"6\" CalculationSubject=\"4\" MeasureOfQuantity=\"0\">'|
-			|'			<IndustryAttribute/>'|
-			|'			<AgentData/>'|
-			|'			<VendorData/>'|
-			|'		</FiscalString>'|
-			|'	</Positions>'|
-			|'	<Payments Cash=\"0\" ElectronicPayment=\"0\" PrePayment=\"0\" PostPayment=\"250\" Barter=\"0\"/>'|
-			|'</CheckPackage>'|
+			| '<?xml version=\"1.0\" encoding=\"UTF-8\"?>'                                                                                                                                                                                                    |
+			| '<CheckPackage>'                                                                                                                                                                                                                                |
+			| '	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" OperationOnline=\"false\">'                                                                   |
+			| '		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Неприменение ККТ\"/>'                                                                                                                                               |
+			| '		<AgentData/>'                                                                                                                                                                                                                                |
+			| '		<VendorData/>'                                                                                                                                                                                                                               |
+			| '		<CustomerDetail/>'                                                                                                                                                                                                                           |
+			| '		<OperationalAttribute/>'                                                                                                                                                                                                                     |
+			| '		<IndustryAttribute/>'                                                                                                                                                                                                                        |
+			| '	</Parameters>'                                                                                                                                                                                                                                |
+			| '	<Positions>'                                                                                                                                                                                                                                  |
+			| '		<FiscalString Name=\"$$УслугаГрупповая$$\" Quantity=\"1\" PriceWithDiscount=\"250\" AmountWithDiscount=\"250\" DiscountAmount=\"0\" Department=\"1\" VATRate=\"none\" PaymentMethod=\"6\" CalculationSubject=\"4\" MeasureOfQuantity=\"0\">' |
+			| '			<IndustryAttribute/>'                                                                                                                                                                                                                       |
+			| '			<AgentData/>'                                                                                                                                                                                                                               |
+			| '			<VendorData/>'                                                                                                                                                                                                                              |
+			| '		</FiscalString>'                                                                                                                                                                                                                             |
+			| '	</Positions>'                                                                                                                                                                                                                                 |
+			| '	<Payments Cash=\"0\" ElectronicPayment=\"0\" PrePayment=\"0\" PostPayment=\"250\" Barter=\"0\"/>'                                                                                                                                             |
+			| '</CheckPackage>'                                                                                                                                                                                                                               |
 		И таблица 'ПозицииЧека' стала равной:
 			| 'Наименование'        | 'Количество' | 'Сумма скидок' | 'Цена'   | 'Цена со скидками' | 'Сумма'  | 'Номер секции' | 'Признак предмета расчета' | 'Ставка НДС' | 'Сумма НДС' | 'Штрихкод' | 'Признак способа расчета' |
 			| '$$УслугаГрупповая$$' | '1,00'       | ''             | '250,00' | '250,00'           | '250,00' | '1'            | 'Услуга'                   | ''           | ''          | ''         | 'Передача без оплаты'     |
@@ -196,7 +196,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -226,7 +226,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -467,7 +467,7 @@
 		Тогда элемент формы с именем 'XML' стал равен по шаблону
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -584,7 +584,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит2$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит2$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -645,7 +645,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -695,7 +695,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -745,7 +745,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -795,7 +795,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -845,7 +845,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -891,7 +891,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -937,7 +937,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -992,7 +992,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"1\" Date=\"$$ДатаСТире$$T00:00:00\" Number=\"1179\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -1021,7 +1021,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"1\" Date=\"$$ДатаСТире$$T00:00:00\" Number=\"1179\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -1085,7 +1085,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -1114,7 +1114,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -1181,7 +1181,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -1210,7 +1210,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -1278,7 +1278,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"2\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
@@ -1307,7 +1307,7 @@
 		Тогда элемент формы с именем 'XML' стал равен 
 			|'<?xml version=\"1.0\" encoding=\"UTF-8\"?>'|
 			|'<CheckPackage>'|
-			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" CustomerEmail=\"\" CustomerPhone=\"\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
+			|'	<Parameters CashierName=\"Админ\" OperationType=\"1\" TaxationSystem=\"0\" SaleLocation=\"Фитнес плюс\" GroupingPositionsWhenPrinting=\"false\" AdditionalAttribute=\"$$МойДопРеквизит$$\" OperationOnline=\"false\">'|
 			|'		<CorrectionData Type=\"0\" Date=\"$$ДатаСТире$$T00:00:00\" Description=\"Ошибка в указании ставки НДС при применении ККТ\"/>'|
 			|'		<AgentData/>'|
 			|'		<VendorData/>'|
