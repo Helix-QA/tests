@@ -5,7 +5,7 @@
 <table style="width:100%; border-collapse: separate; border-spacing: 20px 15px; font-size: 18px;">
   <tr>
     <td style="background:#f0f0f0; padding:20px 30px; border-radius:20px; text-align:center; white-space:nowrap;">
-      Договоры
+      Договоры22
     </td>
     <td style="background:#f0f0f0; padding:20px 30px; border-radius:20px; text-align:center; white-space:nowrap;">
       Занятия
